@@ -34,12 +34,6 @@
 {% if collection.image and collection.description %}
   <section class="collection-info">
     <div class="container">
-      {% comment %}
-      @Ankit - removing this title for now
-      <div class="row">
-          <h4 class="page-title col-md-12"> Story of our farmer {{ collection.title }}</h1>
-      </div>
-      {% endcomment %}
       <div class="row">
         <div class="collection-photo col-md-6">
           <img src="{{ collection.image | img_url: '', crop: 'center' }}" alt="Farmer's Image" />
@@ -47,7 +41,7 @@
         <div class="collection-description col-md-6">
           <p>
             {{ collection.description }}
-          </p>
+          </p>        	
         </div>
       </div>
     </div>

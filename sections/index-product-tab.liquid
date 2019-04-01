@@ -17,18 +17,22 @@
           <div class="home-product-content clearfix">
             {% if section.blocks.size > 0 %}
             <div class="product-tab">
-              <ul class="nav nav-tabs tabs-to-dropdown">
-                {% for block in section.blocks %}
-                <li class="sub-tabs {% if forloop.first == true %}active {% endif %} not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00"><a href="#product_tab_{{ section.id }}_{{forloop.index}}" data-toggle="tab">{{ block.settings.title }}</a></li>
-                {% endfor %}
-                <li class="tabs-dropdown">
-                  <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="cs-icon icon-ios-plus-empty"></i>
-                  </a>
-                  <ul class="nav nav-tabs dropdown-menu">
-                  </ul>
-                </li>
-              </ul>
+              
+{% comment %} adding condition to avoid showing block name if there is only one block{% endcomment %}
+              {% if section.blocks.size > 1 %} 
+                <ul class="nav nav-tabs tabs-to-dropdown">
+                  {% for block in section.blocks %}
+                  <li class="sub-tabs {% if forloop.first == true %}active {% endif %} not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00"><a href="#product_tab_{{ section.id }}_{{forloop.index}}" data-toggle="tab">{{ block.settings.title }}</a></li>
+                  {% endfor %}
+                  <li class="tabs-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="cs-icon icon-ios-plus-empty"></i>
+                    </a>
+                    <ul class="nav nav-tabs dropdown-menu">
+                    </ul>
+                  </li>
+                </ul>
+              {% endif %}
             </div>
             <div class="tab-content"> 
               {% if section.settings.per_row == '3' %}

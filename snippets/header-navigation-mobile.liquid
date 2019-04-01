@@ -201,7 +201,7 @@
 </li>
 {% elsif linklists[submenu].links.size > 0 %}
 <li class="nav-item{% if l.active %} active{% endif %} navigation navigation_mobile">
-  <a href="{{ l.url }}" class="menu-mobile-link mobile-goto-link">
+  <a href="#" class="menu-mobile-link mobile-goto-link">
     <p class="{% if menu_label_1 contains l_title %}menu-sale-layout{% endif %} {% if menu_label_2 contains l_title %}menu-hot-layout{% endif %}">
       {{ l.title }}
       {% if menu_label_1 contains l_title %}
@@ -212,10 +212,10 @@
       {% endif %}
     </p>
   </a>
-  <a href="javascript:void(0)" class="arrow_sub arrow">
-    <i class="cs-icon icon-ios-plus-empty"></i>
+  <a href="javascript:void(0)" class="arrow_sub arrow" >
+    <i class="cs-icon icon-ios-plus-empty" ></i>
   </a>
-  <ul class="menu-mobile-container" style="display: none;">
+  <ul class="menu-mobile-container" style="display: none;" >
     {% for l in linklists[submenu].links %}
     {% include 'navigation-sub-mobile-links' with forloop.index %}
     {% endfor %}

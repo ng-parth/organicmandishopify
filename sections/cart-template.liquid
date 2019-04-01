@@ -33,7 +33,7 @@
                     {{ item.product.title }}
                   </a>
 {% comment %}                  <div class="group_mobile">
-                    <span class="price-mobile">{{ item.line_price | money }}</span>
+                    <span class="price-mobile"><span class='hulkapps-cart-item-line-price' data-key='{{item.key}}'>{{ item.line_price | money }}</span></span>
                     <div class="quantity-mobile">
                       <div class="quantity-wrapper">
                         <div class="wrapper">
@@ -60,7 +60,7 @@
                   </div>{% endcomment %}
                 </div>
               </td>
-              <td class="price">{{ item.price | money }}</td>
+              <td class="price"><span class='hulkapps-cart-item-price' data-key='{{item.key}}'>{{ item.price | money }}</span></td>
               <td class="qty">
                 <div class="quantity-wrapper">
                   <div class="wrapper" style="width: 45px">
@@ -68,7 +68,7 @@
                   </div><!--End wrapper-->                  
                 </div><!--End quantily wrapper-->                
               </td>
-              <td class="total title-1">{{ item.line_price | money }}</td>
+              <td class="total title-1"><span class='hulkapps-cart-item-line-price' data-key='{{item.key}}'>{{ item.line_price | money }}</span></td>
               <td class="remove" style="text-align: center;">
                 <a href="/cart/change?line={{ forloop.index }}&quantity=0" class="cart">
                   <span class="cs-icon icon-close"></span>
@@ -79,7 +79,7 @@
             {% endfor %}
             <tr class="summary">                          
               <td class="total_label" colspan="4">{{ 'cart.general.subtotal' | t }}</td>
-              <td class="price" colspan="1"><span class="total"><strong>{{ cart.total_price | money }}</strong></span></td>                      
+              <td class="price" colspan="1"><span class="total"><strong><span class='hulkapps-cart-original-total'>{{ cart.total_price | money }}</span></strong></span></td>                      
             </tr>
           </tbody>
         </table>

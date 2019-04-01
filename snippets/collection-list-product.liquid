@@ -117,7 +117,7 @@
           {% if variant.available and found_one_in_stock == false %}
           {% assign found_one_in_stock = true %}
           <span class="price_sale">
-            {{ variant.price | money }}
+            {{ variant.price | money_without_trailing_zeros }} ({{ variant.title }})
           </span>
           {% endif %}
           {% endfor %}
@@ -152,8 +152,8 @@
             {% if variant.available and variant.compare_at_price and found_one_in_stock == false %}
             {% assign found_one_in_stock = true %}
 
-            <span class="price_sale">{{ variant.price | money }}</span>
-            <del class="price_compare"> {{ variant.compare_at_price | money }}</del>
+            <span class="price_sale">{{ variant.price | money_without_trailing_zeros }} ({{ variant.title }})</span>
+            <del class="price_compare"> {{ variant.compare_at_price | money_without_trailing_zeros }}</del>
 
             {% endif %}
             {% endfor %}
@@ -163,7 +163,7 @@
             {% if variant.available and found_one_in_stock == false %}
             {% assign found_one_in_stock = true %}
             <span class="price_sale">
-              {{ variant.price | money }}
+              {{ variant.price | money_without_trailing_zeros }} ({{ variant.title }})
             </span>
             {% endif %}
             {% endfor %}

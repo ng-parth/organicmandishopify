@@ -106,7 +106,7 @@
           {% if variant.available and variant.compare_at_price and found_one_in_stock == false %}
           {% assign found_one_in_stock = true %}
 
-          <span class="price_sale">{{ variant.price | money }} a {{ variant.title }}</span>
+          <span class="price_sale">{{ variant.price | money_without_trailing_zeros }} ({{ variant.title }})</span>
           <del class="price_compare"> {{ variant.compare_at_price | money }}</del>
 
           {% endif %}
@@ -117,7 +117,7 @@
           {% if variant.available and found_one_in_stock == false %}
           {% assign found_one_in_stock = true %}
           <span class="price_sale">
-            {{ variant.price | money }} b {{ variant.title }}
+            {{ variant.price | money_without_trailing_zeros }} ({{ variant.title }})
           </span>
           {% endif %}
           {% endfor %}
@@ -152,7 +152,7 @@
             {% if variant.available and variant.compare_at_price and found_one_in_stock == false %}
             {% assign found_one_in_stock = true %}
 
-            <span class="price_sale">{{ variant.price | money }} e {{ variant.title }}</span>
+            <span class="price_sale">{{ variant.price | money_without_trailing_zeros }} ({{ variant.title }})</span>
             <del class="price_compare"> {{ variant.compare_at_price | money }}</del>
 
             {% endif %}
@@ -163,7 +163,7 @@
             {% if variant.available and found_one_in_stock == false %}
             {% assign found_one_in_stock = true %}
             <span class="price_sale">
-              {{ variant.price | money }} f {{ variant.title }}
+              {{ variant.price | money_without_trailing_zeros }} ({{ variant.title }})
             </span>
             {% endif %}
             {% endfor %}
@@ -171,9 +171,9 @@
             {% else %}
             <span class="price_sale">
               {% if product.price_varies %} 
-              {{ product.price | money }} g {{ variant.title }}
+              {{ product.price | money }} {{ variant.title }}
               {% else %}
-              {{ product.price | money }} h {{ variant.title }}
+              {{ product.price | money }} {{ variant.title }}
               {% endif %}
             </span>
             {% endif %}  

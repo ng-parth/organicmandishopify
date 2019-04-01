@@ -154,14 +154,16 @@
       </div>
       <div class="info-header-content">
         <div class="info-header-content-inner">
-          <div class="info-header-item info-header-sidebar">
+          <div class="info-header-item info-header-sidebar">           
             {% if shop.customer_accounts_enabled %}
             {% if customer  %}
             <ul class="account-content">
               <li class="link-item"><a href="/account">{{ 'layout.customer.your_account' | t }}</a></li>
               <li class="link-item"><a href="/account">{{ 'layout.customer.order' | t }}</a></li>
               <li class="link-item"><a href="/pages/wish-list">{{ 'layout.customer.wishlist' | t }}</a></li>
+{% comment %}
               <li class="link-item"><a href="/pages/contact">{{ 'layout.customer.support' | t }}</a></li>
+{% endcomment %}
               <li class="link-item"><a href="/account/logout">{{ 'layout.customer.logout' | t }}</a></li>
             </ul>
             {% else %}

@@ -65,12 +65,14 @@
                   </ul>
                 </div>                
               </div>
+              {% comment %}
               <div class="account-banner col-sm-6">
                 <a href="{{ settings.account_banner_1_link }}"><img src="{{ settings.account_banner_1 | img_url: '', crop: 'center' | split:'?v=' | first }}" alt="{{ settings.account_banner_1.alt }}" /></a>
               </div>
               <div class="account-banner col-sm-6">
                 <a href="{{ settings.account_banner_2_link }}"><img src="{{ settings.account_banner_2 | img_url: '', crop: 'center' | split:'?v=' | first }}" alt="{{ settings.account_banner_2.alt }}" /></a>
               </div>
+              {% endcomment %}
             </div>
             <div class="account-orders">
               <div class="account-orders-inner">
