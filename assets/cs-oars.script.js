@@ -187,7 +187,7 @@ function ModalNewsletter(){
     localStorage.setItem('cs-newsletter', date );
   }
   var checkNewsletter = function(){
-    var date = '02/22/2019 08:20:09';
+    var date = '02/23/2019 00:13:34';
     if(localStorage.getItem('cs-newsletter') == null || localStorage.getItem('cs-newsletter') == "undefined" ){
 	  showNewsletter(date);
     }

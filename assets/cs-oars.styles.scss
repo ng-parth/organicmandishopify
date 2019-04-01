@@ -203,7 +203,7 @@ $font_weight_thin1: 300;
 @mixin font_face_style(){font-weight: normal; font-style: normal;}  
 @font-face {
   font-family: "streamster";
-  src: url("//cdn.shopify.com/s/files/1/0101/5247/6736/t/3/assets/streamster.ttf?3802738600210256643") format('truetype');
+  src: url("//cdn.shopify.com/s/files/1/0101/5247/6736/t/7/assets/streamster.ttf?12228715577877770471") format('truetype');
     @include font_face_style();
     }
 $font_1: Poppins; 
@@ -593,7 +593,7 @@ textarea{
 }
 select{
   @include respond-to($media_max_mobile){    
-    background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/3/assets/ico-select.svg?3802738600210256643);     
+    background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/7/assets/ico-select.svg?12228715577877770471);     
     background-repeat: no-repeat;
     background-position: 98% center;
     -moz-appearance: none; 
@@ -1643,13 +1643,13 @@ $color_addtocart_bg: #46c6f5;
       @include opacity(0.7, 70);
     }
   }
-  &.alert_success{ @include btn_color($color_success_text, $color_success_border, $color_success_bg); background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/3/assets/bg_alert_success_icon.png?3802738600210256643); }
-  &.alert_cross{ @include btn_color($color_cross_text, $color_cross_border, $color_cross_bg); background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/3/assets/bg_alert_notice_icon.png?3802738600210256643); }
+  &.alert_success{ @include btn_color($color_success_text, $color_success_border, $color_success_bg); background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/7/assets/bg_alert_success_icon.png?12228715577877770471); }
+  &.alert_cross{ @include btn_color($color_cross_text, $color_cross_border, $color_cross_bg); background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/7/assets/bg_alert_notice_icon.png?12228715577877770471); }
   &.alert_fail{ @include btn_color($color_fail_text, $color_fail_border, $color_fail_bg); 
-    background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/3/assets/bg_alert_failure_icon.png?3802738600210256643); }
+    background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/7/assets/bg_alert_failure_icon.png?12228715577877770471); }
   &.aler_addtocart{
     @include btn_color($color_addtocart_text, $color_addtocart_border, $color_addtocart_bg);
-    background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/3/assets/bg_addtocart_icon.png?3802738600210256643);
+    background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/7/assets/bg_addtocart_icon.png?12228715577877770471);
     text-transform: uppercase;    
     border-width: 0;
   }
@@ -1918,7 +1918,7 @@ body{
       }
     }
     &.blog-heading{
-      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/3/assets/1920x400.png?3802738600210256643);
+      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/7/assets/1920x400.png?12228715577877770471);
     }
     &.collection-heading{
       
@@ -3357,7 +3357,7 @@ body{
         border: 2px solid #fff;
         border-radius: 50%;
         @include transform(translate(-50%, -50%));
-        background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/3/assets/icon_blog_bg.png?3802738600210256643); 
+        background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/7/assets/icon_blog_bg.png?12228715577877770471); 
         background-size: auto;
         background-repeat: no-repeat;
         background-position: center center;
@@ -4816,7 +4816,7 @@ body{
       color: $color_heading;
       font-weight: $font_weight_bold1;
       padding-bottom: 22px;
-      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/3/assets/ico_title.png?3802738600210256643); 
+      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/7/assets/ico_title.png?12228715577877770471); 
       background-repeat:no-repeat;
       background-position: center bottom;
       background-size: auto;
@@ -5073,14 +5073,14 @@ body{
       left: 0px;
       margin-top: -$_width / 2;                
       border-radius: 0px;
-      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/3/assets/bg_none_check.png?3802738600210256643); 
+      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/7/assets/bg_none_check.png?12228715577877770471); 
       background-repeat: no-repeat;
       background-position: center center;	
       background-size: 100%;
       border: 0;
     }
     .fe-checkbox-active{
-      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/3/assets/bg_check.png?3802738600210256643); 
+      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/7/assets/bg_check.png?12228715577877770471); 
     }  
     li{ 
       margin-bottom: 10px;
@@ -5755,8 +5755,8 @@ body{
             }
           }
           .control-container{           
-            @include style_box();                  
-            left: 0;
+            @include style_box();
+            left: 0;                  
           }                        
           &:hover{
             button > span{
@@ -5772,7 +5772,6 @@ body{
             }
             .control-container{
               max-width: 100%;
-              left: 0;
               border: 1px solid $color_line;              
             }
             button{                    
