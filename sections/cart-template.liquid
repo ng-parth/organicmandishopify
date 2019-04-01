@@ -64,7 +64,7 @@
               <td class="qty">
                 <div class="quantity-wrapper">
                   <div class="wrapper" style="width: 45px">
-                    <input type="text" maxlength=2 size="4" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" class="tc item-quantity" />
+                    <input style="text-align: center; padding: 5px 5px;" type="number" min=0 oninput="validity.valid||(value='');" name="updates[]" id="updates_{{ item.id }}" value="{{ item.quantity }}" class="tc item-quantity" />
                   </div><!--End wrapper-->                  
                 </div><!--End quantily wrapper-->                
               </td>

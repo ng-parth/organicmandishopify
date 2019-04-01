@@ -96,7 +96,7 @@
         <div class="rating-star">
           <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
         </div>
-        <div class="product-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.title | truncate: 20}}</a></div>
+        <div class="product-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.title | truncate: 23}}</a></div>
         <div class="product-price">
           {% if product.available %}
           {% if product.compare_at_price_max > product.price %}
@@ -106,7 +106,7 @@
           {% if variant.available and variant.compare_at_price and found_one_in_stock == false %}
           {% assign found_one_in_stock = true %}
 
-          <span class="price_sale">{{ variant.price | money }}</span>
+          <span class="price_sale">{{ variant.price | money }} a {{ variant.title }}</span>
           <del class="price_compare"> {{ variant.compare_at_price | money }}</del>
 
           {% endif %}
@@ -117,7 +117,7 @@
           {% if variant.available and found_one_in_stock == false %}
           {% assign found_one_in_stock = true %}
           <span class="price_sale">
-            {{ variant.price | money }}
+            {{ variant.price | money }} b {{ variant.title }}
           </span>
           {% endif %}
           {% endfor %}
@@ -125,9 +125,9 @@
           {% else %}
           <span class="price_sale">
             {% if product.price_varies %} 
-            {{ product.price | money }}
+            {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }} ({{ product.selected_or_first_available_variant.title }})
             {% else %}
-            {{ product.price | money }}
+            {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }} ({{ product.selected_or_first_available_variant.title }})
             {% endif %}
           </span>
           {% endif %}  
@@ -135,11 +135,11 @@
           <span class="sold_out">{{ 'products.product.sold_out_html' | t }}</span>
           {% endif %}
         </div>
-        <div class="product-vendor-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.vendor  | truncate: 20 }}</a></div>
+        <div class="product-vendor-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.vendor  | truncate: 23 }}</a></div>
       </div>     
       <div class="list-mode hide">
         <div class="list-collection-top">                 
-          <div class="product-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.title | truncate: 20}}</a></div>
+          <div class="product-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.title | truncate: 23}}</a></div>
           <div class="rating-star">
             <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
           </div> 
@@ -152,7 +152,7 @@
             {% if variant.available and variant.compare_at_price and found_one_in_stock == false %}
             {% assign found_one_in_stock = true %}
 
-            <span class="price_sale">{{ variant.price | money }}</span>
+            <span class="price_sale">{{ variant.price | money }} e {{ variant.title }}</span>
             <del class="price_compare"> {{ variant.compare_at_price | money }}</del>
 
             {% endif %}
@@ -163,7 +163,7 @@
             {% if variant.available and found_one_in_stock == false %}
             {% assign found_one_in_stock = true %}
             <span class="price_sale">
-              {{ variant.price | money }}
+              {{ variant.price | money }} f {{ variant.title }}
             </span>
             {% endif %}
             {% endfor %}
@@ -171,9 +171,9 @@
             {% else %}
             <span class="price_sale">
               {% if product.price_varies %} 
-              {{ product.price | money }}
+              {{ product.price | money }} g {{ variant.title }}
               {% else %}
-              {{ product.price | money }}
+              {{ product.price | money }} h {{ variant.title }}
               {% endif %}
             </span>
             {% endif %}  
@@ -181,7 +181,7 @@
             <span class="sold_out">{{ 'products.product.sold_out_html' | t }}</span>
             {% endif %}
           </div>
-        <div class="product-vendor-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.vendor  | truncate: 20 }}</a></div>
+        <div class="product-vendor-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.vendor  | truncate: 23 }}</a></div>
         </div>
         <div class="list-collection-bottom">                  
           <div class="product-description">

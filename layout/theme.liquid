@@ -195,7 +195,7 @@
 
   {% include 'quick-shop' %}
   {% include 'currencies' %}
-  {% include 'ajax-cart' %}
+  <!-- {% include 'ajax-cart' %} -->
   {% include 'lightbox-search' %}
   {% include 'lightbox-wishlist' %}
   {% include 'lightbox-compare' %}
@@ -204,6 +204,8 @@
   {% endif %}
 
   {{ 'linkOptionSelectors.js' | asset_url | script_tag }}
+
+  {% include 'ajaxify-cart' %}
 
 </body>
 </html>

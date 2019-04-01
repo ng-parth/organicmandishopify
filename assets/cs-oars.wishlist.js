@@ -11,7 +11,8 @@ function wishlist_init(){
     for(i=0; i<activeID.length; i++ ){
       var classadded = '.wishlist-'+activeID[i];        
       $(classadded).addClass("wishlist-added").removeClass("wishlist");
-      $(classadded).attr("href", "/pages/wish-list");
+      //DON'T REDIRECT
+      //$(classadded).attr("href", "/pages/wish-list");
     }
   }
 }
@@ -32,7 +33,8 @@ function wishlist_add(){
 
       //add class and update count
       $('.wishlist-'+$(this).data("wishlisthandle")).addClass("wishlist-added").removeClass("wishlist"); 
-      $('.wishlist-'+$(this).data("wishlisthandle")).attr("href", "/pages/wish-list");
+      //DON'T REDIRECT
+      //$('.wishlist-'+$(this).data("wishlisthandle")).attr("href", "/pages/wish-list");
       
       var url="/products/"+$(this).data("wishlisthandle")+".js";
       var content = '#modalwishlist1';
@@ -48,8 +50,8 @@ function wishlist_add(){
         addToVariantsWishlist(product);
       });
       
-      //Modal
-      $('#modalwishlist1').modal();
+      //Don't show wish list modal
+      //$('#modalwishlist1').modal();
     }     
   });
 }  

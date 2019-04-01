@@ -155,7 +155,7 @@
                       {% if section.settings.display_quantity_dropdown %}
                       <div class="quantity-wrapper clearfix">
                         <div class="wrapper">
-                          <input id="quantity" type="text" name="quantity" value="1" maxlength="5" size="5" class="item-quantity" />
+                          <input style="text-align: center; padding: 5px 5px; border: none;" id="quantity" type="number" min=0 oninput="validity.valid||(value='');" name="quantity" value="1" maxlength="5" size="5" class="item-quantity" />
                           <div class="qty-btn-vertical">
                             <span class="qty-up cs-icon icon-ion-ios-arrow-up" title="Increase" data-src="#quantity">
                             </span>

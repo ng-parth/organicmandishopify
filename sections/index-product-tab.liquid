@@ -44,6 +44,7 @@
                   <div class="content-product {{ col }} not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00">
                     {% include 'index-proditem' %} 
                   </div>
+{% comment %} below code is actually useless and if-else statement is not added properly
                   {% else %}
                   {% for i in (1..section.settings.limit) %}
                   <div class="{{col}} content_product grid__item .grid__item--{{section.id}} {{ grid_item_width }}">
@@ -61,21 +62,36 @@
                     </div>
                   </div>
                   {% endfor %}
+{% endcomment %}
+                  
                   {% endfor %}
-                </div>                
+                  
+                </div>
+                <div class="row">
+                    <div class="action view-all">
+                      {% if block.settings.title == "All" %}
+                      <a class="_btn view-all-btn" href="collections/{{ block.settings.collection }}">View All Products</a>
+                      {% else %}
+                      <a class="_btn view-all-btn" href="collections/{{ block.settings.collection }}">View All {{ block.settings.title }}</a>
+                      {% endif %}
+                    </div>
+                  </div>
               </div>
+              
+              
               {% endfor %}                                   
             </div>
             {% endif %}
           </div>
         </div>
       </div>
+{% comment %} made "View All" button collection specific and hence commenting this out
       <div class="row">
         <div class="action view-all">
           <a class="_btn view-all-btn" href="{{ section.settings.view_all_link }}">{{ section.settings.view_all_title }}</a>
         </div>
       </div>
-
+{% endcomment %}
     </div>
   </section>
 </div>

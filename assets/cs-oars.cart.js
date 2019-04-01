@@ -10,7 +10,10 @@ var GLOBAL = {
     init: function(){
       $('html').removeClass('no-js').addClass('js');
       //searchPlaceholder();
-      if($(window).innerWidth() > 767 ){
+
+      // @Mayank - Earlier there was logic of only do this if it's on desktop
+      // It doesn't make sense anymore, instead of removing it, I have made it > 0 width which means always.
+      if($(window).innerWidth() > 0 ){
         
           $('.add-to-cart').bind( 'click', addToCart );
         
@@ -141,7 +144,7 @@ function addToCartSuccess (jqXHR, textStatus, errorThrown){
   $('.ajax-cart-number-product').html(ai_numpro);
   $('.ajax-cart-loading').hide();
   $('.ajax-cart-box').show().addClass("fadeIn animated");
-  countDown(10);
+  countDown(0);
 }
 
 function addToCartFail(jqXHR, textStatus, errorThrown){
@@ -158,7 +161,7 @@ function addToCartFail(jqXHR, textStatus, errorThrown){
   $('.ajax-cart-number-product').html(ai_numpro);
   $('.ajax-cart-loading').hide();
   $('.ajax-cart-box').show().addClass("fadeIn animated");
-  countDown(10);
+  countDown(0);
 }
 
 function searchPlaceholder(){

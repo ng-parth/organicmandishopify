@@ -91,7 +91,7 @@
     <div class="rating-star">
       <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
     </div>
-    <div class="product-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.title  | truncate: 20 }}</a></div>
+    <div class="product-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.title  | truncate: 23 }}</a></div>
     <div class="product-price">
       {% if product.available %}
       {% if product.compare_at_price_max > product.price %}
@@ -120,9 +120,9 @@
       {% else %}
       <span class="price_sale">
         {% if product.price_varies %} 
-        {{ product.price | money }}
+        {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }} ({{ product.selected_or_first_available_variant.title }})
         {% else %}
-        {{ product.price | money }}
+        {{ product.selected_or_first_available_variant.price | money_without_trailing_zeros }} ({{ product.selected_or_first_available_variant.title }})
         {% endif %}
       </span>
       {% endif %}  
@@ -130,7 +130,7 @@
       <span class="sold_out">{{ 'products.product.sold_out_html' | t }}}</span>
       {% endif %}
     </div>
-    <div class="product-vendor-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.vendor  | truncate: 20 }}</a></div>
+    <div class="product-vendor-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.vendor  | truncate: 23 }}</a></div>
 
   </div>   
 </div> 

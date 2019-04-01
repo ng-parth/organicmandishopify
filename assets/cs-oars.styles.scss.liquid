@@ -648,7 +648,7 @@ $_width_popupwrapper: 870px;
 
 $distance_section: 90px / 2;
 $distance_section_subpage: 45px;
-$distance_product: 60px;
+$distance_product: 30px;
 $distance_title: 15px;
 
 @mixin style_filter_btn{
@@ -1355,7 +1355,7 @@ $_font_size_search: 14px;
 }
 /*END RATTING*/
 /*PRODUCT*/
-$font_size_price: $_h6;
+$font_size_price: $_h7;
 $font_size_title_pro: $_h7;
 .product{ 
   @include un_style_ul;
@@ -1401,7 +1401,7 @@ $font_size_title_pro: $_h7;
     }
   }
   .product-title{ 
-    margin-bottom: $__distance_seletor;    
+    margin-bottom: $__distance_seletor/2;     /* ankit: reduced in half, orginail: $__distance_seletor*/
     margin-top: 0px;    
     a{
       @include inline-block(); 
@@ -1448,10 +1448,10 @@ $font_size_title_pro: $_h7;
   .row-right{
     @include transition();           
     text-align: center;     
-    padding-top: 2*$__distance_seletor + 5px;
-    padding-bottom: 2*$__distance_seletor + 5px;
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-top: $__distance_seletor + 5px;  /* original: 2*$__distance_seletor + 5px;*/
+    padding-bottom: $__distance_seletor + 5px; /* original: 2*$__distance_seletor + 5px;*/
+    padding-left: 3px;
+    padding-right: 3px;
     position: relative;
   }     
   .row-left{    
@@ -3053,7 +3053,7 @@ body{
         }
       }      
       .m_cart-group .num-items-in-cart .cart_text{
-        display: none !important;
+        display: flex !important;
       }      
     }        
   } 
@@ -3342,7 +3342,7 @@ body{
 @mixin blog_style(){
   .blog-title-group{
     text-align: center;
-    padding: 15px 0;
+    padding: 15px 0 0px;
   }
   .blog-title{
     @include inline-block();
@@ -3383,11 +3383,11 @@ body{
   .article-name{    
     text-align: center;
     font-size: 0;
-    margin-bottom: 15px;
+    margin-bottom: 5px;
     a{
       font-size: 14px;
       color: $color_heading;
-      font-weight: $font_weight_bold1;
+      font-weight: $font_weight_normal;
       &:hover{
         color: $color_primary;
       }
@@ -5367,6 +5367,7 @@ body{
           .title-5{
             font-size: 13px;
             font-weight: $font_weight_normal;
+            
           }
         }
       }
@@ -5926,6 +5927,7 @@ body{
             }            
             .product-title{
               margin-bottom: 0px;
+              
               a{
                 font-size: 24px;
                 font-weight: $font_weight_bold1;

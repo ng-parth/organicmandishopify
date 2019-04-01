@@ -10,7 +10,10 @@ var GLOBAL = {
     init: function(){
       $('html').removeClass('no-js').addClass('js');
       //searchPlaceholder();
-      if($(window).innerWidth() > 767 ){
+
+      // @Mayank - Earlier there was logic of only do this if it's on desktop
+      // It doesn't make sense anymore, instead of removing it, I have made it > 0 width which means always.
+      if($(window).innerWidth() > 0 ){
         {% if settings.ajax_active %}
           $('.add-to-cart').bind( 'click', addToCart );
         {% else %}
