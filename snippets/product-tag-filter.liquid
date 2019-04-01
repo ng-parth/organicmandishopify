@@ -1,0 +1,35 @@
+<!-- filter tags group -->
+{% for i in (1..4) %}
+  {% capture group_tag %}group_tag_{{i}}{% endcapture %}
+  {% capture group_tag_label %}group_tag_{{i}}_label{% endcapture %}
+  {% assign array_tag = settings[group_tag] | split: ',' %}
+  {% if array_tag.size > 0 %}
+    {% assign swatch = false %}
+    {% if settings[group_tag_label] contains 'Color' or settings[group_tag_label] contains 'color' %}
+      {% assign swatch = true %}
+    {% endif %}
+    <div class="sidebar-block filter-block">
+      <h3 class="sidebar-title">
+        <span class="text">{{ settings[group_tag_label] }}</span>
+        <span class="cs-icon icon-ios-minus-empty"></span>
+      </h3>
+      <div class="sidebar-content">    
+        <ul class="filter-content {% if swatch %}filter-color{% endif %}">
+          {% for t in array_tag %}
+            {% assign tag = t | strip %}
+            {% if collections.all.tags contains tag %}
+              {% if swatch %}
+                {% assign color_img = tag | downcase | append: '.png' | asset_url %}
+                {% assign style = 'background-color: ' | append: tag | downcase | append: '; background-image: url(' | append: color_img | append: ');' %}
+                {% capture color_html %}<span style="{{ style }}" class="color-swatch btooltip" title="{{tag}}"></span>{% endcapture %}
+          		<li><a href="/collections/all?constraint={{ tag | handleize }}">{{ color_html }}</a></li>
+              {% else %}
+                <li><a href="/collections/all?constraint={{ tag | handleize }}"><span class="fe-checkbox"></span>{{ tag }}</a></li>
+              {% endif %}
+            {% endif %}
+          {% endfor %}
+        </ul>  
+      </div>
+    </div>
+  {% endif %}
+{% endfor %}

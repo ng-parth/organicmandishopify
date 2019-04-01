@@ -1,0 +1,42 @@
+<section class="heading-content heading-product">
+  <div class="heading-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="page-heading-inner heading-group">
+          <div class="breadcrumb-group">
+            <h3 class="page-title">{{ product.title }}</h3>
+{% comment %}              <span>
+                {% if collection %}
+                <a href="{{ collection.url }}" title="{{ collection.title | escape }}">{{ collection.title }}</a>
+                {% else %}
+                <a href="/collections/all" title="All Products">{{ 'general.breadcrumbs.products' | t }}</a>
+                {% endif %}
+              </span>
+{% endcomment %}
+            <div class="breadcrumb clearfix">
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+              <span class="arrow-space"></span>
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                {% if collection %}
+                <a href="{{ collection.url }}" title="{{ collection.title | escape }}" itemprop="url"><span itemprop="title">{{ collection.title }}</span></a>
+                {% else %}
+                <a href="/collections/all" title="All Products" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.products' | t }}</span></a>
+                {% endif %}
+              </span>
+              <span class="arrow-space"></span>
+              <strong>{{ product.title }}</strong>
+            </div> 
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="product-detail-layout">
+  <div class="container">
+    <div class="row">
+      {% section 'product-template' %}
+    </div>
+  </div>
+</section>

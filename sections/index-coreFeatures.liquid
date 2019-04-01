@@ -1,0 +1,111 @@
+<div data-section-id="{{ section.id }}" data-section-type="core-section">
+  <section class="home-core-layout" style="background-color: {{ section.settings.color_background }};">
+    <div class="container">
+      <div class="row">
+        <div class="home-core-inner">
+          <div class="home-core-banner not-animated" data-animate="zoomIn" data-delay="100">
+            {% if section.settings.banner %}
+            <img src="{{ section.settings.banner | img_url: '', crop: 'center' }}" alt="{{ section.settings.banner.alt }}" />
+            {% else %}
+            <img src="{{ '767x550.png' | asset_url }}" alt=""/>
+            {% endif %}
+          </div>
+          <div class="home-core-content">
+            <div class="group">
+              <div class="page-title text-left not-animated" data-animate="zoomIn" data-delay="100">
+                <h2>{{ section.settings.title }}</h2>
+                <p class="sub-title">
+                  {{ section.settings.sub_title }}
+                </p>
+                {% if section.settings.caption != '' %}
+                <p class="caption">
+                  {{ section.settings.caption }}
+                </p>
+                {% endif %}
+              </div>
+              {% if section.blocks.size > 0 %}
+              <div class="home-core-group">
+                {% for block in section.blocks %}
+                <div class="core-item not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00">
+                  {% if block.settings.image %}
+                  <img src="{{ block.settings.image | img_url: '', crop: 'center' }}" alt="{{ block.settings.image.alt }}" />
+                  {% else %}
+                  <img src="{{ '90x70.png' | asset_url }}" alt=""/>
+                  {% endif %}
+                  <div class="core-caption-group">
+                    <h5 class="core-title">{{ block.settings.title }}</h5>
+                    <p class="core-caption">
+                      {{ block.settings.caption }}
+                    </p>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              {% endif %}
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+  "name": "Core Features",
+  "class": "index-section index-section-core",
+  "settings": [
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "textarea",
+      "id": "caption",
+      "label": "Caption"
+    },
+	{
+      "type": "image_picker",
+      "id": "banner",
+      "label": "Upload Banner"
+    },
+	{
+      "type": "color",
+      "id": "color_background",
+      "label": "Background Color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Upload Icon"
+        },
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+		{
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Core Features",
+    "category": "Store Information"
+  }]
+}
+{% endschema %}

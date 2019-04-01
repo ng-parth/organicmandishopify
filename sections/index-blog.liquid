@@ -1,0 +1,118 @@
+<div data-section-id="{{ section.id }}" data-section-type="blog-section">
+  <section class="home-blog-layout">
+    <div class="container">
+      <div class="row">
+        <div class="home-blog-inner">
+          <div class="page-title text-center not-animated" data-animate="zoomIn" data-delay="100">
+            <h2>{{ section.settings.title }}</h2>
+            <p class="sub-title">
+              {{ section.settings.sub_title }}
+            </p>
+            {% if section.settings.caption != '' %}
+            <p class="caption">
+              {{ section.settings.caption }}
+            </p>
+            {% endif %}
+          </div>
+          <div class="clearfix home-blog-content-inner">
+            <div class="home-blog-content">
+              {% unless blogs[section.settings.select_blog].articles_count == 0 or blogs[section.settings.select_blog].articles_count == '' %}
+              {% for article in blogs[section.settings.select_blog].articles limit:3 %}
+              <div class="col-sm-4 not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00">
+                <div class="article">
+                  <div class="group-blog-top">
+                    {% if article.image %}
+                    <div class="top-banner article-image"> 
+                      <a href="{{ article.url }}">
+                        <img src="{{article.image | img_url: 'master' }}" alt="" />
+                      </a>
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="articleinfo_group">
+                    <div class="blog-title-group">
+                      <a class="blog-title" href="{{ blogs[section.settings.select_blog].url }}">
+                        {{ blogs[section.settings.select_blog].title }}
+                      </a>
+                    </div>                  
+                    <div class="article-title">                     
+                      <h2 class="article-name"><a href="{{ article.url }}">{{ article.title }}</a></h2>                                            
+                    </div>
+                    <ul class="article-info list-inline">
+                      <li class="article-date"><span>{{article.published_at | date: '%b %d, %Y'}}</span></li> 
+                      <li class="article-comment">
+                        <span>
+                          <a href="{{article.url}}#comments">
+                            {% assign comments_count1 = article.comments_count %}
+                            <span>{{ article.comments_count }}</span> {{ article.comments_count | pluralize: 'Comment', 'Comment(s)' }}
+                          </a>
+                        </span>
+                      </li>
+                      <li class="article-author">
+                        <span>{{article.author}}</span>
+                      </li>                                    
+                    </ul>
+                  </div> 
+                </div>                
+              </div>
+              {% endfor %}
+              {% else %}
+              <div class="grid grid--uniform grid--blog">
+                {% for i in (1..3 ) %}
+                <div class="article-content col-sm-4">
+                  <div class="article-inner">
+                    <div class="article-left">
+                      <a class="article-img" href="#">
+                        <img src="{{ '667x667.png' | asset_url | split:'?v=' | first }}" alt=""/>
+                      </a>                   
+                    </div>
+                    <div class="article-right">
+                      <div class="article-name"><a href="#">{{ 'homepage.onboarding.blog_title' | t }}</a></div>
+                      <div class="article-description">
+                        <p>{{ 'homepage.onboarding.blog_excerpt' | t | truncatewords: 30 }}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                {% endfor %}
+              </div>
+              {% endunless %}
+            </div>
+          </div>          
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+  "name": "Blog",
+  "class": "index-section index-section-blog",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "textarea",
+      "id": "caption",
+      "label": "Caption"
+    },
+	{
+      "type": "blog",
+      "id": "select_blog",
+      "label": "Select blogs"
+    }
+  ],
+  "presets": [{
+    "name": "Blog",
+    "category": "List Blog"
+  }]
+}
+{% endschema %}

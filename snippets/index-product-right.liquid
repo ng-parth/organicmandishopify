@@ -1,0 +1,131 @@
+<div class="row-container">
+  <div class="product home_product">
+    <div class="row-left">
+      <a href="{{ product.url | within: collection }}" class="container_item"> 
+        <div class="hoverBorderWrapper">
+          <img src="{{ product.featured_image | product_img_url: '200x', crop:'center' }}" class="not-rotation img-responsive front" alt="{{ product.featured_image.alt | escape }}" />
+          <div class="mask"></div>
+        </div>        
+      </a>
+      <div class="hover-mask">              
+        <form action="/cart/add" method="post">
+          {% if product.available %}
+          <div class="hide clearfix"> 
+            <select name="id" >
+              {% if product.compare_at_price_max > product.price %}
+
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.available and variant.compare_at_price and found_one_in_stock == false %}
+              {% assign found_one_in_stock = true %}
+              {% assign found_variant_id = variant.id %}
+              {% break %}
+              {% endif %}
+              {% endfor %}
+
+              {% if found_one_in_stock == false %}
+              {% for variant in product.variants %}
+              {% if variant.available and found_one_in_stock == false %}
+              {% assign found_one_in_stock = true %}
+              {% assign found_variant_id = variant.id %}
+              {% break %}
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+
+              {% for variant in product.variants %}
+              {% if variant.id == found_variant_id %}
+              <option selected="selected" value="{{ variant.id }}">{{ variant.title | escape }}</option>
+              {% else %}
+              <option value="{{ variant.id }}">{{ variant.title | escape }}</option>
+              {% endif %}
+              {% endfor %}
+              {% else %}
+              {% assign found_one_in_stock = false %}
+              {% for variant in product.variants %}
+              {% if variant.available and found_one_in_stock == false %}
+              {% assign found_one_in_stock = true %}
+              <option selected="selected" value="{{ variant.id }}">{{ variant.title | escape }}</option>
+              {% else %}
+              <option value="{{ variant.id }}">{{ variant.title | escape }}</option>
+              {% endif %}
+              {% endfor %}
+              {% endif %}
+            </select>
+          </div>  
+          {% endif %}
+          <div class="effect-ajax-cart">
+            {% if product.available %}
+            <input type="hidden" name="quantity" value="1" />
+            {% if product.variants.size == 1 %}
+            <button class="add-to-cart" data-parent=".parent-fly" type="submit" name="add"  data-toggle="tooltip" title="{{ 'products.product.add_to_cart' | t }}"><span class="cs-icon icon-cs-cart"></span></button>
+            {% else %}
+            <button class="select-option" type="button" onclick="window.location='{{product.url}}';"  data-toggle="tooltip" title="{{ 'products.product.add_to_cart' | t }}"><span class="cs-icon icon-cs-cart"></span></button>
+            {% endif %}
+            {% else %}
+            <button class="disabled" disabled="disabled" type="button" name="add"  data-toggle="tooltip" title="{{ 'products.product.add_to_cart' | t }}"><span class="cs-icon icon-cs-cart"></span></button>
+            {% endif %}
+          </div>
+        </form>      
+        <ul class="quickview-wishlist-wrapper">
+          <li class="quickview hidden-xs hidden-sm">
+            {% if product.available %}
+            <div class="product-ajax-cart">            
+              <div data-handle="{{product.handle}}" data-target="#quick-shop-modal" class="quick_shop" data-toggle="modal">
+                <a class="" data-toggle="tooltip" title="{{ 'collections.product_item.quickview' | t }}"><span class="cs-icon icon-search"></span></a>
+              </div>
+            </div>
+            {% endif %}
+          </li>
+          <li class="wishlist">
+            <a data-toggle="tooltip" title="{{ 'sections.header.top_header_wishlist' | t }}" class="wishlist wishlist-{{ product.handle }}" data-wishlisthandle="{{ product.handle }}"><span class="cs-icon icon-heart"></span></a>    
+          </li>
+        </ul>                      
+      </div>
+    </div>
+    <div class="row-right">      
+      <div class="rating-star">
+        <span class="shopify-product-reviews-badge" data-id="{{ product.id }}"></span>
+      </div>
+      <div class="product-title"><a class="title-5" href="{{ product.url | within: collection }}">{{ product.title }}</a></div>
+      <div class="product-price">
+        {% if product.available %}
+        {% if product.compare_at_price_max > product.price %}
+
+        {% assign found_one_in_stock = false %}
+        {% for variant in product.variants %}
+        {% if variant.available and variant.compare_at_price and found_one_in_stock == false %}
+        {% assign found_one_in_stock = true %}
+
+        <span class="price_sale">{{ variant.price | money }}</span>
+        <del class="price_compare"> {{ variant.compare_at_price | money }}</del>
+
+        {% endif %}
+        {% endfor %}
+
+        {% if found_one_in_stock == false %}
+        {% for variant in product.variants %}
+        {% if variant.available and found_one_in_stock == false %}
+        {% assign found_one_in_stock = true %}
+        <span class="price">
+          {{ variant.price | money }}
+        </span>
+        {% endif %}
+        {% endfor %}
+        {% endif %}
+        {% else %}
+        <span class="price">
+          {% if product.price_varies %} 
+          {{ product.price | money }}
+          {% else %}
+          {{ product.price | money }}
+          {% endif %}
+        </span>
+        {% endif %}  
+        {% else %}
+        <span class="sold_out">{{ 'products.product.sold_out_html' | t }}</span>
+        {% endif %}
+      </div>            
+    </div>   
+  </div>  
+</div> 

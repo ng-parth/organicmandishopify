@@ -1,0 +1,17 @@
+<div class="related-group article">
+  <div class="related-top">
+    <img src="{{related.image | img_url: '' , crop: 'center'}}" alt="" />
+  </div>
+  <div class="related-right">
+    <div class="article-title">                    
+      <h2 class="article-name"><a href="{{ related.url }}">{{ related.title }}</a></h2>
+    </div>
+    <ul class="article-info list-inline">
+      <li class="article-author">
+        <span>{{ 'blogs.comments.by' |t }}</span>
+        <span class="user" itemprop="name">{{article.author}}</span>
+      </li> 
+      <li class="article-date"><span>{{article.published_at | date: '%b %d, %Y'}}</span></li>                                           
+    </ul>
+  </div>
+</div>

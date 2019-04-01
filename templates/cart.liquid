@@ -1,0 +1,31 @@
+<section class="heading-content">
+  <div class="heading-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="page-heading-inner heading-group">
+          <div class="breadcrumb-group">
+            <h1 class="page-title">{{ 'cart.general.title' | t }}</h1>
+            <div class="breadcrumb clearfix">
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+              <span class="arrow-space"></span>
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a href="/cart" title="{{ 'cart.general.title' | t }}" itemprop="url"><span itemprop="title" >{{ 'cart.general.title' | t }}</span></a>
+              </span>
+            </div>        
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cart-content">
+  <div class="cart-wrapper">
+    <div class="container">
+      <div class="row">
+        {% section 'cart-template' %}
+      </div>
+    </div>
+  </div>
+</section>
+

@@ -1,0 +1,174 @@
+<section class="heading-content">
+  <div class="heading-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="page-heading-inner heading-group">
+          <div class="breadcrumb-group">
+            <h1 class="page-title hidden">{{ 'general.search.title' | t }}</h1>
+            <div class="breadcrumb clearfix">
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+              <span class="arrow-space"></span>
+              {% if search.terms != "" %}
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/search" title="{{'general.search.text'|t}} '{{search.terms}}'" itemprop="url"><span itemprop="title">{{'general.search.text'|t}} "{{search.terms}}"</span></a></span>
+              {% else%}
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="/search" title="{{'general.search.title'|t}}" itemprop="url"><span itemprop="title">{{'general.search.title'|t}}</span></a></span>
+              {% endif%}  
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="search-content">
+  <div class="search-content-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="search-content-group">
+          <div class="search-content-inner">
+            <div id="search">
+              {% assign check_article = false %}
+              {% for item in search.results limit:1 %}
+              {% if item.object_type == 'article' %}
+              {% assign check_article = true %}
+              {% endif %}
+              {% endfor %}
+              
+              {% if search.performed %}
+              {% paginate search.results by 8 %}
+
+              {% if search.terms == "" %}
+
+              <div class="expanded-message">
+                <div class="search-field">
+                  <form class="search" action="/search">
+                    <input type="hidden" name="type" value="product">
+                    <button class="search-submit" type="submit">
+                      <span class="cs-icon icon-search"></span>
+                    </button>
+                    <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.placeholder' | t }}" value=""  />
+                  </form>
+                </div>
+              </div>              
+              {% else %}
+
+              {% if search.results == empty %}            
+              <div class="expanded-message">
+                <h2>{{ 'general.search.no_results_title' | t }}</h2>
+                <span class="subtext">{{ 'general.search.no_results_html' | t: search: search.terms }}</span>
+                <div class="search-field">
+                  <form class="search" action="/search">
+                    <input type="hidden" name="type" value="product">
+                    <button class="search-submit" type="submit">
+                      <span class="cs-icon icon-search"></span>
+                    </button>
+                    <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms | escape }}"  />
+                  </form>
+                </div>
+              </div>            
+              {% else %}
+			  <div class="expanded-message">
+                <div class="search-field">
+                  <form class="search" action="/search">
+                    <input type="hidden" name="type" value="product">
+                    <button class="search-submit" type="submit">
+                      <span class="cs-icon icon-search"></span>
+                    </button>
+                    <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.placeholder' | t }}" value="{{ search.terms | escape }}"  />
+                  </form>
+                </div>
+                <span class="subtext">{{ 'general.search.results_html' | t: search: search.terms }}</span>
+                <span class="results">{{ search.results_count }} {{ 'general.search.results_title' |t }}</span>
+              </div>
+              <!-- Begin results -->
+              <div class="product-item-group clearfix">
+                <div class="product-item-inner">
+                  <!-- results article -->
+                  {% if check_article %}                  
+                  {% for article in search.results %}
+                  <div class="article clearfix {% if forloop.first == true %}article-big{% else %}article-small{% endif %}">
+                    <div class="group-blog-top">
+                      {% if article.image %}
+                      <div class="top-banner article_banner_show article-image"> 
+                        <a href="{{ article.url }}">
+                          <img src="{{article.image | img_url: 'master'}}" alt="" />
+                        </a>
+                      </div>
+                      {% endif %}
+                      <div class="article-title">                     
+                        <h2 class="article-name"><a href="{{ article.url }}">{{ article.title }}</a></h2>                                            
+                      </div>
+                      <ul class="article-info list-inline">
+                        <li class="article-date">{{article.published_at | date: '%b %d, %Y'}}</li> 
+                        <li class="article-author">
+                          <span>{{ 'blogs.comments.by' |t }}</span>
+                          {{article.author}}
+                        </li> 
+                        <li class="article-comment">
+                          <span>
+                            <a href="{{article.url}}#comments">
+                              <span>{{ article.comments_count }}</span> {{ article.comments_count | pluralize: 'Comment', 'Comment(s)' }}
+                            </a>
+                          </span>
+                        </li>                                          
+                      </ul>
+                    </div>
+                    <div class="articleinfo_group">
+                      <div class="article-content">
+                        {% if forloop.first == true %}{{ article.content | truncatewords : 55 }}{% else %}{{ article.content | truncatewords : 30 }}{% endif %}
+                      </div>
+                      <a class="_btn" href="{{ article.url }}">{{ 'blogs.article.action'| t }}</a>
+                    </div>               
+                  </div> 
+                  {% endfor %}                  
+                  {% else %}
+                  <!-- results product -->
+                  {% for product in search.results %}
+                  <div class="product-item-wrapper col-sm-3"> 
+                    {% include 'index-proditem' %}
+                  </div>
+                  {% endfor %}
+                  {% endif %}
+                </div>                
+              </div>
+              
+              <!-- End results -->
+              <div class="search-bottom-toolbar">
+                <div class="search-pagination col-sm-6">
+                  {% include 'pagination' %}
+                </div>
+                <div class="search-counter col-sm-6">
+                  {% if paginate.current_page == 1 %} {% capture xnumber %}1{% endcapture%}
+                  {% else %} {% capture xnumber %} {{paginate.current_page | minus:1 | times: 8 | plus: 1}} {% endcapture%}
+                  {% endif %}
+                  {% capture ynumber%}{{paginate.current_page | times: 8 }} {% endcapture%}
+                  {% if paginate.pages == paginate.current_page %} {% capture ynumber %} {{search.results_count}} {% endcapture%}{%endif%}  
+                  {{'collections.general.showing'|t:x:xnumber,y:ynumber,z:search.results_count}}
+                </div>
+              </div>
+              {% endif %}
+              {% endif %}
+
+              {% endpaginate %}
+
+              {% else %}            
+              <div class="expanded-message">
+                <div class="search-field">
+                  <form class="search" action="/search">
+                    <input type="hidden" name="type" value="product">
+                    <button class="search-submit" type="submit">
+                      <span class="cs-icon icon-search"></span>
+                    </button>
+                    <input type="text" name="q" class="search_box" placeholder="{{ 'general.search.placeholder' | t }}" value="" />
+                  </form>
+                </div>
+              </div>            
+              {% endif %}	   
+            </div> <!-- /#search -->
+          </div>
+        </div>                
+      </div>
+    </div>
+  </div>
+</section>

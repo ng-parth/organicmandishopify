@@ -1,0 +1,142 @@
+{% if section.blocks.size > 0 %}
+<div data-section-id="{{ section.id }}" data-section-type="product-section">
+  <section class="home-productCol-layout">
+    <div class="container">
+      <div class="row">
+        <div class="home-productCol-inner">
+          <div class="home-productCol-content">
+            {% if section.blocks.size == 1 %}
+              {% assign col = 'col-sm-12' %}
+            {% elsif section.blocks.size == 2 %}
+              {% assign col = 'col-sm-6' %}
+            {% elsif section.blocks.size == 3 %}
+              {% assign col = 'col-sm-4' %}
+            {% else %}
+              {% assign col = 'col-sm-3' %}
+            {% endif %}
+            
+            {% for block in section.blocks %}
+            <div class="productCol-item {{ col }}">
+              <div class="page-title text-left un-before not-animated" data-animate="zoomIn" data-delay="{{ forloop.index }}00">
+                <h2>{{ block.settings.title }}</h2>
+                <p class="sub-title">
+                  {{ block.settings.sub_title }}
+                </p>
+              </div>
+              <div class="productCol-product productCol_{{ section.id }}">
+                {% for product in collections[block.settings.collection].products limit:section.settings.limit %} 
+                  {% capture check_forloop_product %}{{ forloop.index | modulo: 4 }}{% endcapture %}
+                  {% if check_forloop_product == "1" %}
+                  <div class="content-product">
+                    {% endif %} 
+                    <div class="item not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00">
+                      {% include 'index-product-right' %} 
+                    </div>
+                    {% if check_forloop_product == "0" or forloop.last %}
+                  </div>
+                  {% endif %}
+                {% else %}
+                  <div class="content-product">
+                  {% for i in (1..4) %}
+                    <div class="item">
+                      <div class="grid__item .grid__item--{{section.id}} {{ grid_item_width }}">
+                        <div class="grid-view-item product">
+                          <div class="grid-view-item__link">
+                            <div class="grid-view-item__image">
+                              {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                              {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                            </div>
+                            <div class="h4 grid-view-item__title product-title"><a href="#">{{ 'homepage.onboarding.product_title' | t }}</a></div>
+                            <div class="grid-view-item__meta">
+                              {% include 'product-price' %}
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  {% endfor %}
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<script type="text/javascript">
+  $(".productCol_{{ section.id }}").owlCarousel({
+    navigation : true,
+    pagination: false,
+    autoPlay: {{section.settings.auto_slider}},
+    items: 1,
+    slideSpeed : 200,
+    paginationSpeed : 800,
+    rewindSpeed : 1000,
+    itemsDesktop : [1200,1],
+    itemsTablet: [1199,1],
+    itemsTabletSmall: [991,1],
+    itemsMobile : [767,1]
+  });
+</script>
+{% endif %}
+{% schema %}
+{
+  "name": "Column Products",
+  "class": "index-section index-section-product",
+  "settings": [
+	{
+      "type": "checkbox",
+      "id": "auto_slider",
+      "label": "Setup to animate automatically",
+      "default": false
+    },
+	{
+      "type": "text",
+      "id": "limit",
+      "label": "Limit product show",
+	  "default":"8"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "sub_title",
+          "label": "Sub Title"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection product"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Column Products",
+    "category": "List Products",
+    "blocks": [
+      {
+        "type": "tab"
+      },
+      {
+        "type": "tab"
+      },
+	  {
+        "type": "tab"
+      }
+    ]
+  }]
+}
+{% endschema %}

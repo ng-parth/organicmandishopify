@@ -1,0 +1,21 @@
+<div class="list-collection-item">
+  <div class="collection-content">
+    <!-- Begin product image -->
+    <div class="image">
+      {% if collection.image %}
+      <img src="{{ collection.image.src | collection_img_url: 'large', crop:'top' }}" alt="{{ collection.image.alt }}" />
+      {% else %}
+      <img src="{{ collection.products.first.featured_image | product_img_url: 'large', crop:'top' }}" alt="{{ collection.title | escape  }}" />
+      {% endif %}      
+    </div>
+    <!-- End product image -->
+    <!-- Begin product description -->
+    <div class="info" >
+      <a class="info-group" href="{{ collection.url }}">
+        <h4 class="title">{{ collection.title }}</h4>
+        <span class="count">{{ collection.products_count }} {{ 'collections.general.items_with_count' | t: count: collections.general.items_with_count }}</span>
+      </a>      
+    </div>
+    <!-- End product description -->
+  </div>    
+</div>

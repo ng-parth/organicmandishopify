@@ -1,0 +1,36 @@
+<section class="heading-content collection-heading">
+  <div class="heading-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="page-heading-inner heading-group">
+          <div class="breadcrumb-group">
+            <h1 class="page-title">{{ collection.title }}</h1>
+            <div class="breadcrumb clearfix">
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+              <span class="arrow-space"></span>
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a href="{% if collection.handle == 'all' %}/collections/all{% else %}{{ collection.url }}{% endif %}" title="{{ collection.title | escape }}" itemprop="url">
+                  <span itemprop="title">
+                    {% if collection.handle == 'all' %}
+                    {{ 'collections.general.title' | t }}
+                    {% else %}
+                    {{ collection.title }}
+                    {% endif %}
+                  </span>
+                </a>
+              </span>
+            </div>        
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="collection-layout">  
+  <div class="container">
+    <div class="row">
+      {% section 'collection-leftSidebar-template' %}
+    </div>
+  </div>
+</section>

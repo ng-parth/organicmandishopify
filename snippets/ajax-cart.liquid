@@ -1,0 +1,61 @@
+<div id="ajax-cart-modal" class="popup-pro-wrapper" style="display: none; position: fixed;  top: 0%; left: 0%; width: 100%; height: 100%; ">
+  <div class="ajax-cart-modal-wrapper">
+    <div class="ajax-cart-overlay"></div>
+    <div class="ajax-cart-loading" style="color:#fff"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
+    <div class="ajax-cart-box" style="display: none;">
+      <div class="ajax-cart-note">
+        {{"products.ajax_cart.note_text_1"|t}}
+      </div>
+      <div class="group_ajax">
+        <div class="ajax-cart-left">        
+          <div class="ajax-cart-product">
+            <div class="col-md-6 ajax-cart-image">
+            </div>
+            <div class="col-md-6 ajax-cart-desc">
+              <div class="ajax-cart-product-title"></div>
+              <div class="ajax-cart-price"></div>
+              <div class="ajax-cart-variant"></div>
+              <div class="ajax-cart-qty"></div>
+            </div>
+          </div>        
+      </div>
+      <div class="ajax-cart-right">
+        <div class="ajax-cart-number-product"></div>
+        <div class="ajax-cart-subtotal"></div>
+        <div class="ajax-cart-group-actions">
+          <div class="ajax-cart-next">
+            <a class="_btn" href="/cart">{{"products.ajax_cart.precess"|t}}</a>
+          </div>
+          <div class="ajax-cart-continue">
+            <a href="javascript:void(null)" onclick="ajaxCartHide()" class="_btn">
+              {{"products.ajax_cart.continue"|t}}
+              <span class="icon-small icon-small-long-arrow-right"></span>
+            </a>
+          </div>
+        </div>
+        <div class="countDiv"></div>
+      </div>
+      </div>      
+      <div class="ajax-cart-close" onclick="ajaxCartHide()"><span class="cs-icon icon-close"></span></div>
+    </div>      
+  </div>    
+</div>
+
+<div class="remove-cart-model">
+  <div class="modal fade" id="modalRemoveCart" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog white-modal modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="lnr lnr-cross"></span>
+          </button>
+        </div>
+        <div class="modal-body">
+          {{ 'compare.max' | t }}
+          <div class="body-bottom">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

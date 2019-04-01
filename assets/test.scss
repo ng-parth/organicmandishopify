@@ -1,0 +1,34 @@
+   @include respond-to($media_max_mobile){
+        $_height_slideshow_mobile: 300px;
+        .home-slideshow-content {
+          height: auto !important;
+          > ul {
+            height: auto !important;
+            > li{
+              height: auto !important;
+              &.current-sr-slide-visible {
+                position: relative !important;
+              }
+            }                    
+          }
+          .tp-bgimg,
+          .slotholder {
+            overflow: hidden !important;
+            height: $_height_slideshow_mobile !important;
+            .slot,
+            .slot * {
+              position: absolute !important;
+              height: 300px !important;
+              width: 100% !important;
+            }            
+          }   
+          /*-------------------*/
+          .slotholder{
+            display: none !important;
+          }
+        }               
+        .slideshow-caption{
+                  
+          /*-------------------*/
+        }        
+      }

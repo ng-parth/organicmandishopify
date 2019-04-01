@@ -1,0 +1,54 @@
+{% if settings.side_category_show %}
+<div class="sidebar-block blog-category">
+  <h3 class="sidebar-title">
+    <span class="text">{{ settings.blog_category_title }}</span>
+    <span class="cs-icon icon-ios-minus-empty"></span>
+  </h3>
+  <div class="sidebar-content">
+    <ul class="category">
+      {% for l in linklists[settings.blog_category_linklist].links %}
+      <li class="nav-item{% if l.active %} active{% endif %}">
+        <a href="{{ l.url }}">
+          {{ l.title }}
+        </a>
+      </li>
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}
+{% if settings.blog_late_show %}
+<div class="sidebar-block blogs-recent">
+  <h3 class="sidebar-title">
+    <span class="text">{{ settings.blog_late_title }}</span>
+    <span class="cs-icon icon-ios-minus-empty"></span>
+  </h3>
+  <div class="sidebar-content recent-article">
+    <div class="ra-item-inner">
+      {% for article in blogs[settings.blog_late_blog].articles limit:4 %}
+        {% include 'blog-sidebar-article' %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+{% endif %}
+{% if blog.all_tags.size > 0 and settings.blog_tags_show %}
+<div class="sidebar-block blog-tags">
+  <h3 class="sidebar-title">
+    <span class="text">{{ settings.blog_tags_title }}</span>
+    <span class="cs-icon icon-ios-minus-empty"></span>
+  </h3>
+  <div class="sidebar-content">
+    <ul class="tags-inner tags">
+      <li{% unless current_tags %} class="active"{% endunless %}><a href="{{ shop.url}}/blogs/{{ blog.handle }}">{{ 'blogs.sidebar.all' | t }}</a></li>
+      {% for tag in blog.all_tags %}
+      {% if current_tags contains tag %}
+      <li class="active">{{ tag | link_to_remove_tag: tag }}</li>
+      {% else %}
+      <li>{{ tag | link_to_tag: tag }}</li>
+      {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>
+{% endif %}

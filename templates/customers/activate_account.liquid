@@ -1,0 +1,57 @@
+<section class="heading-content">
+  <div class="heading-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="page-heading-inner heading-group">
+          <div class="breadcrumb-group">
+            <h1 class="page-title">{{ 'customer.activate_account.title' | t }}</h1>
+            <div class="breadcrumb clearfix">
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url">
+                  <span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span>
+                </a>
+              </span>
+              <span class="arrow-space">></span>
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a href="{{ page.url }}" title="{{ 'customer.activate_account.title' | t }}" itemprop="url">
+                  <span itemprop="title">{{ 'customer.activate_account.title' | t }}</span>
+                </a>
+              </span>  
+            </div>          
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="customers-layout activate_account-layout">
+  <div class="customers-wrapper activate_account-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="activate_account-inner">
+          <div class="activate_account-content">
+            <div id="customer-activate">    
+              <p class="note create-password">{{ 'customer.activate_account.subtext' | t }}</p>
+              {% form 'activate_customer_password' %}
+              {{ form.errors | default_errors }}
+              <div class="clearfix large_form form-item form-password">
+                <input type="password" value="" placeholder="{{ 'customer.activate_account.password' | t }}" name="customer[password]" id="customer_password" class="text" size="16" />
+              	<span class="cs-icon icon-eye"></span>
+              </div>
+              <div class="clearfix large_form form-item form-password">
+                <input type="password" value="" placeholder="{{ 'customer.activate_account.password_confirm' | t }}" name="customer[password_confirmation]" id="customer_password_confirmation" class="text" size="16" />
+				<span class="cs-icon icon-eye"></span>
+              </div>
+              <div class="action_bottom">
+                <input class="_btn" type="submit" value="{{ 'customer.activate_account.submit' | t }}" />
+                <a href="/">{{ 'customer.activate_account.cancel' | t }}</a>
+              </div>
+              {% endform %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

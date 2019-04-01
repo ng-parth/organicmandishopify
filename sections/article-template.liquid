@@ -1,0 +1,235 @@
+<div class="article-inner" itemscope itemtype="http://schema.org/NewsArticle">
+  <meta itemprop="datePublished" content="{{article.created_at | date: ''}}"/>
+  <meta itemprop="dateModified" content="{{article.published_at | date: ''}}"/>
+  <meta itemscope itemprop="mainEntityOfPage"  itemType="https://schema.org/WebPage" itemid="{{ article.url }}"/>
+  {% paginate article.comments by 100 %}
+  <div itemprop="publisher" itemscope itemtype="https://schema.org/Organization">
+    <div itemprop="logo" itemscope itemtype="https://schema.org/ImageObject">
+      <meta itemprop="url" content="https:{{article.image | img_url: 'master'}}">
+    </div>
+    <meta itemprop="name" content="Shopify">
+  </div>
+  <div class="article-content">
+    <div class="group_article">
+      <div class="{% if settings.blog_sidebar_show %}col-sm-9{% else %}col-sm-12{% endif %} article-left-group">
+        <!-- Begin article -->
+        <div class="article-body clearfix">
+          <div class="group-blog-top">
+            <div class="top-banner article_banner_show article-image" itemprop="image" itemscope itemtype="https://schema.org/ImageObject">  
+              <img src="{{article.image | img_url: 'master'}}" alt="" />
+              <meta itemprop="url" content="https:{{article.image | img_url: 'master'}}">
+              <meta itemprop="width" content="863">
+              <meta itemprop="height" content="575">
+            </div>
+            <div class="blog-title-group">
+              <a class="blog-title" href="{{ blog.url }}">
+                {{ blog.title }}
+              </a>
+            </div>
+            <ul class="article-info list-inline">
+              <li class="article-date">
+                <i class="fa fa-calendar-check-o"></i>
+                {{article.published_at | date: '%b %d, %Y'}}
+              </li> 
+              <li class="article-author">
+                <i class="fa fa-user"></i>
+                {{article.author}}
+              </li> 
+              <li class="article-comment">
+                <span>
+                  <a href="{{article.url}}#comments">
+                    <i class="fa fa-comments-o"></i>
+                    <span>{{ article.comments_count }}</span> {{ article.comments_count | pluralize: 'Comment', 'Comment(s)' }}
+                  </a>
+                </span>
+              </li>                                          
+            </ul>
+            <div class="article-title">                    
+              <h1 class="article-name" itemprop="headline">{{ article.title }}</h1>
+            </div>
+          </div>
+          <div class="articledescript_group">
+            <div class="article-description" itemprop="description">
+              {{ article.content }}
+            </div>
+          </div>                
+        </div>
+        <!-- End article --> 
+        <!-- Social & Tags -->
+        <div class="group-blog-btm">
+          <div class="tags-area">
+            <span>{{ 'blogs.article.tags' |t }}: </span>
+            {% for tag in article.tags %}
+            {% if tag == article.tags.last %} {{ tag | link_to_tag: tag }} {% else %} {{ tag | link_to_tag: tag }}, {% endif%}
+            {% endfor %}
+          </div>
+          {% if settings.social_sharing_blog %}
+          <div class="share-with supports-fontface">
+            {% include 'social-sharing' %}
+          </div>
+          {% endif %}
+        </div>
+        {% if section.settings.blog_recent_show %}
+        <div class="recent-blog">
+          <h2 class="recent-title">{{ section.settings.blog_recent_title }}</h2>          
+          <div class="recent-article-group">
+            <div class="recent-article related-blog-slider">
+              {% for related in blogs[section.settings.blog_recent_blog].articles limit:section.settings.blog_recent_number %}
+              <div class="ra-item"> 
+                <div class="article" >
+                  <div class="group-blog-top">
+                    {% if related.image %}
+                    <div class="top-banner article-image"> 
+                      <a href="{{ related.url }}">
+                        <img src="{{related.image | img_url: 'master'}}" alt="" />
+                      </a>
+                    </div>
+                    {% endif %}
+                  </div>
+                  <div class="articleinfo_group">
+                    <div class="blog-title-group">
+                      <a class="blog-title" href="{{ blogs[section.settings.blog_recent_blog].url }}">
+                        {{ blogs[section.settings.blog_recent_blog].title }}
+                      </a>
+                    </div>              
+                    <div class="article-title">                     
+                      <h2 class="article-name"><a href="{{ related.url }}">{{ related.title }}</a></h2>                                            
+                    </div>
+                    <ul class="article-info list-inline">
+                      <li class="article-date"><span>{{related.published_at | date: '%b %d, %Y'}}</span></li> 
+                      <li class="article-comment">
+                        <span>
+                          <a href="{{related.url}}#comments">
+                            {% assign comments_count1 = related.comments_count %}
+                            <span>{{ related.comments_count }}</span> {{ related.comments_count | pluralize: 'Comment', 'Comment(s)' }}
+                          </a>
+                        </span>
+                      </li>                                    
+                    </ul>
+                  </div>                 
+                </div> 
+              </div>
+              {% endfor %}
+            </div>
+          </div>          
+        </div> 
+        {% endif %}
+        <!-- Begin comments -->
+        {% if blog.comments_enabled? %}
+        <div id="comments" class="comments">
+
+          {% if article.comments.size > 0 or comment.created_at %}
+          <h2 class="article-title page-title"><span>{{ 'blogs.comments.title' | t }}</span></h2>          
+          {% for comment in article.comments %}
+          <div id="comment-{{ comment.id }}" class="comment border-bottom clearfix">
+            <div class="group">
+              <div class="cmt-author"><b>{{ comment.author }}</b></div>                    
+              <div class="cmt-date">
+                <span class="date-hour">
+                  {{ comment.created_at | date: '%H:%M'}}  
+                </span>
+                <span class="date-day">
+                  {{ comment.created_at | date: '%A.%d %B %Y'}}  
+                </span>
+              </div>                       
+            </div>            
+            <div class="cmt-content">{{ comment.content }}</div>                     
+          </div>
+          {% endfor %}
+          {% include 'pagination' %}
+
+          {% endif %}
+          <div class="comment_form">
+            {% form "new_comment", article %}
+            <h2 class="article-title page-title"><span>{{ 'blogs.comments.form_title' | t }}</span></h2>    
+            <div class="group_form">
+              {% if form.posted_successfully? %}
+              {% if blog.moderated? %}
+              <div class="col-sm-12">
+                <p class="subtext success">{{ 'blogs.comments.success_moderated' | t }}</p>
+              </div>
+              {% else %}
+              <div class="col-sm-12">
+                <p class="subtext success">{{ 'blogs.comments.success' | t }}</p>
+              </div>
+              {% endif %}
+              {% endif %}
+              {% if form.errors %}
+              <div class="col-sm-12">
+                <p class="subtext error">{{ 'blogs.comments.error' | t }}</p>
+              </div>                  
+              {% endif %}
+              <div class="col-sm-6"> 
+                <div class="input-row">
+                  <input type="text" placeholder="{{ 'blogs.comments.name' | t }}" id="comment_author" name="comment[author]" size="40" class="text" />
+                </div>                
+              </div>
+              <div class="col-sm-6">              
+                <div class="input-row">
+                  <input type="text" placeholder="{{ 'blogs.comments.email' | t }}" id="comment_email" name="comment[email]" size="40" class="text" />
+                </div>                
+              </div>                          
+              <div class="col-sm-12">              
+                <div class="input-row">
+                  <textarea id="comment_body" placeholder="{{ 'blogs.comments.message' | t }}" name="comment[body]" cols="40" rows="5" class="text">{{form.body}}</textarea>
+                </div>
+              </div>
+              <div class="col-sm-12">
+                <div class="input-row">
+                  <input type="submit" value="{{ 'blogs.comments.post' | t }}" class="_btn" id="comment-submit" />
+                </div>
+              </div>
+              {% if blog.moderated? %}
+              <div class="col-sm-12">
+                <div class="notice">{{ 'blogs.comments.moderated' | t }}</div>
+              </div>
+              {% endif %}
+            </div>
+            {% endform %}
+          </div>
+        </div>
+        {% endif %}
+        <!-- End comments -->
+      </div>  
+      {% if settings.blog_sidebar_show %}
+      <div class="col-sm-3 sidebar-blog sidebar">
+        {% include 'blog-sidebar' %}
+      </div> 
+      {% endif %}
+    </div> 
+  </div>
+  {% endpaginate %}          
+</div>
+{% schema %}
+{
+  "name": "Article",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Recent posts"
+    },
+    {
+      "type": "checkbox",
+      "id": "blog_recent_show",
+      "label": "Set active this block?",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "blog_recent_title",
+      "label": "Title"
+    },
+    {
+      "type": "blog",
+      "id": "blog_recent_blog",
+      "label": "Use blog"
+    },
+    {
+      "type": "text",
+      "id": "blog_recent_number",
+      "label": "Limit show",
+      "default": "4"
+    }
+  ]
+}
+{% endschema %}

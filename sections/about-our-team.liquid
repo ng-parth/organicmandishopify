@@ -1,0 +1,173 @@
+<div data-section-id="{{ section.id }}" data-section-type="ourTeam-section">
+  <section class="home-ourTeam-layout">
+    <div class="home-ourTeam-layout">
+      <div class="container">
+        <div class="row">
+          <div class="page-title text-center">
+            <h2>{{ section.settings.title }}</h2>
+            <p class="sub-title">
+              {{ section.settings.sub_title }}
+            </p>
+            {% if section.settings.caption != '' %}
+            <p class="caption">
+              {{ section.settings.caption }}
+            </p>
+            {% endif %}
+          </div>
+          <div class="home-ourTeam-inner">            
+            <div class="home-ourTeam-content">
+              {% if section.blocks.size > 0 %}
+                {% if section.blocks.size == 1 %}
+                  {% assign col = 'col-sm-12' %}
+                {% elsif section.blocks.size == 2 %}
+                  {% assign col = 'col-sm-6' %}
+                {% elsif section.blocks.size == 3 %}
+                  {% assign col = 'col-sm-4' %}
+                {% else %}
+                  {% assign col = 'col-sm-3' %}
+                {% endif %}
+                {% for block in section.blocks %}
+                <div class="ourTeam-item {{ col }}">
+                  <div class="group">
+                    {% if block.settings.image %}
+                    <span class="group_img">
+                      <img src="{{ block.settings.image | img_url: '', crop: 'center' }}" alt="{{ block.settings.image.alt }}" />
+                    </span>                  
+                    {% else %}
+                    <img src="{{ '154x154.png' | asset_url }}" alt=""/>
+                    {% endif %}
+                    <div class="testimonials-caption-group">
+                      <p class="testimonials-name">
+                        {{ block.settings.name }}
+                      </p>
+                      <p class="testimonials-position">
+                        {{ block.settings.position }}
+                      </p>
+                      <ul class="follow-content">
+                        {% if block.settings.social_facebook_link != blank %}<li class="socialLinks-item"><a href="{{ block.settings.social_facebook_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Facebook' }}" class="icon-social facebook"><i class="fa fa-facebook"></i></a></li>{% endif %}
+                        {% if block.settings.social_twitter_link != blank %}<li class="socialLinks-item"><a href="{{ block.settings.social_twitter_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Twitter' }}" class="icon-social twitter"><i class="fa fa-twitter"></i></a></li>{% endif %}            
+                        {% if block.settings.social_google_plus_link != blank %}<li class="socialLinks-item"><a href="{{ block.settings.social_google_plus_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Google+' }}" class="icon-social google-plus"><i class="fa fa-google-plus"></i></a></li>{% endif %}                        
+                        {% if block.settings.social_pinterest_link != blank %}<li class="socialLinks-item"><a href="{{ block.settings.social_pinterest_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Pinterest' }}" class="icon-social pinterest"><i class="fa fa-pinterest"></i></a></li>{% endif %}
+                        {% if block.settings.social_instagram_link != blank %}<li class="socialLinks-item"><a href="{{ block.settings.social_instagram_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Instagram' }}" class="icon-social instagram"><i class="fa fa-instagram"></i></a></li>{% endif %}                                    
+                        {% if block.settings.social_youtube_link != blank %}<li class="socialLinks-item"><a href="{{ block.settings.social_youtube_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Youtube' }}" class="icon-social youtube"><i class="fa fa-youtube"></i></a></li>{% endif %}	
+                        {% if block.settings.social_wordpress_link != blank %}<li class="socialLinks-item"><a href="{{ block.settings.social_wordpress_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Wordpress' }}" class="icon-social wordpress"><i class="fa fa-wordpress"></i></a></li>{% endif %}
+                        {% if block.settings.social_vimeo_link != blank %}<li class="socialLinks-item"><a href="{{ block.settings.social_vimeo_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Vimeo' }}" class="icon-social vimeo"><i class="fa fa-vimeo"></i></a></li>{% endif %}	
+                        {% if block.settings.social_tumblr_link != blank %}<li class="socialLinks-item"><a href="{{ block.settings.social_tumblr_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Tumblr' }}" class="icon-social tumblr"><i class="fa fa-tumblr"></i></a></li>{% endif %}	    
+                      </ul>
+                    </div>
+                  </div>                
+                </div>
+                {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+  "name": "Meet Our Team",
+  "class": "index-section index-section-ourTeam",
+  "settings": [
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "textarea",
+      "id": "caption",
+      "label": "Caption"
+    },
+	{
+      "type": "color",
+      "id": "color_background",
+      "label": "Background Color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Upload Avatar"
+        },
+		{
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+		{
+          "type": "text",
+          "id": "position",
+          "label": "Position"
+        },
+		{
+          "type": "text",
+          "id": "social_twitter_link",
+          "label": "Twitter",
+          "info": "https:\/\/twitter.com\/shopify"
+        },
+        {
+          "type": "text",
+          "id": "social_facebook_link",
+          "label": "Facebook",
+          "info": "https:\/\/www.facebook.com\/shopify"
+        },
+        {
+          "type": "text",
+          "id": "social_pinterest_link",
+          "label": "Pinterest",
+          "info": "https:\/\/www.pinterest.com\/shopify"
+        },
+        {
+          "type": "text",
+          "id": "social_google_plus_link",
+          "label": "Google+",
+          "info": "https:\/\/plus.google.com\/+shopify"
+        },
+        {
+          "type": "text",
+          "id": "social_instagram_link",
+          "label": "Instagram",
+          "info": "https:\/\/instagram.com\/shopify"
+        },
+        {
+          "type": "text",
+          "id": "social_tumblr_link",
+          "label": "Tumblr",
+          "info": "http:\/\/shopify.tumblr.com"
+        },
+        {
+          "type": "text",
+          "id": "social_youtube_link",
+          "label": "YouTube",
+          "info": "https:\/\/www.youtube.com\/user\/shopify"
+        },
+        {
+          "type": "text",
+          "id": "social_wordpress_link",
+          "label": "Wordpress",
+          "info": "http:\/\/wordpress.org\/"
+        },
+        {
+          "type": "text",
+          "id": "social_vimeo_link",
+          "label": "Vimeo",
+          "info": "https:\/\/vimeo.com\/shopify"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

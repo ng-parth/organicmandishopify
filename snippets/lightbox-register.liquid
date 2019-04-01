@@ -1,0 +1,47 @@
+<div class="modal fade" id="lightbox-register" tabindex="-1" role="dialog" aria-labelledby="lightbox-register" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="lnr lnr-cross"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="register-content">
+          <span class="register-title">
+            {{ 'customer.register.title_popup'|t }}
+          </span>
+          <span class="register-description">
+            {{ 'customer.register.description_popup'|t }}
+          </span>
+          {% form 'create_customer' %}
+          {{ form.errors | default_errors }}
+          <div class="clearfix large_form">
+            <label for="first_name" class="label">{{ 'customer.register.first_name' | t }}</label>
+            <input type="text" value="" name="customer[first_name]" id="first_name" class="text" size="30" />
+          </div>
+
+          <div class="clearfix large_form">
+            <label for="last_name" class="label">{{ 'customer.register.last_name' | t }}</label>
+            <input type="text" value="" name="customer[last_name]" id="last_name" class="text" size="30" />
+          </div>
+
+          <div class="clearfix large_form">
+            <label for="email" class="label">{{ 'customer.register.email' | t }}</label>
+            <input type="email" value="" name="customer[email]" id="email" class="text" size="30" />
+          </div>
+
+          <div class="clearfix large_form">
+            <label for="password" class="label">{{ 'customer.register.password' | t }}</label>
+            <input type="password" value="" name="customer[password]" id="password" class="password text" size="30" />
+          </div>
+
+          <div class="action_bottom">
+            <button class="btn" type="submit">{{'customer.register.submit'|t}}</button>
+          </div>
+          {% endform %}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="collection-info">
+	<div class="custom-content">
+	    <div class="container">
+		  <div class="row">
+		  	<h3 class="page-title col-md-12">Meet our Farmers</h3>
+		  </div>
+	      <div class="row">
+			{% for block in section.blocks %}
+				{%- assign collection = collections[block.settings.collection] -%}
+				        <div class="collection-photo our-farmers col-md-6">
+				        	<a href="{{ collection.url }}" class="href">
+					          <img class="grow" src="{{ collection.image | img_url: '', crop: 'center' }}"/>
+					          <div style="text-align: center; padding: 15px 0;">
+						          <h5> {{ collection.title }}</h5>
+						          <p class="_btn">Know more</p>
+					          </div>
+				        	</a>
+				        </div>
+			{% endfor %}
+	      </div>
+	    </div>
+	</div>
+</div>
+
+{% schema %}
+{
+	"name": "My Custom Page",
+
+	"settings": [
+	{
+		"type": "text",
+		"id": "title",
+		"label": "Heading",
+		"default": "Custom content"
+	}
+	],
+	"blocks": [
+	{
+		"type": "collection",
+		"name": "Collection",
+		"settings": [
+		{
+			"type": "collection",
+			"id": "collection",
+			"label": "Collection"
+		}]
+	}]
+}
+
+{% endschema %} 

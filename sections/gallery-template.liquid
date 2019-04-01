@@ -1,0 +1,195 @@
+<div class="gallery-content">
+  <div class="gallery-title-layout">
+    <div class="container">
+      <div class="row">
+        <div class="gallery-title-inner">
+          <h3 class="title">{{ section.settings.title }}</h3>
+          <p class="sub-title">{{ section.settings.sub_title }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if section.blocks.size > 0 %}
+  <div class="gallery-item-layout">
+    <div class="container">
+      <div class="row">
+        <div class="gallery-item-inner">
+          {% for block in section.blocks %}
+          <div class="gallery-item-content position-{{ block.settings.position }}">
+            <div class="banner-big item-content">
+              <a class="item-img" href="{{ block.settings.big_image | img_url: '', crop: 'center' }}" {% if block.settings.big_image %}style="background-image:url({{ block.settings.big_image | img_url: '', crop: '' }});"{% endif %}>
+                <div class="item-group-caption">
+                  <div class="item-caption">
+                    {{ block.settings.big_caption }}
+                  </div>
+                  <div class="item-action">
+                    <i class="fa fa-expand" aria-hidden="true"></i>
+                  </div>
+                </div>
+              </a>
+            </div>
+            <div class="banner-group">
+              <div class="banner-group-top">
+                <div class="banner-top item-content">
+                  <a class="item-img" href="{{ block.settings.top1_image | img_url: '', crop: 'center' }}" {% if block.settings.top1_image %}style="background-image:url({{ block.settings.top1_image | img_url: '', crop: '' }});"{% endif %}>
+                    <div class="item-group-caption">
+                      <div class="item-caption">
+                        {{ block.settings.top1_caption }}
+                      </div>
+                      <div class="item-action">
+                        <i class="fa fa-expand" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+                <div class="banner-top item-content">
+                  <a class="item-img" href="{{ block.settings.top2_image | img_url: '', crop: 'center' }}" {% if block.settings.top2_image %}style="background-image:url({{ block.settings.top2_image| img_url: '', crop: '' }});"{% endif %}>
+                    <div class="item-group-caption">
+                      <div class="item-caption">
+                        {{ block.settings.top2_caption }}
+                      </div>
+                      <div class="item-action">
+                        <i class="fa fa-expand" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+              <div class="banner-group-bottom">
+                <div class="banner-bottom item-content">
+                  <a class="item-img" href="{{ block.settings.bottom_image | img_url: '', crop: 'center' }}" {% if block.settings.bottom_image %}style="background-image:url({{ block.settings.bottom_image| img_url: '', crop: '' }});"{% endif %}>
+                    <div class="item-group-caption">
+                      <div class="item-caption">
+                        {{ block.settings.bottom_caption }}
+                      </div>
+                      <div class="item-action">
+                        <i class="fa fa-expand" aria-hidden="true"></i>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>    
+  </div>
+  {% endif %}
+</div>
+<script type="text/javascript">
+  $(document).ready(function() {
+    $(".gallery-item-layout .item-img").fb({
+      'transitionIn'	:	'elastic',
+      'transitionOut'	:	'elastic',
+      'maxHeight'		:  	800,
+      'speedIn'		:	600, 
+      'speedOut'		:	200, 
+      'helpers' : {
+        overlay : {
+          css : {
+            'background' : 'rgba(0, 0, 0, 0.5)'
+          }
+        }
+      }
+    });
+  });
+</script>
+{% schema %}
+{
+  "name": "Gallery Page",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "You need create the Page in Admin Panel and set the layout is page.gallery"
+    },
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+		{
+          "type": "select",
+          "id": "position",
+		  "label": "Set Position for Image Big",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+		{
+          "type": "header",
+          "content": "Image Big"
+        },
+        {
+          "type": "image_picker",
+          "id": "big_image",
+          "label": "Upload Image"
+        },
+        {
+          "type": "textarea",
+          "id": "big_caption",
+          "label": "Caption( HTML )"
+        },
+		{
+          "type": "header",
+          "content": "Image Top"
+        },
+        {
+          "type": "image_picker",
+          "id": "top1_image",
+          "label": "Image 1: Upload Image"
+        },
+        {
+          "type": "textarea",
+          "id": "top1_caption",
+          "label": "Image 1: Caption( HTML )"
+        },
+        {
+          "type": "image_picker",
+          "id": "top2_image",
+          "label": "Image 2: Upload Image"
+        },
+        {
+          "type": "textarea",
+          "id": "top2_caption",
+          "label": "Image 2: Caption( HTML )"
+        },
+		{
+          "type": "header",
+          "content": "Image Bottom"
+        },
+		{
+          "type": "image_picker",
+          "id": "bottom_image",
+          "label": "Upload Image"
+        },
+        {
+          "type": "textarea",
+          "id": "bottom_caption",
+          "label": "Caption( HTML )"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

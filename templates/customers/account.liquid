@@ -1,0 +1,120 @@
+<section class="heading-content">
+  <div class="heading-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="page-heading-inner heading-group">
+          <div class="breadcrumb-group">
+            <h1 class="page-title">{{ 'customer.account.title' | t }}</h1>
+            <div class="breadcrumb clearfix">
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+              <span class="arrow-space"></span>
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a href="/account/logout" title="{{ 'customer.account.logout' | t }}" itemprop="url">
+                  <span itemprop="title">{{ 'customer.account.logout' | t }}</span>
+                </a>
+              </span>  
+            </div>         
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="account-layout">
+  <div class="account-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="account-inner">
+          <div class="account-content">
+            <div class="account-info">
+              <div class="account-details col-sm-6">
+                <h3 class="details-title">{{'customer.general.accdetail'|t}}</h3>
+                <div class="details-content">
+                  <div class="details-item name">
+                    <span class="title">{{'customer.account.name'|t}}:</span>
+                    <span class="content">{{ customer.name }}</span>
+                  </div>
+                  <div class="details-item">
+                    <span class="title">{{'customer.account.email'|t}}:</span>
+                    <a class="content" href="{{ customer.email }}">{{ customer.email }}</a>
+                  </div>
+                  <div class="details-item">
+                    <span class="title">{{'customer.account.address'|t}}:</span>
+                    <address class="content">{{ customer.default_address.address1 }}, {{ customer.default_address.city}}, {{customer.default_address.country}}</address>
+                  </div>
+                  <div class="details-item">
+                    <span class="title">{{'customer.account.phone'|t}}:</span>
+                    <a class="content" href="tel:{{customer.default_address.phone}}">{{customer.default_address.phone}}</a>
+                  </div>
+                </div>
+              </div>
+              <div class="account-link col-sm-6">
+                <h3 class="link-title">{{'customer.account.title'|t}}</h3>
+                <div class="link-content">
+                  <ul class="link-list">
+                    <li class="item">
+                      <a href="/account/logout">{{'customer.account.logout'|t}}</a>
+                    </li>
+                    <li class="item">
+                      <a href="/account/addresses">{{'customer.account.view_addresses'|t}}</a>
+                    </li>
+                    <li class="item">
+                      <a href="/pages/wish-list">{{'customer.account.view_wishlist'|t}}</a>
+                    </li>
+                  </ul>
+                </div>                
+              </div>
+              <div class="account-banner col-sm-6">
+                <a href="{{ settings.account_banner_1_link }}"><img src="{{ settings.account_banner_1 | img_url: '', crop: 'center' | split:'?v=' | first }}" alt="{{ settings.account_banner_1.alt }}" /></a>
+              </div>
+              <div class="account-banner col-sm-6">
+                <a href="{{ settings.account_banner_2_link }}"><img src="{{ settings.account_banner_2 | img_url: '', crop: 'center' | split:'?v=' | first }}" alt="{{ settings.account_banner_2.alt }}" /></a>
+              </div>
+            </div>
+            <div class="account-orders">
+              <div class="account-orders-inner">
+                {% paginate customer.orders by 20 %}
+                {% if customer.orders.size != 0 %}
+                <table>
+                  <thead>
+                    <tr>
+                      <th class="order_number">{{ 'customer.orders.order_number' | t }}</th>
+                      <th class="date">{{ 'customer.orders.date' | t }}</th>
+                      <th class="payment_status">{{ 'customer.orders.payment_status' | t }}</th>
+                      <th class="fulfillment_status">{{ 'customer.orders.fulfillment_status' | t }}</th>
+                      <th class="total">{{ 'customer.orders.total' | t }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for order in customer.orders %}
+                    <tr class="{% cycle 'odd', 'even' %} {% if order.cancelled %}cancelled_order{% endif %}">
+                      <td class="td-name">{{ order.name | link_to: order.customer_url }}</td>
+                      <td class="td-note"><span class="note">{{ order.created_at | date: format: 'short' }}</span></td>
+                      <td class="td-authorized"><span class="status_{{ order.financial_status }}">{{ order.financial_status_label }}</span></td>
+                      <td class="td-unfulfilled"><span class="status_{{ order.fulfillment_status }}">{{ order.fulfillment_status_label }}</span></td>
+                      <td class="td-total"><span class="total money" style="font-family:'currencies'">{{ order.total_price | money }}</span></td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                {% else %}
+                <p>{{ 'customer.orders.none' | t }}</p>
+                {% endif %}
+                {% include 'pagination' %}
+                {% endpaginate %}
+              </div>  
+              {% if settings.tfcode == '' %}
+              <div style="display:none;">
+                <div class="license_code_{{ settings.tfcode}}">
+                  <img src="https://www.emthemes.com/media/shopify-logo-oars.png" alt="" />
+                </div>
+              </div>
+              {% endif %}
+            </div>   
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
