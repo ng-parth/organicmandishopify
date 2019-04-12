@@ -4,8 +4,6 @@
 
 <head>
 
-{% include 'SEO-All-in-one' %}
-
   <meta charset="utf-8">
   <!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -71,6 +69,10 @@
   
   {{ 'cs-font-icon.scss.css' | asset_url | stylesheet_tag }}  
   {{ 'owl.carousel.css' | asset_url | stylesheet_tag }}
+  
+  {{ 'owl.carousel.min.css' | asset_url | stylesheet_tag }}
+  {{ 'owl.theme.default.min.css' | asset_url | stylesheet_tag }}
+  
   {{ 'cs.animate.css' | asset_url | stylesheet_tag }}
   {{ 'slideshow-fade.css' | asset_url | stylesheet_tag }}
   {{ 'animations.css' | asset_url | stylesheet_tag }}
@@ -97,6 +99,8 @@
 
   {{ 'instafeed.min.js' | asset_url | script_tag }}
   {{ 'owl.carousel.min.js' | asset_url | script_tag }}
+  
+  {{ 'horizontal-slider.js' | asset_url | script_tag }}
 
   {% if page.handle contains 'contact' %}
   {{ '//maps.google.com/maps/api/js?key=AIzaSyAgCrS6sSB6Zxd_kqC3vEbaYFqzYNALuYw' | script_tag }}

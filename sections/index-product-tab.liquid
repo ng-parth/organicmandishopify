@@ -12,6 +12,8 @@
             {{ section.settings.caption }}
           </p>
           {% endif %}
+          
+          
         </div>
         <div class="home-product-inner">             
           <div class="home-product-content clearfix">
@@ -43,11 +45,12 @@
 
               {% for block in section.blocks %}
               <div class="tab-pane {% if forloop.first == true %}active{% endif %}" id="product_tab_{{ section.id }}_{{forloop.index}}">
-                <div class="product-item">
+                <div id="productCarousel" class="product-item owl-carousel owl-theme">
                   {% for product in collections[block.settings.collection].products limit:section.settings.limit %} 
-                  <div class="content-product {{ col }} not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00">
+                  <div class="content-product">
                     {% include 'index-proditem' %} 
                   </div>
+                  
 {% comment %} below code is actually useless and if-else statement is not added properly
                   {% else %}
                   {% for i in (1..section.settings.limit) %}

@@ -15,15 +15,14 @@
             {% endif %}
           </div>
           <div class="clearfix home-blog-content-inner">
-            <div class="home-blog-content">
+            <div id="farmer-carousel" class="home-blog-content owl-carousel owl-theme">
               {% if section.blocks.size > 0 %}
                 {% for block in section.blocks %}
-                <div class="col-sm-4 not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00">
-                  <div class="article">
-                    <div class="group-blog-top">
-
+                <div class="farmer-card">
+                  <div class="farmer-article">
+                    <div class="farmer-group-blog-top">
                       {% if block.settings.image %}
-                      <div class="top-banner article-image">
+                      <div class="top-banner farmer-article-image">
                         <a href="{{ block.settings.link }}">
                           <img src="{{block.settings.image | img_url: 'master' }}" alt="" />
                         </a>
@@ -31,14 +30,14 @@
                       {% endif %}
 
                     </div>
-                    <div class="articleinfo_group">
-                      <div class="blog-title-group">
+                    <div class="farmer-articleinfo_group">
+                      <div class="farmer-blog-title-group">
                         <h5> {{ block.settings.name }}</h5>                        
                       </div>                  
                       <div class="article-title">                     
-                        <h2 class="article-name"><a href="{{ block.settings.link }}">{{ block.settings.caption }}</a></h2>
+                        <h2 class="farmer-article-name"><a href="{{ block.settings.link }}">{{ block.settings.caption }}</a></h2>
                       </div>
-                      <div class="blog-title-group" style="padding-bottom: 10px;">                        
+                      <div class="farmer-blog-title-group" style="padding-bottom: 10px;">                        
                         <a class="_btn" href="{{ block.settings.link }}">
                           {{ block.settings.action_text }}
                         </a>
