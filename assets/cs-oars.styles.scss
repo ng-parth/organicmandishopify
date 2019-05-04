@@ -203,7 +203,7 @@ $font_weight_thin1: 300;
 @mixin font_face_style(){font-weight: normal; font-style: normal;}  
 @font-face {
   font-family: "streamster";
-  src: url("//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/streamster.ttf?8830") format('truetype');
+  src: url("//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/streamster.ttf?10468") format('truetype');
     @include font_face_style();
     }
 $font_1: Open Sans; 
@@ -393,10 +393,8 @@ $_padding_btn_small: 15px;
 }
 
 .view-all{
-  text-align: center;
+  text-align: center
 }
-
-
 .view-all-btn{
   @include inline-block();
   @include btn_large;
@@ -595,7 +593,7 @@ textarea{
 }
 select{
   @include respond-to($media_max_mobile){    
-    background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/ico-select.svg?8830);     
+    background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/ico-select.svg?10468);     
     background-repeat: no-repeat;
     background-position: 98% center;
     -moz-appearance: none; 
@@ -646,9 +644,9 @@ select{
 /*STYLE*/
 $_width_popupwrapper: 870px;
 
-$distance_section: 25px;
-$distance_section_subpage: 25px;
-$distance_product: 25px;
+$distance_section: 90px / 2;
+$distance_section_subpage: 45px;
+$distance_product: 30px;
 $distance_title: 15px;
 
 @mixin style_filter_btn{
@@ -1362,8 +1360,7 @@ $font_size_title_pro: $_h7;
   $__distance_seletor: 10px;
   margin-bottom: $distance_product;
   overflow: hidden;  
-  box-sizing: border-box;
-  border-radius: 8px;
+  box-sizing: border-box;  
   position: relative;  
   border-style: solid;
   border-width: 1px;
@@ -1646,13 +1643,13 @@ $color_addtocart_bg: #46c6f5;
       @include opacity(0.7, 70);
     }
   }
-  &.alert_success{ @include btn_color($color_success_text, $color_success_border, $color_success_bg); background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/bg_alert_success_icon.png?8830); }
-  &.alert_cross{ @include btn_color($color_cross_text, $color_cross_border, $color_cross_bg); background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/bg_alert_notice_icon.png?8830); }
+  &.alert_success{ @include btn_color($color_success_text, $color_success_border, $color_success_bg); background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/bg_alert_success_icon.png?10468); }
+  &.alert_cross{ @include btn_color($color_cross_text, $color_cross_border, $color_cross_bg); background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/bg_alert_notice_icon.png?10468); }
   &.alert_fail{ @include btn_color($color_fail_text, $color_fail_border, $color_fail_bg); 
-    background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/bg_alert_failure_icon.png?8830); }
+    background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/bg_alert_failure_icon.png?10468); }
   &.aler_addtocart{
     @include btn_color($color_addtocart_text, $color_addtocart_border, $color_addtocart_bg);
-    background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/bg_addtocart_icon.png?8830);
+    background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/bg_addtocart_icon.png?10468);
     text-transform: uppercase;    
     border-width: 0;
   }
@@ -1921,7 +1918,7 @@ body{
       }
     }
     &.blog-heading{
-      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/1920x400.png?8830);
+      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/1920x400.png?10468);
     }
     &.collection-heading{
       
@@ -2328,7 +2325,7 @@ body{
         }
       }
       @include respond-to($media_max_tabletsmall){
-        padding: $distance_section 0 $distance_section;
+        padding: $distance_section 0 $distance_section / 2;
         .social-content>a{
           margin-right: 15px; 
           &:last-child{
@@ -3350,7 +3347,6 @@ body{
       display: block;
       overflow: hidden;
       position: relative;
-
       &:after{
         content: '';
         position: absolute;
@@ -3361,7 +3357,7 @@ body{
         border: 2px solid #fff;
         border-radius: 50%;
         @include transform(translate(-50%, -50%));
-        background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/icon_blog_bg.png?8830); 
+        background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/icon_blog_bg.png?10468); 
         background-size: auto;
         background-repeat: no-repeat;
         background-position: center center;
@@ -3414,7 +3410,7 @@ body{
   }  
   .articleinfo_group{
     background-color: hsla(hue($color_line), saturation($color_line), lightness($color_line), 0.5);
-    padding: 0px 15px ($distance_section);
+    padding: 0px 15px ($distance_section - 40px);
   }
   .article {
     margin-bottom: 30px;
@@ -3487,9 +3483,9 @@ body{
     }    
     &.index-section{
       section{
-        padding: 0 0 $distance_section 0;             
+        padding: $distance_section 0;             
         @include respond-to($media_max_mobilemedium){
-          padding: 0 0 $distance_section 0;                       
+          padding: ($distance_section / 2) 0;                       
         }
       }                        
     }    
@@ -3802,9 +3798,9 @@ body{
         background-size: auto;
         background-position: right bottom;
         padding-top: $distance_section;
-        padding-bottom: $distance_section;
-        padding-left: 30px;
-        padding-right: 30px;
+        padding-bottom: $distance_section / 2;
+        padding-left: 60px;
+        padding-right: 60px;
         text-align: center;
         color: #fff;
         > img{          
@@ -4016,7 +4012,7 @@ body{
     /*end home-core-layout*/
     /*home-about-layout*/
     .home-about-layout{ 
-      padding: 15px 0 !important;
+      padding: 10px 0 !important;
       .home-about-inner{
         margin-left: -15px;
         margin-right: -15px;
@@ -4025,7 +4021,7 @@ body{
         @include display-flexbox();                    
         @include flex-wrap(wrap);         
         .about-item{
-          width: $width_full /3; /*@Mayank: Modified this as we want the about items to fit into 3 items*/
+          width: $width_full / 3; /*@Mayank: Modified this as we want the about items to fit into 3 items*/
           text-align: center;
           img{
             width: 150px;    
@@ -4066,7 +4062,7 @@ body{
       @include respond-to($media_max_tabletsmall){
         padding-bottom: $distance_section * 2 - 30px !important;
         .page-title{
-          margin-bottom: $distance_section / 2;
+          margin-bottom: $distance_section - 30px;
         }
         .home-about-content{
           .about-item{
@@ -4436,7 +4432,7 @@ body{
     .home-productTab-layout{ 
       margin-bottom: $distance_section - $distance_product;
       .page-title{        
-        margin-bottom: $distance_section / 2;
+        margin-bottom: 18px;
       }
       .home-product-inner{
         margin-left: -15px;
@@ -4570,7 +4566,26 @@ body{
           @include flex-wrap(wrap);                     
         }
       }
-      
+      @include respond-to($media_max_tabletsmall){
+        .content-product{
+          width: $width_full / 3;
+        }
+      }
+      @include respond-to($media_max_mobile){
+        .content-product{
+          width: $width_full / 2;
+        }
+      }
+      @include respond-to($media_max_mobilesmall){
+        .home-product-inner{
+          margin-left: -5px;
+          margin-right: -5px;
+        }      
+        .content-product{
+          padding-left: 5px;
+          padding-right: 5px;
+        }
+      }
     }
     /*end home-productTab-layout*/
     /*home-productCol-layout*/
@@ -4681,7 +4696,7 @@ body{
           .productCol-item{            
           }
         }
-        padding-top: $distance_section + 20px !important;
+        padding-top: ($distance_section / 2) + 20px !important;
       }
     }
     /*End home-productCol-layout*/
@@ -4691,11 +4706,9 @@ body{
       .home-blog-content-inner{
         margin-left: -15px;
         margin-right: -15px;
-
       }
-      
-      .home-blog-content{
-        
+         .home-blog-content{
+
         display: inline-block;
 		width: 100%;
         height: auto;
@@ -4851,7 +4864,7 @@ body{
   }  
   .page-title {
     text-align: center;                
-    margin-bottom: $distance_section/2;
+    margin-bottom: $distance_section;
     h2{
       font-size: 24px;
       color: $color_primary;          
@@ -4863,10 +4876,10 @@ body{
       font-size: 36px;
       color: $color_heading;
       font-weight: $font_weight_bold1;
-      padding-top: 22px;
-      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/ico_title.png?8830); 
+      padding-bottom: 22px;
+      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/ico_title.png?10468); 
       background-repeat:no-repeat;
-      background-position: center top;
+      background-position: center bottom;
       background-size: auto;
       margin-bottom: 0;
       @include respond-to($media_max_mobile){
@@ -5121,14 +5134,14 @@ body{
       left: 0px;
       margin-top: -$_width / 2;                
       border-radius: 0px;
-      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/bg_none_check.png?8830); 
+      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/bg_none_check.png?10468); 
       background-repeat: no-repeat;
       background-position: center center;	
       background-size: 100%;
       border: 0;
     }
     .fe-checkbox-active{
-      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/bg_check.png?8830); 
+      background-image: url(//cdn.shopify.com/s/files/1/0101/5247/6736/t/16/assets/bg_check.png?10468); 
     }  
     li{ 
       margin-bottom: 10px;
@@ -8826,7 +8839,7 @@ body{
     }
     .article-left-group{
       .group-blog-top{
-        text-align: left;
+        text-align: left;  
         .article-image{
           img{
             width: 100%;

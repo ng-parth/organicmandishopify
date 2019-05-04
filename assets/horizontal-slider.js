@@ -1,8 +1,8 @@
 $(document).ready(function(){
- $('#farmer-carousel').owlCarousel({
-      stagePadding: 30,
+ $('#farmer-carousel').owlnewCarousel({
+      stagePadding: 40,
       loop: true,
-      margin: 10,
+      margin: 15,
       nav: true,
       dots: false,
       lazyload: true,
@@ -19,28 +19,6 @@ $(document).ready(function(){
       }
     });
 
-  var owl = $('.owl-carousel');
-    owl.owlCarousel({
-      stagePadding: 80,
-      loop: false,
-      margin: 10,
-      nav: true,
-      dots: false,
-      lazyload: true,
-      responsive:{
-        0:{
-          items:1
-        },
-        600:{
-          items:3
-        },
-        1200:{
-          items:4
-        }
-      }
-    });
-  
-    
 });
 
 

@@ -1,0 +1,19 @@
+/**
+ * owlnew Carousel v2.3.4
+ * Copyright 2013-2018 David Deutsch
+ * Licensed under: SEE LICENSE IN https://github.com/owlnewCarousel2/owlnewCarousel2/blob/master/LICENSE
+ */
+.owlnew-theme .owlnew-dots,
+.owlnew-theme .owlnew-nav{
+  text-align:center;-webkit-tap-highlight-color:transparent
+}
+
+.owlnew-theme .owlnew-nav{
+  margin-top:0px;
+}
+@media only screen and (max-width: 900px) {
+.owlnew-theme .owlnew-nav{
+    display: none;
+  }
+}
+.owlnew-theme .owlnew-nav [class*=owlnew-]{color:#FFF;font-size:14px;margin:0px 5px;padding:0px 7px;background:#D6D6D6;display:inline-block;cursor:pointer;border-radius:3px}.owlnew-theme .owlnew-nav [class*=owlnew-]:hover{background:#869791;color:#FFF;text-decoration:none}.owlnew-theme .owlnew-nav .disabled{opacity:.5;cursor:default}.owlnew-theme .owlnew-nav.disabled+.owlnew-dots{margin-top:0px}.owlnew-theme .owlnew-dots .owlnew-dot{display:inline-block;zoom:1}.owlnew-theme .owlnew-dots .owlnew-dot span{width:10px;height:10px;margin:0px 7px;background:#D6D6D6;display:block;-webkit-backface-visibility:visible;transition:opacity .2s ease;border-radius:30px}.owlnew-theme .owlnew-dots .owlnew-dot.active span,.owlnew-theme .owlnew-dots .owlnew-dot:hover span{background:#869791}

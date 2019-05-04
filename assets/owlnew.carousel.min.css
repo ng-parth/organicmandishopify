@@ -1,26 +1,26 @@
 /**
- * Owl Carousel v2.3.4
+ * owlnew Carousel v2.3.4
  * Copyright 2013-2018 David Deutsch
- * Licensed under: SEE LICENSE IN https://github.com/OwlCarousel2/OwlCarousel2/blob/master/LICENSE
+ * Licensed under: SEE LICENSE IN https://github.com/owlnewCarousel2/owlnewCarousel2/blob/master/LICENSE
  */
 
-.owl-carousel,
-.owl-carousel .owl-item {
+.owlnew-carousel,
+.owlnew-carousel .owlnew-item {
 	-webkit-tap-highlight-color: transparent;
 	position: relative
 }
-.owl-carousel {
+.owlnew-carousel {
 	display: none;
 	width: 100%;
 	z-index: 1
 }
-.owl-carousel .owl-stage {
+.owlnew-carousel .owlnew-stage {
 	position: relative;
 	-ms-touch-action: pan-Y;
 	touch-action: manipulation;
 	-moz-backface-visibility: hidden
 }
-.owl-carousel .owl-stage:after {
+.owlnew-carousel .owlnew-stage:after {
 	content: ".";
 	display: block;
 	clear: both;
@@ -28,13 +28,13 @@
 	line-height: 0;
 	height: 0
 }
-.owl-carousel .owl-stage-outer {
+.owlnew-carousel .owlnew-stage-outer {
 	position: relative;
 	overflow: hidden;
 	-webkit-transform: translate3d(0, 0, 0)
 }
-.owl-carousel .owl-item,
-.owl-carousel .owl-wrapper {
+.owlnew-carousel .owlnew-item,
+.owlnew-carousel .owlnew-wrapper {
 	-webkit-backface-visibility: hidden;
 	-moz-backface-visibility: hidden;
 	-ms-backface-visibility: hidden;
@@ -42,27 +42,27 @@
 	-moz-transform: translate3d(0, 0, 0);
 	-ms-transform: translate3d(0, 0, 0)
 }
-.owl-carousel .owl-item {
+.owlnew-carousel .owlnew-item {
 	min-height: 1px;
 	float: left;
 	-webkit-backface-visibility: hidden;
 	-webkit-touch-callout: none
 }
-.owl-carousel .owl-item img {
+.owlnew-carousel .owlnew-item img {
 	display: block;
 	width: 100%
 }
-.owl-carousel .owl-dots.disabled,
-.owl-carousel .owl-nav.disabled {
+.owlnew-carousel .owlnew-dots.disabled,
+.owlnew-carousel .owlnew-nav.disabled {
 	display: none
 }
-.no-js .owl-carousel,
-.owl-carousel.owl-loaded {
+.no-js .owlnew-carousel,
+.owlnew-carousel.owlnew-loaded {
 	display: block
 }
-.owl-carousel .owl-dot,
-.owl-carousel .owl-nav .owl-next,
-.owl-carousel .owl-nav .owl-prev {
+.owlnew-carousel .owlnew-dot,
+.owlnew-carousel .owlnew-nav .owlnew-next,
+.owlnew-carousel .owlnew-nav .owlnew-prev {
 	cursor: pointer;
 	-webkit-user-select: none;
 	-khtml-user-select: none;
@@ -70,14 +70,14 @@
 	-ms-user-select: none;
 	user-select: none
 }
-.owl-carousel .owl-nav{
+.owlnew-carousel .owlnew-nav{
  font-size: 30px;  
   button{
     overflow: visible;
   }
 }
-.owl-carousel .owl-nav button.owl-next,
-.owl-carousel .owl-nav button.owl-prev {
+.owlnew-carousel .owlnew-nav button.owlnew-next,
+.owlnew-carousel .owlnew-nav button.owlnew-prev {
 	position: absolute;
     top: 30%;
     height: 80px;
@@ -89,15 +89,15 @@
   
 }
 
-.owl-carousel .owl-nav button.owl-next {
+.owlnew-carousel .owlnew-nav button.owlnew-next {
   right: -10px;
 }
 
-.owl-carousel .owl-nav button.owl-prev{
+.owlnew-carousel .owlnew-nav button.owlnew-prev{
 	left: -10px;
 }
 
-.owl-carousel button.owl-dot {
+.owlnew-carousel button.owlnew-dot {
 	background: 0 0;
 	color: inherit;
 	border: none;
@@ -107,17 +107,17 @@
 
 
 
-.owl-carousel.owl-loading {
+.owlnew-carousel.owlnew-loading {
 	opacity: 0;
 	display: block
 }
-.owl-carousel.owl-hidden {
+.owlnew-carousel.owlnew-hidden {
 	opacity: 0
 }
-.owl-carousel.owl-refresh .owl-item {
+.owlnew-carousel.owlnew-refresh .owlnew-item {
 	visibility: hidden
 }
-.owl-carousel.owl-drag .owl-item {
+.owlnew-carousel.owlnew-drag .owlnew-item {
 	-ms-touch-action: pan-y;
 	touch-action: pan-y;
 	-webkit-user-select: none;
@@ -125,27 +125,27 @@
 	-ms-user-select: none;
 	user-select: none
 }
-.owl-carousel.owl-grab {
+.owlnew-carousel.owlnew-grab {
 	cursor: move;
 	cursor: grab
 }
-.owl-carousel.owl-rtl {
+.owlnew-carousel.owlnew-rtl {
 	direction: rtl
 }
-.owl-carousel.owl-rtl .owl-item {
+.owlnew-carousel.owlnew-rtl .owlnew-item {
 	float: right
 }
-.owl-carousel .animated {
+.owlnew-carousel .animated {
 	animation-duration: 1s;
 	animation-fill-mode: both
 }
-.owl-carousel .owl-animated-in {
+.owlnew-carousel .owlnew-animated-in {
 	z-index: 0
 }
-.owl-carousel .owl-animated-out {
+.owlnew-carousel .owlnew-animated-out {
 	z-index: 1
 }
-.owl-carousel .fadeOut {
+.owlnew-carousel .fadeOut {
 	animation-name: fadeOut
 }
 @keyframes fadeOut {
@@ -156,26 +156,26 @@
 		opacity: 0
 	}
 }
-.owl-height {
+.owlnew-height {
 	transition: height .5s ease-in-out
 }
-.owl-carousel .owl-item .owl-lazy {
+.owlnew-carousel .owlnew-item .owlnew-lazy {
 	opacity: 0;
 	transition: opacity .4s ease
 }
-.owl-carousel .owl-item .owl-lazy:not([src]),
-.owl-carousel .owl-item .owl-lazy[src^=""] {
+.owlnew-carousel .owlnew-item .owlnew-lazy:not([src]),
+.owlnew-carousel .owlnew-item .owlnew-lazy[src^=""] {
 	max-height: 0
 }
-.owl-carousel .owl-item img.owl-lazy {
+.owlnew-carousel .owlnew-item img.owlnew-lazy {
 	transform-style: preserve-3d
 }
-.owl-carousel .owl-video-wrapper {
+.owlnew-carousel .owlnew-video-wrapper {
 	position: relative;
 	height: 100%;
 	background: #000
 }
-.owl-carousel .owl-video-play-icon {
+.owlnew-carousel .owlnew-video-play-icon {
 	position: absolute;
 	height: 80px;
 	width: 80px;
@@ -183,21 +183,21 @@
 	top: 50%;
 	margin-left: -40px;
 	margin-top: -40px;
-	background: url(owl.video.play.png) no-repeat;
+	background: url(owlnew.video.play.png) no-repeat;
 	cursor: pointer;
 	z-index: 1;
 	-webkit-backface-visibility: hidden;
 	transition: transform .1s ease
 }
-.owl-carousel .owl-video-play-icon:hover {
+.owlnew-carousel .owlnew-video-play-icon:hover {
 	-ms-transform: scale(1.3, 1.3);
 	transform: scale(1.3, 1.3)
 }
-.owl-carousel .owl-video-playing .owl-video-play-icon,
-.owl-carousel .owl-video-playing .owl-video-tn {
+.owlnew-carousel .owlnew-video-playing .owlnew-video-play-icon,
+.owlnew-carousel .owlnew-video-playing .owlnew-video-tn {
 	display: none
 }
-.owl-carousel .owl-video-tn {
+.owlnew-carousel .owlnew-video-tn {
 	opacity: 0;
 	height: 100%;
 	background-position: center center;
@@ -205,7 +205,7 @@
 	background-size: contain;
 	transition: opacity .4s ease
 }
-.owl-carousel .owl-video-frame {
+.owlnew-carousel .owlnew-video-frame {
 	position: relative;
 	z-index: 1;
 	height: 100%;
