@@ -44,7 +44,17 @@
       <div class="prod-categories-content {{ col }} not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00" style="background-color: {{ block.settings.color_background }};">
         {% if block.settings.image %}
         <a href="{{ block.settings.link }}">
-          <img class="prod-categories-content-img" src="{{ block.settings.image | img_url: '', crop: 'center' }}" alt="{{ block.settings.image.alt }}" onmouseover="hover(this, '{{ block.settings.hover_image | img_url: '', crop: 'center' }}');" onmouseout="unhover(this, '{{ block.settings.image | img_url: '', crop: 'center' }}');"/>
+          <img class="prod-categories-content-img lazyload" 
+              src="{{ block.settings.image | img_url:'10x' }}"
+              data-src="{{ block.settings.image | img_url: '', crop: 'center' }}"
+              data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+              data-aspectratio="{{ image.aspect_ratio }}"
+              data-sizes="auto"
+              alt="{{ block.settings.image.alt }}"
+              onmouseover="hover(this, '{{ block.settings.hover_image | img_url: '', crop: 'center' }}');" 
+              onmouseout="unhover(this, '{{ block.settings.image | img_url: '', crop: 'center' }}');"
+          />
+
         </a>
         {% else %}
         <img class="prod-categories-content-img" src="{{ '120x120.png' | asset_url }}" alt=""/>

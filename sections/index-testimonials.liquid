@@ -22,7 +22,14 @@
                 <div class="group">
                   {% if block.settings.image %}
                   <span class="group_img">
-                    <img src="{{ block.settings.image | img_url: '', crop: 'center' }}" alt="{{ block.settings.image.alt }}" />
+                    <img class="lazyload" 
+                        src="{{ block.settings.image | img_url:'10x' }}"
+                        data-src="{{ block.settings.image | img_url: '', crop: 'center' }}"
+                        data-widths="[180, 360, 540, 720, 900]"
+                        data-aspectratio="{{ image.aspect_ratio }}"
+                        data-sizes="auto"
+                        alt="{{ block.settings.image.alt }}"
+                    />
                   </span>                  
                   {% else %}
                   <img src="{{ '250x250.png' | asset_url }}" alt=""/>

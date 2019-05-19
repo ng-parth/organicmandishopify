@@ -43,6 +43,10 @@
                       <p class="testimonials-position">
                         {{ block.settings.position }}
                       </p>
+                      <p class="testimonials-caption">
+                      	{{ block.settings.caption }}
+                   	  </p>
+                    
                       <ul class="follow-content">
                         {% if block.settings.social_facebook_link != blank %}<li class="socialLinks-item"><a href="{{ block.settings.social_facebook_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Facebook' }}" class="icon-social facebook"><i class="fa fa-facebook"></i></a></li>{% endif %}
                         {% if block.settings.social_twitter_link != blank %}<li class="socialLinks-item"><a href="{{ block.settings.social_twitter_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Twitter' }}" class="icon-social twitter"><i class="fa fa-twitter"></i></a></li>{% endif %}            
@@ -111,6 +115,11 @@
           "type": "text",
           "id": "position",
           "label": "Position"
+        },
+		{
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption"
         },
 		{
           "type": "text",

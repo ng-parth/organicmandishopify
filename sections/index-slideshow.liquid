@@ -17,9 +17,25 @@
               {% if block.type == 'image' %}
               <div style="max-width: 100%; max-height: 100%;" class="item {% if forloop.first == true %}active {% endif %} image">
                 {% if block.settings.image %}
-                <img class="carousel-img" style="opacity: 0.4" src="{{ block.settings.image | img_url: '', crop: 'center' }}" alt="{{ block.settings.image.alt }}" title="{{ block.settings.image.alt }}"  />
+                <img class="carousel-img lazyload" 
+                    src="{{ block.settings.image | img_url:'100x' }}"
+                    data-src="{{ block.settings.image | img_url: '', crop: 'center' }}"
+                    data-widths="[540, 720, 900, 1080, 1296]"
+                    data-aspectratio="{{ image.aspect_ratio }}"
+                    data-sizes="auto"
+                    alt="{{ block.settings.image.alt }}"
+                    style="opacity: 0.4"
+                    title="{{ block.settings.image.alt }}"
+                />
                 {% else %}
-                <img src="{{ '1920x920.png' | asset_url }}" alt=""/>
+                <img class="lazyload"
+                    src="{{ '1920x920.png' | img_url:'100x100' }}"
+                    data-src="{{ '1920x920.png' | asset_url }}"
+                    data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728]"
+                    data-aspectratio="{{ image.aspect_ratio }}"
+                    data-sizes="auto"	
+                    alt=""
+                />
                 {% endif %}
                 <div class="slideshow-caption">
                   <div class="slideshow-caption-group">                             

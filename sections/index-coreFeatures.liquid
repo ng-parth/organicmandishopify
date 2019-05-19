@@ -5,7 +5,14 @@
         <div class="home-core-inner">
           <div class="home-core-banner not-animated" data-animate="zoomIn" data-delay="100">
             {% if section.settings.banner %}
-            <img src="{{ section.settings.banner | img_url: '', crop: 'center' }}" alt="{{ section.settings.banner.alt }}" />
+            <img class="lazyload" 
+                src="{{ section.settings.banner | img_url:'10x' }}"
+                data-src="{{ section.settings.banner | img_url: '', crop: 'center' }}"
+                data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+                data-aspectratio="{{ image.aspect_ratio }}"
+                data-sizes="auto"
+                alt="{{ section.settings.banner.alt }}"
+            />
             {% else %}
             <img src="{{ '767x550.png' | asset_url }}" alt=""/>
             {% endif %}
@@ -28,7 +35,14 @@
                 {% for block in section.blocks %}
                 <div class="core-item not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00">
                   {% if block.settings.image %}
-                  <img src="{{ block.settings.image | img_url: '', crop: 'center' }}" alt="{{ block.settings.image.alt }}" />
+                  <img class="lazyload" 
+                      src="{{ block.settings.image | img_url:'10x' }}"
+                      data-src="{{ block.settings.image | img_url: '', crop: 'center' }}"
+                      data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512]"
+                      data-aspectratio="{{ image.aspect_ratio }}"
+                      data-sizes="auto"
+                      alt="{{ block.settings.image.alt }}"
+                  />
                   {% else %}
                   <img src="{{ '90x70.png' | asset_url }}" alt=""/>
                   {% endif %}

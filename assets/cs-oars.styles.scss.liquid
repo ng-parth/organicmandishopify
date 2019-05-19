@@ -1926,6 +1926,9 @@ body{
       *{
         color: $color_heading;
       }
+      @include respond-to($media_max_mobile){
+            font-size: 30px;
+          }
     }
     &.blog-heading{
       background-image: url({% if settings.blog_background %}{{ settings.blog_background | img_url: '', crop: 'center' }}{% else %}{{ '1920x400.png' | asset_url }}{% endif %});
@@ -1947,8 +1950,8 @@ body{
       padding-bottom: 50px;
     }
     @include respond-to($media_max_mobile){
-      padding-top: 30px;
-      padding-bottom: 30px;
+      padding-top: 25px;
+      padding-bottom: 25px;
     }
   }      
   /*END HEADING*/      
@@ -3068,7 +3071,7 @@ body{
     margin: 0;      
     border: 0;                             
     height: 100vh;       
-    width: 100%;  
+    width: 75%;  
     overflow: hidden;   
     background-color: transparent;
     @include transition();
@@ -3661,8 +3664,8 @@ body{
             }
           }
           .group-title{
-            font-size: 20px;
-            line-height: 28px;
+            font-size: 30px;
+            line-height: 32px;
           }
           .group-caption{
             font-size: 16px;
@@ -4843,17 +4846,17 @@ body{
           }
         }
         .testimonials-name{
-          text-transform: uppercase;
+          text-transform: capitalize;
           color: $color_heading;
           font-weight: $font_weight_bold;
-          font-size: 18px;
+          font-size: 16px;
           margin-bottom: 3px;
         }
         .testimonials-position{
           color: $color_primary;
           font-style: italic;
           font-weight: $font_weight_thin;          
-          margin-bottom: 25px;
+          margin-bottom: 20px;
         }
       }
       @include respond-to($media_max_tabletsmall){
@@ -4897,7 +4900,7 @@ body{
       background-size: auto;
       margin-bottom: 0;
       @include respond-to($media_max_mobile){
-        font-size: 20px;
+        font-size: 25px;
       }
     }
     .caption{
@@ -5617,13 +5620,17 @@ body{
   /* COLLECTION INFO */
   .collection-info{
     background: white;
-    padding: 30px 0px;
-    margin: 30px 0px;
+    padding: 25px 0px;
+    margin: 25px 0px;
     
       .page-title {
      	color: $color_heading;
         font-size: 36px;
-        font-weight: $font_weight_bold1;      
+        font-weight: $font_weight_bold1;
+        
+        @include respond-to($media_max_mobile){
+            font-size: 30px;
+          }
     }
   }
   .collection-info img {

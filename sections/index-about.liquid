@@ -28,7 +28,16 @@
               {% for block in section.blocks %}
             	<div class="about-item {{ col }} not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00">
                   {% if block.settings.image %}
-                  <img class="about-item-img" src="{{ block.settings.image | img_url: '', crop: 'center' }}" alt="{{ block.settings.image.alt }}" />
+                  <img class="about-item-img lazyload" 
+                      src="{{ block.settings.image | img_url:'10x' }}"
+                      data-src="{{ block.settings.image | img_url: '', crop: 'center' }}"
+                      data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728]"
+                      data-aspectratio="{{ image.aspect_ratio }}"
+                      data-sizes="auto"
+                      alt="{{ block.settings.image.alt }}"
+                  />
+
+
                   {% else %}
                   <img class="about-item-img" src="{{ '155x155.png' | asset_url }}" alt=""/>
                   {% endif %}

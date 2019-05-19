@@ -114,6 +114,7 @@
   {{ 'slick.css' | asset_url | stylesheet_tag }}
   {{ 'slick.min.js' | asset_url | script_tag }}
   {% endif %}
+  <script src="{{ 'lazysizes.js' | asset_url }}" async="async"></script>
   
   <meta name="google-site-verification" content="Dfk9E-fth7t2Ao_q74RwSO8wGdVpfu4ppMfK_ZahgyA" />
 
@@ -220,14 +221,6 @@
   {{ 'linkOptionSelectors.js' | asset_url | script_tag }}
 
   {% include 'ajaxify-cart' %}
-
-{% comment %}This is for Volume Discount App by hulkapps{% endcomment %}{% include 'hulkcode_common' %}
-
-{% include 'whatsapp-share' %}
-
-
-
-<div id='wp_chat_btn'></div>
 
 </body>
 

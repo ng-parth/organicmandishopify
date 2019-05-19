@@ -3,9 +3,23 @@
     <a href="{{ product.url | within: collection }}" class="hoverBorder container_item">       
       {% capture number_of_images %}{{ product.images | size }}{% endcapture %}
       {% assign number_images = number_of_images | plus:0 %}
-      <img src="{{ product.featured_image | product_img_url: '370x', crop:'center' }}" class="{% if number_images > 1 %}not-rotation{% endif %} img-responsive front" alt="{{ product.featured_image.alt | escape }}" />        
+      <img class="{% if number_images > 1 %}not-rotation{% endif %} img-responsive front lazyload" 
+           src="{{ product.featured_image | product_img_url: '10x', crop:'center' }}"
+           data-src="{{ product.featured_image | product_img_url: '370x', crop:'center'}}"
+           data-widths="[180, 370]"
+           data-aspectratio="{{ image.aspect_ratio }}"
+           data-sizes="auto"
+           alt="{{ product.featured_image.alt | escape }}"
+      />
       {% if number_images > 1 %}
-      <img src="{{ product.images[1]| product_img_url: '370x', crop:'center' }}" class="rotation img-responsive" alt="{{ product.images[1].alt | escape }}" />    
+      <img class="rotation img-responsive lazyload" 
+          src="{{ product.images[1]| product_img_url: '10x', crop:'center' }}"
+          data-src="{{ product.images[1]| product_img_url: '370x', crop:'center' }}"
+          data-widths="[180, 370]"
+          data-aspectratio="{{ image.aspect_ratio }}"
+          data-sizes="auto"
+          alt="{{ product.images[1].alt | escape }}"
+      />
       {% endif %}
     </a>        
     {% if settings.label_active %}

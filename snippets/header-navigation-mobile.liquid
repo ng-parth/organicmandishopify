@@ -200,8 +200,8 @@
   </ul>  
 </li>
 {% elsif linklists[submenu].links.size > 0 %}
-<li class="nav-item{% if l.active %} active{% endif %} navigation navigation_mobile">
-  <a href="#" class="menu-mobile-link mobile-goto-link">
+<li class="nav-item{% if l.active %} active{% endif %} dropdown navigation">
+  <a href="{{ l.url }}" class="dropdown-toggle dropdown-link" data-toggle="dropdown">
     <p class="{% if menu_label_1 contains l_title %}menu-sale-layout{% endif %} {% if menu_label_2 contains l_title %}menu-hot-layout{% endif %}">
       {{ l.title }}
       {% if menu_label_1 contains l_title %}
@@ -210,14 +210,14 @@
       {% if menu_label_2 contains l_title %}
       <span class="menu-label label-hot">{{ settings.hot_text }}</span>
       {% endif %}
+      <i class="fa fa-angle-down"></i>
     </p>
+    <i class="sub-dropdown1"></i>
+    <i class="sub-dropdown"></i>
   </a>
-  <a href="javascript:void(0)" class="arrow_sub arrow" >
-    <i class="cs-icon icon-ios-plus-empty" ></i>
-  </a>
-  <ul class="menu-mobile-container" style="display: none;" >
+  <ul class="dropdown-menu">    
     {% for l in linklists[submenu].links %}
-    {% include 'navigation-sub-mobile-links' with forloop.index %}
+    {% include 'navigation-sub-links' with forloop.index %}
     {% endfor %}
   </ul>
 </li>
