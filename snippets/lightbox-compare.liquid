@@ -1,0 +1,69 @@
+<div class="compare-model">
+  <div class="modal fade" id="modalCompare" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog white-modal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="cs-icon icon-close"></span>
+          </button>          
+        </div>
+        <div class="modal-body">
+          <div class="modal-note compare-note">              
+            {{ 'compare.successful' | t }} <a href="/pages/wish-list">{{ 'compare.title' | t }}</a>
+          </div>
+          <div class="modal-body-inner">
+            <div class="modal-left compare-left">
+              <div class="modal-product compare-product">
+                <div class="product-left">
+                  <div class="modal-image compare-image"></div>
+                </div>
+              </div>
+            </div>
+            <div class="modal-right compare-right">
+              <div class="compare-cart">
+                <form action="/cart/add" method="post" class="variants-form variants" id="compare-form-cart" enctype="multipart/form-data">                  
+                  <div class="form-left">
+                    <div class="product-right">
+                      <div class="name compare-name"></div>
+                      <div class="price compare-price"></div>
+                    </div>
+                    <div id="compare-variants-container" class="variants-wrapper"></div> 
+                    <div class="quantity-content">
+                      <label>{{ 'compare.qty' | t }}</label>
+                      <input type="text" size="5" class="item-quantity item-quantity-qs" name="quantity" value="1" />
+                    </div>
+                  </div>
+                  <div class="form-right">
+                    <div class="others-bottom">
+                      <a class="_btn btn-quick-shop" href="/pages/compare">{{ 'compare.view_compare' | t }}</a>
+                      <a id="compare-addToCart" class="_btn add-to-cart">{{ 'compare.add_to_cart' | t }}</a>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>         
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="compare-model">
+  <div class="modal fade" id="modalCompare1" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog white-modal modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span class="cs-icon icon-close"></span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <p class="max_compare">
+            {{ 'compare.max' | t }}
+          </p>          
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

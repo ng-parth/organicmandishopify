@@ -1,0 +1,69 @@
+<div class="collection-leftsidebar-group-inner">
+  {% if settings.collection_search_show %}
+  <div class="sidebar-block search-block">
+    <h3 class="sidebar-title">
+      <span class="text">{{ settings.collection_search_title }}</span>
+      <span class="cs-icon icon-ios-minus-empty"></span>
+    </h3>
+    <div class="sidebar-content">
+      <form class="search" action="/search">
+        <input type="hidden" name="type" value="product" />                        
+        <input type="text" name="q" class="search_box" placeholder="{{ settings.collection_search_placeholder }}" value="{{ search.terms }}"  />
+        <button class="search-submit" type="submit">
+          <span class="cs-icon icon-search"></span>
+        </button>
+      </form>
+    </div>
+  </div>
+  {% endif %}
+  {% if settings.collection_colllist_show %}
+  <div class="sidebar-block collection-block">
+    <h3 class="sidebar-title">
+      <span class="text">{{ 'collections.general.collection_listing' |t }}</span>
+      <span class="cs-icon icon-ios-minus-empty"></span>
+    </h3>
+    <div class="sidebar-content">
+      <ul class="list-cat">
+        {% for l in linklists[settings.collection_colllist_linklist].links %}
+        {% if l.handle == collection.handle %}
+        <li class="active"><a href="{{ l.url}}"><span>{{ l.title }}</span></a></li>
+        {% else %}
+        <li><a href="{{ l.url}}"><span>{{ l.title }} </span></a></li>
+        {% endif %}
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if settings.collection_filter_show %}
+  {% include 'collection-tag-filter' %}
+  {% endif %}
+
+  {% if settings.collection_best_show %}
+  <div class="sidebar-block best-block">
+    <h3 class="sidebar-title">
+      <span class="text">{{ settings.collection_best_title }}</span>
+      <span class="cs-icon icon-ios-minus-empty"></span>
+    </h3>
+    <div class="sidebar-content">    
+      <div class="latest-inner">
+        {% for product in collections[settings.collection_best_product].products limit:4 %} 
+        <div class="products-item">
+          {% include 'index-product-right' %} 
+        </div>
+        {% endfor %}
+      </div>           
+    </div>
+  </div>
+  {% endif %}
+  
+</div>
+<div class="sidebarMobile sidebar-bottom">
+  <button class="sidebarMobile-clear _btn">
+    {{'collections.general.clear_all'|t}}
+  </button>
+  <button class="sidebarMobile-close _btn">
+    {{'collections.general.apply_close'|t}}
+  </button>
+</div>

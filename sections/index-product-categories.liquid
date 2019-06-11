@@ -1,0 +1,142 @@
+<div data-section-id="{{ section.id }}" data-section-type="prod-categories-section" style="background-color: #EBF4EF">
+
+  <div class="page-title page-title-prod text-center not-animated" data-animate="zoomIn" data-delay="100">
+    {% if section.settings.category_title != '' %}
+    <h2>
+      {{ section.settings.category_title }}
+    </h2>
+    {% endif %}
+
+    {% if section.settings.category_sub_title != '' %}
+      <p class="sub-title">
+        {{ section.settings.category_sub_title }}
+      </p>
+    {% endif %}
+    {% if section.settings.category_caption != '' %}
+      <p class="caption">
+        {{ section.settings.category_caption }}
+      </p>
+    {% endif %}
+  </div>
+
+  {% if section.blocks.size > 0 %}
+    {% if section.blocks.size == 1 %}
+      {% assign col = 'col-sm-12' %}
+    {% elsif section.blocks.size == 2 %}
+      {% assign col = 'col-sm-6' %}
+    {% elsif section.blocks.size == 3 %}
+      {% assign col = 'col-sm-4' %}
+    {% elsif section.blocks.size == 6 %}
+      {% assign col = 'col-sm-2' %}
+    {% else %}
+      {% assign col = 'col-sm-3' %}
+    {% endif %}
+
+    {% comment %}
+    @Mayank - Padding ideally should be moved to scss file but for now this works!
+    {% endcomment %}
+    <section class="home-prod-categories-layout" style="padding: 0px">
+
+      <div class="prod-categories-content {{ col }} not-animated prod-categories-content-desktop" data-animate="fadeInUp" data-delay="{{ forloop.index }}00" style="background-color: {{ block.settings.color_background }};">
+      </div>
+
+	  {% for block in section.blocks %}
+      <div class="prod-categories-content {{ col }} not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00" style="background-color: {{ block.settings.color_background }};">
+        {% if block.settings.image %}
+        <a href="{{ block.settings.link }}">
+          <img class="prod-categories-content-img lazyload" 
+              src="{{ block.settings.image | img_url:'10x' }}"
+              data-src="{{ block.settings.image | img_url: '', crop: 'center' }}"
+              data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728, 2048]"
+              data-aspectratio="{{ image.aspect_ratio }}"
+              data-sizes="auto"
+              alt="{{ block.settings.image.alt }}"
+              onmouseover="hover(this, '{{ block.settings.hover_image | img_url: '', crop: 'center' }}');" 
+              onmouseout="unhover(this, '{{ block.settings.image | img_url: '', crop: 'center' }}');"
+          />
+
+        </a>
+        {% else %}
+        <img class="prod-categories-content-img" src="{{ '120x120.png' | asset_url }}" alt=""/>
+        {% endif %}
+        <p class="prod-categories-title">{{ block.settings.title }}</p>
+      </div>
+      {% endfor %}
+
+      <div class="prod-categories-content {{ col }} not-animated prod-categories-content-desktop" data-animate="fadeInUp" data-delay="{{ forloop.index }}00" style="background-color: {{ block.settings.color_background }};">
+      </div>
+
+    </section>
+  {% endif %}
+</div>
+
+<script type="text/javascript">
+  function hover(element, img) {
+    element.setAttribute('src', img);
+  }
+
+  function unhover(element, img) {
+    element.setAttribute('src', img);
+  }
+</script>
+
+{% schema %}
+{
+  "name": "Product Categories",
+  "class": "index-section index-section-prod-categories",
+  "settings": [
+	{
+      "type": "text",
+      "id": "category_title",
+      "label": "Title"
+    },
+	{
+      "type": "text",
+      "id": "category_sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "textarea",
+      "id": "category_caption",
+      "label": "Caption"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Upload Icon"
+        },
+        {
+          "type": "image_picker",
+          "id": "hover_image",
+          "label": "Upload Hover Icon"
+        },
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+    {
+          "type": "color",
+          "id": "color_background",
+          "label": "Background Color"
+        },
+    {
+          "type": "url",
+          "id": "link",
+          "label": "Category Link"
+        }
+    ]
+    }
+  ],
+  "presets": [{
+    "name": "Product Categories",
+    "category": "Store Information"
+  }]
+}
+{% endschema %}

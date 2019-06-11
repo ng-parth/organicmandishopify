@@ -1,0 +1,114 @@
+<div data-section-id="{{ section.id }}" data-section-type="process-section">
+  <div class="page-title page-title-prod text-center not-animated" data-animate="zoomIn" data-delay="100">
+    {% if section.settings.process_title != '' %}
+    <h2>
+      {{ section.settings.process_title }}
+    </h2>
+    {% endif %}
+
+    {% if section.settings.process_sub_title != '' %}
+      <p class="sub-title">
+        {{ section.settings.process_sub_title }}
+      </p>
+    {% endif %}
+    {% if section.settings.process_caption != '' %}
+      <p class="caption">
+        {{ section.settings.process_caption }}
+      </p>
+    {% endif %}
+  </div>
+
+  {% if section.blocks.size > 0 %}
+    {% if section.blocks.size == 1 %}
+      {% assign col = 'col-sm-12' %}
+    {% elsif section.blocks.size == 2 %}
+      {% assign col = 'col-sm-6' %}
+    {% elsif section.blocks.size == 3 %}
+      {% assign col = 'col-sm-4' %}
+    {% else %}
+      {% assign col = 'col-sm-3' %}
+    {% endif %}
+    <section class="home-process-layout">
+	  {% for block in section.blocks %}
+      <div class="process-content {{ col }} not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00" style="background-color: {{ block.settings.color_background }}; background-image:  url({% if block.settings.backgroud %}{{ block.settings.backgroud | img_url: '', crop: '' }}{% else %}{{ '280x280.png' | asset_url }}{% endif %});">
+        {% if block.settings.image %}
+        <img class="lazyload" 
+            src="{{ block.settings.image | img_url:'10x' }}"
+            data-src="{{ block.settings.image | img_url: '', crop: 'center' }}"
+            data-widths="[180, 360, 540, 720, 900, 1080, 1296]"
+            data-aspectratio="{{ image.aspect_ratio }}"
+            data-sizes="auto"
+            alt="{{ block.settings.image.alt }}"
+        />
+        {% else %}
+        <img src="{{ '120x120.png' | asset_url }}" alt=""/>
+        {% endif %}
+        <p class="process-title">{{ block.settings.title }}</p>
+        <p class="process-caption">
+          {{ block.settings.caption }}
+        </p>
+      </div>
+      {% endfor %}
+    </section>
+  {% endif %}
+</div>
+{% schema %}
+{
+  "name": "Section Process",
+  "class": "index-section index-section-process",
+  "settings": [
+	{
+      "type": "text",
+      "id": "process_title",
+      "label": "Title"
+    },
+	{
+      "type": "text",
+      "id": "process_sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "textarea",
+      "id": "process_caption",
+      "label": "Caption"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Upload Icon"
+        },
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+		{
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption"
+        },
+		{
+          "type": "color",
+          "id": "color_background",
+          "label": "Background Color"
+        },
+		{
+          "type": "image_picker",
+          "id": "backgroud",
+          "label": "Upload Background"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Section Process",
+    "category": "Store Information"
+  }]
+}
+{% endschema %}

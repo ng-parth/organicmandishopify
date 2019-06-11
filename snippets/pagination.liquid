@@ -1,0 +1,30 @@
+{% if paginate.pages > 1 %}
+{% unless template == 'customers/account' %}<div class="pagination_group">{% endunless %}
+<ul class="pagination {% if template contains "collection" %}pagination-collection{% endif %}">
+  
+    {% if paginate.previous %}
+    <li class="prev"><a href="{{ paginate.previous.url }}"><i class="cs-icon icon-arrow-left"></i></a></li>
+    {% else %}
+    <li class="prev"><a class="disabled" href="javascript:;"><i class="cs-icon icon-arrow-left"></i></a></li>
+    {% endif %}
+
+    {% for part in paginate.parts %}
+    {% if part.is_link %}
+    <li><a href="{{ part.url }}">{{ part.title }}</a></li>
+    {% else %}
+    {% if part.title == '&hellip;' %}
+    <li class="ellipsis"><a class="disabled" href="javascript:;">{{ part.title }}</a></li>
+    {% else %}
+    <li class="active"><a href="javascript:;">{{ part.title }}</a></li>
+    {% endif %}
+    {% endif %}
+    {% endfor %}
+
+    {% if paginate.next %}
+    <li class="next"><a href="{{ paginate.next.url }}"><i class="cs-icon icon-arrow-right"></i></a></li>
+    {% else %}
+    <li class="next"><a class="disabled" href="javascript:;"><i class="cs-icon icon-arrow-right"></i></a></li>
+    {% endif %}   
+</ul>
+{% unless template == 'customers/account' %}</div>{% endunless %}
+{% endif %}

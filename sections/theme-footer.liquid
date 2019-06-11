@@ -1,0 +1,333 @@
+{% if section.settings.newsletter_enable %}
+<section class="footer-newsletter-layout not-animated" data-animate="zoomIn" data-delay="100">
+  <div class="footer-newsletter-layout-group">
+    <div class="container">
+      <div class="row">
+        <div class="footer-newsletter-inner">
+          <div class="footer-newsletter-content">
+            <div class="newsletter-title">
+              <h5 class="title">
+                {{ section.settings.newsletter_title }}
+              </h5>
+              <p class="caption">
+                {{ section.settings.newsletter_caption }}
+              </p>
+            </div>
+            <div class="newsletter-form">
+              <form action="{{ section.settings.newsletter_action }}" method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" target="_blank">                    
+                <input type="email" class="form-control" value="" name="EMAIL" id="mail" placeholder="{{ section.settings.newsletter_placeholder }}" />
+                <button type="submit" class="btn btn_newsletter_send" name="subscribe" id="subscribe">{{ section.settings.newsletter_actiontext }}</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>  
+  <style>        
+    .footer-newsletter-layout::before,
+    .footer-newsletter-layout::after{      
+      content: '';
+    }
+    .footer-newsletter-layout::before{      
+      background-image: url({% if section.settings.newsletter_background1 %}{{ section.settings.newsletter_background1 | img_url: '', crop: '' }}{% else %}{{ '376x249.png' | asset_url }}{% endif %});             
+    }
+    .footer-newsletter-layout::after{      
+      background-image: url({% if section.settings.newsletter_background2 %}{{ section.settings.newsletter_background2 | img_url: '', crop: '' }}{% else %}{{ '274x251.png' | asset_url }}{% endif %});             
+    }
+    @media (max-width: 767px){
+      .footer-newsletter-layout::before{
+        background-image: none;
+      }
+      .footer-newsletter-layout::after{
+        background-image: none;
+      }
+    }
+  </style>
+</section>
+{% endif %}
+{% if section.settings.contact_enable or section.settings.follow_enable or section.settings.link_enable or section.settings.about_enable %}
+<section class="footer-info-layout">
+  <div class="container">
+    <div class="row">
+      <div class="footer-info-group">
+        <div class="footer-info-inner">
+          {% if section.settings.contact_enable %}
+          <div class="contact-layout not-animated" data-animate="zoomIn" data-delay="100">
+            <h5 class="footer-title">
+              {{ section.settings.contact_title }}
+            </h5>
+            <div class="contact-content">
+              {{ section.settings.contact_caption }}
+            </div>
+          </div>
+          {% endif %}
+          {% if section.settings.follow_enable %}
+          <div class="follow-layout not-animated" data-animate="zoomIn" data-delay="200">
+            <h5 class="footer-title">
+              {{ section.settings.follow_title }}
+            </h5>
+            <ul class="follow-content">
+              {% if section.settings.social_facebook_link != blank %}<li class="socialLinks-item"><a href="{{ section.settings.social_facebook_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Facebook' }}" class="icon-social facebook"><i class="fa fa-facebook"></i> <span>Facebook</span></a></li>{% endif %}
+              {% if section.settings.social_twitter_link != blank %}<li class="socialLinks-item"><a href="{{ section.settings.social_twitter_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Twitter' }}" class="icon-social twitter"><i class="fa fa-twitter"></i> <span>Twitter</span></a></li>{% endif %}            
+              {% if section.settings.social_google_plus_link != blank %}<li class="socialLinks-item"><a href="{{ section.settings.social_google_plus_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Google+' }}" class="icon-social google-plus"><i class="fa fa-google-plus"></i> <span>Google+</span></a></li>{% endif %}                        
+              {% if section.settings.social_pinterest_link != blank %}<li class="socialLinks-item"><a href="{{ section.settings.social_pinterest_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Pinterest' }}" class="icon-social pinterest"><i class="fa fa-pinterest"></i> <span>Pinterest</span></a></li>{% endif %}
+              {% if section.settings.social_instagram_link != blank %}<li class="socialLinks-item"><a href="{{ section.settings.social_instagram_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Instagram' }}" class="icon-social instagram"><i class="fa fa-instagram"></i> <span>Instagram</span></a></li>{% endif %}                                    
+              {% if section.settings.social_youtube_link != blank %}<li class="socialLinks-item"><a href="{{ section.settings.social_youtube_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Youtube' }}" class="icon-social youtube"><i class="fa fa-youtube"></i> <span>Youtube</span></a></li>{% endif %}	
+              {% if section.settings.social_wordpress_link != blank %}<li class="socialLinks-item"><a href="{{ section.settings.social_wordpress_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Wordpress' }}" class="icon-social wordpress"><i class="fa fa-wordpress"></i> <span>Wordpress</span></a></li>{% endif %}
+              {% if section.settings.social_vimeo_link != blank %}<li class="socialLinks-item"><a href="{{ section.settings.social_vimeo_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Vimeo' }}" class="icon-social vimeo"><i class="fa fa-vimeo"></i> <span>Vimeo</span></a></li>{% endif %}	
+              {% if section.settings.social_tumblr_link != blank %}<li class="socialLinks-item"><a href="{{ section.settings.social_tumblr_link }}" title="{{ 'layout.footer.social' | t: shop: shop.name, social_media: 'Tumblr' }}" class="icon-social tumblr"><i class="fa fa-tumblr"></i> <span>Tumblr</span></a></li>{% endif %}	    
+            </ul>
+          </div>
+          {% endif %}
+          {% if section.settings.link_enable %}
+          <div class="linklist-layout not-animated" data-animate="zoomIn" data-delay="300">
+            <h5 class="footer-title">
+              {{ section.settings.link_title }}
+            </h5>
+            <ul class="linklist-content">
+              {% for link in linklists[section.settings.link_link].links %}
+              <li>
+                <a href="{{ link.url }}">{{ link.title | escape }}</a>           
+              </li>
+              {% endfor %}
+            </ul>
+          </div>
+          {% endif %}
+          {% if section.settings.about_enable %}
+          <div class="about-layout not-animated" data-animate="zoomIn" data-delay="400" style="background-image:  url({% if section.settings.about_background2 %}{{ section.settings.about_background2 | img_url: '', crop: '' }}{% endif %});">
+            <div class="group">
+              <div class="group-inner">
+                {% if section.settings.about_logo %}
+                <div class="about-logo">
+                  <img src="{{ section.settings.about_logo | img_url: "", crop: '' }}" alt="{{ section.settings.about_logo.alt }}" title="{{ shop.name }}" />
+                </div>                       
+                {% endif %}
+                <div class="about-content">
+                  {{ section.settings.about_caption }}
+                </div>
+              </div>              
+            </div> 
+          </div>
+          <style>
+            .about-layout{
+              position: relative;                           
+            }
+            .about-layout::after{
+              content: '';
+              position: absolute;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              height: 110px;
+              background-image: url({% if section.settings.about_background1 %}{{ section.settings.about_background1 | img_url: '', crop: '' }}{% else %}{{ '372x105.png' | asset_url }}{% endif %}); 
+              background-position: center bottom;
+              background-repeat: no-repeat;
+              background-size: 100%;
+            }
+          </style>
+          {% endif %}
+        </div>
+      </div>      
+    </div>
+  </div>
+</section>
+{% endif %}
+<section class="footer-copyright-layout">
+  <div class="container">   
+    <div class="row">
+      <div class="footer-copyright-inner">
+        <article class="powered-by">
+          {{ 'layout.footer.copyright' | t }} &copy; {{ 'now' | date: "%Y" }} <span class="shopname">{{ shop.name | link_to: '/' }}</span>. {{ 'layout.footer.reserved' | t }}
+        </article>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+{
+  "name": "Footer",
+  "settings": [
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+	{
+      "type": "checkbox",
+      "id": "newsletter_enable",
+      "label": "Set active this block"
+    },
+	{
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_caption",
+      "label": "Caption"
+    },
+    {
+      "type": "textarea",
+      "id": "newsletter_action",
+      "label": "Mailchimp form action URL",
+      "info": "[Find your MailChimp form action URL](https:\/\/docs.shopify.com\/manual\/configuration\/store-customization\/communicating-with-customers\/accounts-and-newsletters\/get-a-mailchimp-form-action-url)."
+    },
+    {
+      "type": "text",
+      "id": "newsletter_placeholder",
+      "label": "Placeholder text"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_actiontext",
+      "label": "Action text"
+    },
+	{
+      "type": "image_picker",
+      "id": "newsletter_background1",
+      "label": "Upload background 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "newsletter_background2",
+      "label": "Upload background 2"
+    },
+	{
+      "type": "header",
+      "content": "Contact Farm"
+    },
+	{
+      "type": "checkbox",
+      "id": "contact_enable",
+      "label": "Set active this block"
+    },
+	{
+      "type": "text",
+      "id": "contact_title",
+      "label": "Title"
+    },
+	{
+      "type": "textarea",
+      "id": "contact_caption",
+      "label": "Caption( HTML )"
+    },
+	{
+      "type": "header",
+      "content": "Follow Me"
+    },
+	{
+      "type": "checkbox",
+      "id": "follow_enable",
+      "label": "Set active this block"
+    },
+	{
+      "type": "text",
+      "id": "follow_title",
+      "label": "Title"
+    },
+	{
+      "type": "text",
+      "id": "social_twitter_link",
+      "label": "Twitter",
+      "info": "https:\/\/twitter.com\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_facebook_link",
+      "label": "Facebook",
+      "info": "https:\/\/www.facebook.com\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_pinterest_link",
+      "label": "Pinterest",
+      "info": "https:\/\/www.pinterest.com\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_google_plus_link",
+      "label": "Google+",
+      "info": "https:\/\/plus.google.com\/+shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_instagram_link",
+      "label": "Instagram",
+      "info": "https:\/\/instagram.com\/shopify"
+    },
+	{
+      "type": "text",
+      "id": "social_tumblr_link",
+      "label": "Tumblr",
+      "info": "http:\/\/shopify.tumblr.com"
+    },
+    {
+      "type": "text",
+      "id": "social_youtube_link",
+      "label": "YouTube",
+      "info": "https:\/\/www.youtube.com\/user\/shopify"
+    },
+    {
+      "type": "text",
+      "id": "social_wordpress_link",
+      "label": "Wordpress",
+      "info": "http:\/\/wordpress.org\/"
+    },
+    {
+      "type": "text",
+      "id": "social_vimeo_link",
+      "label": "Vimeo",
+      "info": "https:\/\/vimeo.com\/shopify"
+    },
+	{
+      "type": "header",
+      "content": "Links"
+    },
+	{
+      "type": "checkbox",
+      "id": "link_enable",
+      "label": "Set active this block"
+    },
+	{
+      "type": "text",
+      "id": "link_title",
+      "label": "Title"
+    },
+	{
+      "type": "link_list",
+      "id": "link_link",
+      "label": "Select linklist"
+    },
+	{
+      "type": "header",
+      "content": "About Us"
+    },
+	{
+      "type": "checkbox",
+      "id": "about_enable",
+      "label": "Set active this block"
+    },
+	{
+      "type": "image_picker",
+      "id": "about_logo",
+      "label": "Upload Logo Footer"
+    },
+	{
+      "type": "textarea",
+      "id": "about_caption",
+      "label": "Caption"
+    },
+	{
+      "type": "image_picker",
+      "id": "about_background1",
+      "label": "Upload Background 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "about_background2",
+      "label": "Upload Background 2"
+    }
+  ]
+}
+{% endschema %}

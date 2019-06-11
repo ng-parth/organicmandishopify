@@ -1,0 +1,52 @@
+<div class="blog-inner">
+  <div id="blog" class="blog-content blog-default">   
+    {% paginate blog.articles by 9 %}
+    <div class="articles-group-full articles">
+      <div class="articles-group">
+        <div class="articles-group-inner">
+          {% for article in blog.articles %}
+          <div class="col-sm-4">
+            <div class="article" >
+              <div class="group-blog-top">
+                {% if article.image %}
+                <div class="top-banner article-image"> 
+                  <a href="{{ article.url }}">
+                    <img src="{{article.image | img_url: 'master'}}" alt="" />
+                  </a>
+                </div>
+                {% endif %}
+              </div>
+              <div class="articleinfo_group">
+                <div class="blog-title-group">
+                  <a class="blog-title" href="{{ blog.url }}">
+                    {{ blog.title }}
+                  </a>
+                </div>              
+                <div class="article-title">                     
+                  <h2 class="article-name"><a href="{{ article.url }}">{{ article.title }}</a></h2>                                            
+                </div>
+                <ul class="article-info list-inline">
+                  <li class="article-date"><span>{{article.published_at | date: '%b %d, %Y'}}</span></li> 
+                  <li class="article-comment">
+                    <span>
+                      <a href="{{article.url}}#comments">
+                        {% assign comments_count1 = article.comments_count %}
+                        <span>{{ article.comments_count }}</span> {{ article.comments_count | pluralize: 'Comment', 'Comment(s)' }}
+                      </a>
+                    </span>
+                  </li>
+                  <li class="article-author">
+                    <span>{{article.author}}</span>
+                  </li>                                    
+                </ul>
+              </div>                 
+            </div>            
+          </div> 
+          {% endfor %}
+        </div>                  
+      </div>     
+      {% include 'pagination' %}
+    </div>
+    {% endpaginate %}                        
+  </div>
+</div>

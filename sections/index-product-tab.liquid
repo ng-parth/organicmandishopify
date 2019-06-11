@@ -1,0 +1,195 @@
+<div data-section-id="{{ section.id }}" data-section-type="product-section">
+  <section class="home-productTab-layout">
+    <div class="container">
+      <div class="row">
+        <div class="page-title text-center not-animated" data-animate="zoomIn" data-delay="100">
+          <h2>{{ section.settings.title }}</h2>
+          <p class="sub-title">
+            {{ section.settings.sub_title }}
+          </p>
+          {% if section.settings.caption != '' %}
+          <p class="caption">
+            {{ section.settings.caption }}
+          </p>
+          {% endif %}
+        </div>
+        <div class="home-product-inner">             
+          <div class="home-product-content clearfix">
+            {% if section.blocks.size > 0 %}
+            <div class="product-tab">
+              
+{% comment %} adding condition to avoid showing block name if there is only one block{% endcomment %}
+              {% if section.blocks.size > 1 %} 
+                <ul class="nav nav-tabs tabs-to-dropdown">
+                  {% for block in section.blocks %}
+                  <li class="sub-tabs {% if forloop.first == true %}active {% endif %} not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00"><a href="#product_tab_{{ section.id }}_{{forloop.index}}" data-toggle="tab">{{ block.settings.title }}</a></li>
+                  {% endfor %}
+                  <li class="tabs-dropdown">
+                    <a href="javascript:void(0)" class="dropdown-toggle" data-toggle="dropdown">
+                      <i class="cs-icon icon-ios-plus-empty"></i>
+                    </a>
+                    <ul class="nav nav-tabs dropdown-menu">
+                    </ul>
+                  </li>
+                </ul>
+              {% endif %}
+            </div>
+            <div class="tab-content"> 
+              {% if section.settings.per_row == '3' %}
+              {%- assign col = 'col-sm-4' -%}
+              {% else %}
+              {%- assign col = 'col-sm-3' -%}
+              {% endif %}
+
+              {% for block in section.blocks %}
+              <div class="tab-pane {% if forloop.first == true %}active{% endif %}" id="product_tab_{{ section.id }}_{{forloop.index}}">
+                <div class="product-item">
+                  {% for product in collections[block.settings.collection].products limit:section.settings.limit %} 
+                  <div class="content-product {{ col }} not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00">
+                    {% include 'index-proditem' %} 
+                  </div>
+{% comment %} below code is actually useless and if-else statement is not added properly
+                  {% else %}
+                  {% for i in (1..section.settings.limit) %}
+                  <div class="{{col}} content_product grid__item .grid__item--{{section.id}} {{ grid_item_width }}">
+                    <div class="grid-view-item product">
+                      <div class="grid-view-item__link">
+                        <div class="grid-view-item__image">
+                          {% capture current %}{% cycle 1, 2, 3, 4, 5, 6 %}{% endcapture %}
+                          {{ 'product-' | append: current | placeholder_svg_tag: 'placeholder-svg' }}
+                        </div>
+                        <div class="h4 grid-view-item__title product-title"><a href="#">{{ 'homepage.onboarding.product_title' | t }}</a></div>
+                        <div class="grid-view-item__meta">
+                          {% include 'product-price' %}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}
+{% endcomment %}
+                  
+                  {% endfor %}
+                  
+                </div>
+                <div class="row">
+                    <div class="action view-all">
+                      {% if block.settings.title == "All" %}
+                      <a class="_btn view-all-btn" href="collections/{{ block.settings.collection }}">View All Products</a>
+                      {% else %}
+                      <a class="_btn view-all-btn" href="collections/{{ block.settings.collection }}">View All {{ block.settings.title }}</a>
+                      {% endif %}
+                    </div>
+                  </div>
+              </div>
+              
+              
+              {% endfor %}                                   
+            </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+{% comment %} made "View All" button collection specific and hence commenting this out
+      <div class="row">
+        <div class="action view-all">
+          <a class="_btn view-all-btn" href="{{ section.settings.view_all_link }}">{{ section.settings.view_all_title }}</a>
+        </div>
+      </div>
+{% endcomment %}
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+  "name": "Tab Products",
+  "class": "index-section index-section-product",
+  "settings": [
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "textarea",
+      "id": "caption",
+      "label": "Caption"
+    },
+  {
+    "type": "select",
+    "id": "per_row",
+    "label": "Products per row",
+    "options": [
+      {
+        "value": "3",
+        "label": "3"
+      },
+      {
+        "value": "4",
+        "label": "4"
+      }
+    ],
+    "default": "4"
+  },
+	{
+      "type": "text",
+      "id": "limit",
+      "label": "Limit product show",
+	  "default":"8"
+  },
+  {
+    "type": "text",
+    "id": "view_all_title",
+    "label": "View All Title"
+  },
+  {
+    "type": "url",
+    "id": "view_all_link",
+    "label": "View All Link"
+  }
+  ],
+  "blocks": [
+    {
+      "type": "tab",
+      "name": "Tab",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Collection product"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Tab Products",
+    "category": "List Products",
+    "blocks": [
+      {
+        "type": "tab"
+      },
+      {
+        "type": "tab"
+      },
+	  {
+        "type": "tab"
+      },
+	  {
+        "type": "tab"
+      },
+	  {
+        "type": "tab"
+      }
+    ]
+  }]
+}
+{% endschema %}

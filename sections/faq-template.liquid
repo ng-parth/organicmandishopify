@@ -1,0 +1,144 @@
+{% if section.blocks.size > 0 %}
+<div class="faqs-content">
+  <div class="questions-layout">
+    <div class="questions-inner">
+      <h2 class="faqs-title">{{ section.settings.title }}</h2>
+      <div class="accordions-content">
+        <div class="panel-group" id="accordion" role="tablist" aria-multiselectable="true">
+          {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+          <div class="panel panel-default">
+            <div class="panel-heading {% if forloop.first == true %}active{% endif %}" role="tab" id="tab_heading{{forloop.index}}">
+              <h4 class="panel-title">
+                <a data-toggle="collapse" data-parent="#accordion" href="#tab_collapse{{forloop.index}}" aria-expanded="true" aria-controls="tab_collapse{{forloop.index}}">
+                  {{forloop.index}}. {{ block.settings.title }}
+                </a>
+              </h4>
+            </div>
+            <div id="tab_collapse{{forloop.index}}" class="panel-collapse collapse {% if forloop.first == true %}in{% endif %}" role="tabpanel" aria-labelledby="tab_heading{{forloop.index}}">
+              <div class="panel-body">
+                {{ block.settings.content }}
+              </div>
+            </div>
+          </div>
+          {% endfor %}
+          <script>
+            jQuery(function($) {
+              var $active = $('#accordion .panel-collapse.in').prev().addClass('active');
+              $active.find('a').prepend('<span class="cs-icon icon-ios-minus-empty"></span>');
+              $('#accordion .panel-heading').not($active).find('a').prepend('<span class="cs-icon icon-ios-plus-empty"></span>');
+              $('#accordion').on('show.bs.collapse', function(e) {
+                $('#accordion .panel-heading.active').removeClass('active').find('.cs-icon').toggleClass('icon-ios-minus-empty icon-ios-plus-empty');
+                $(e.target).prev().addClass('active').find('.cs-icon').toggleClass('icon-ios-plus-empty icon-ios-minus-empty');
+              })
+            });
+          </script>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% if section.settings.active_contact %}
+  <div class="contact-layout">
+    <div class="contact-inner">
+      <h2 class="faqs-title">{{ section.settings.title_contact }}</h2>
+      <div class="contact-content">
+        {% form 'contact' %}
+        {% if form.posted_successfully? %}
+        <div class="successForm feedback">
+          <p>{{ 'contact.form.post_success' | t }}</p>
+        </div>
+        {% endif %}
+
+        {% if form.errors %}
+        <div class="errorForm feedback">
+          <p>{{ 'contact.form.post_error' | t }}</p>
+          {% for field in form.errors %}
+          <p>{{ 'contact.form.post_field_error_html' | t: field: field, error: form.errors.messages[field] }}</p>
+          {% endfor %}
+        </div>
+        {% endif %}
+
+        <div id="contactFormWrapper">
+          <div class="col-md-6">
+            <div class="form-item">              
+              <input placeholder="{{ 'contact.placeholder.name' | t }}" type="text" id="contactFormName" name="contact[name]" />              
+            </div>  
+            <div class="form-item">              
+              <input placeholder="{{ 'contact.placeholder.email' | t }}" type="email" id="contactFormEmail" name="contact[email]" placeholder="" />
+            </div>            
+          </div>
+          <div class="col-md-6">
+            <div class="form-item">              
+              <textarea placeholder="{{ 'contact.placeholder.message' | t }}" rows="15" cols="75" id="contactFormMessage" name="contact[body]" placeholder=""></textarea>
+            </div>            
+          </div>
+          <div class="col-md-12">
+            <div class="form-item">
+              <input type="submit" id="contactFormSubmit" value="{{ 'contact.form.send' | t }}" class="_btn" />
+            </div>            
+          </div>
+        </div>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+  {% endif %}
+</div>
+{% endif %}
+{% schema %}
+{
+  "name": "FAQs",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "You need create the Page in Admin Panel and set the layout is page.faqs"
+    },
+    {
+      "type": "header",
+      "content": "FAQs content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "paragraph",
+      "content": "Add questions in Block"
+    },
+    {
+      "type": "header",
+      "content": "Contact content"
+    },
+    {
+      "type": "checkbox",
+      "id": "active_contact",
+      "label": "Set active this block"
+    },
+    {
+      "type": "text",
+      "id": "title_contact",
+      "label": "Title"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "question",
+      "name": "Question",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading"
+        },
+        {
+          "type": "textarea",
+          "id": "content",
+          "label": "Content ( HTML )"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

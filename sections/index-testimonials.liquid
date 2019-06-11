@@ -1,0 +1,251 @@
+<div data-section-id="{{ section.id }}" data-section-type="testimonials-section">
+  <section class="home-testimonialsBrand-layout" style="background-color: {{ section.settings.color_background }}; background-image:  url({% if section.settings.background %}{{ section.settings.background | img_url: '', crop: '' }}{% else %}{{ '1920x859.png' | asset_url }}{% endif %});">
+    <div class="home-testimonials-layout">
+      <div class="container">
+        <div class="row">
+          <div class="page-title text-center not-animated" data-animate="zoomIn" data-delay="100">
+            <h2>{{ section.settings.title }}</h2>
+            <p class="sub-title">
+              {{ section.settings.sub_title }}
+            </p>
+            {% if section.settings.caption != '' %}
+            <p class="caption">
+              {{ section.settings.caption }}
+            </p>
+            {% endif %}
+          </div>
+          <div class="home-testimonials-inner">            
+            <div class="home-testimonials-content">
+              {% if section.blocks.size > 0 %}
+              {% for block in section.blocks %}
+              <div class="testimonials-item col-sm-6 not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00">
+                <div class="group">
+                  {% if block.settings.image %}
+                  <span class="group_img">
+                    <img class="lazyload" 
+                        src="{{ block.settings.image | img_url:'10x' }}"
+                        data-src="{{ block.settings.image | img_url: '', crop: 'center' }}"
+                        data-widths="[180, 360, 540, 720, 900]"
+                        data-aspectratio="{{ image.aspect_ratio }}"
+                        data-sizes="auto"
+                        alt="{{ block.settings.image.alt }}"
+                    />
+                  </span>                  
+                  {% else %}
+                  <img src="{{ '250x250.png' | asset_url }}" alt=""/>
+                  {% endif %}
+                  <div class="testimonials-caption-group">
+                    <p class="testimonials-caption">
+                      {{ block.settings.caption }}
+                    </p>
+                    <p class="testimonials-name">
+                      {{ block.settings.name }}
+                    </p>
+                    <p class="testimonials-position">
+                      {{ block.settings.position }}
+                    </p>
+                  </div>
+                </div>                
+              </div>
+              {% endfor %}
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% comment %}    <div class="home-brand-layout">
+      <div class="container">
+        <div class="row">
+          <div class="home-brand-inner">
+            <div class="home-brand-content">
+              {% for i in (1..6) %}
+                {% capture logo %}brand_{{i}}_logo{% endcapture %}
+                {% capture logohover %}brand_{{i}}_logo_hover{% endcapture %}
+                {% capture link %}brand_{{i}}_link{% endcapture %}
+                {% if section.settings[logo] %}
+              	  <div class="brand-item {% if section.settings[logohover] %}brand-item-two{% endif %} not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00">
+                    <a href="{{ section.settings[link] }}">
+                      {% if section.settings[logo] %}
+                      <img src="{{ section.settings[logo] | img_url: '', crop: 'center' }}" alt="{{ section.settings[link].alt }}" />
+                      {% else %}
+                      <img src="{{ '200x100.png' | asset_url }}" alt=""/>
+                      {% endif %}
+                      {% if section.settings[logohover] %}
+                      <img class="logo-hover" src="{{ section.settings[logohover] | img_url: '', crop: 'center' }}" alt="{{ section.settings[link].alt }}" />
+                      {% endif %}
+                    </a>
+              	  </div>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>{% endcomment %}
+  </section>
+</div>
+{% schema %}
+{
+  "name": "Testimonials",
+  "class": "index-section index-section-testimonials",
+  "settings": [
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "textarea",
+      "id": "caption",
+      "label": "Caption"
+    },
+	{
+      "type": "color",
+      "id": "color_background",
+      "label": "Background Color"
+    },
+	{
+      "type": "image_picker",
+      "id": "background",
+      "label": "Upload Background"
+    },
+	{
+      "type": "header",
+      "content": "List Brand"
+    },
+	{
+      "type": "checkbox",
+      "id": "brand_enable",
+      "label": "Set active this block"
+    },
+	{
+      "type": "image_picker",
+      "id": "brand_1_logo",
+      "label": "Brand 1: Upload Logo"
+    },
+	{
+      "type": "image_picker",
+      "id": "brand_1_logo_hover",
+      "label": "Brand 1: Upload Logo Hover"
+    },
+	{
+      "type": "url",
+      "id": "brand_1_link",
+      "label": "Brand 1: Link"
+    },
+	{
+      "type": "image_picker",
+      "id": "brand_2_logo",
+      "label": "Brand 2: Upload Logo"
+    },
+	{
+      "type": "image_picker",
+      "id": "brand_2_logo_hover",
+      "label": "Brand 2: Upload Logo Hover"
+    },
+	{
+      "type": "url",
+      "id": "brand_2_link",
+      "label": "Brand 2: Link"
+    },
+	{
+      "type": "image_picker",
+      "id": "brand_3_logo",
+      "label": "Brand 3: Upload Logo"
+    },
+	{
+      "type": "image_picker",
+      "id": "brand_3_logo_hover",
+      "label": "Brand 3: Upload Logo Hover"
+    },
+	{
+      "type": "url",
+      "id": "brand_3_link",
+      "label": "Brand 3: Link"
+    },
+	{
+      "type": "image_picker",
+      "id": "brand_4_logo",
+      "label": "Brand 4: Upload Logo"
+    },
+	{
+      "type": "image_picker",
+      "id": "brand_4_logo_hover",
+      "label": "Brand 4: Upload Logo Hover"
+    },
+	{
+      "type": "url",
+      "id": "brand_4_link",
+      "label": "Brand 4: Link"
+    },
+	{
+      "type": "image_picker",
+      "id": "brand_5_logo",
+      "label": "Brand 5: Upload Logo"
+    },
+	{
+      "type": "image_picker",
+      "id": "brand_5_logo_hover",
+      "label": "Brand 5: Upload Logo Hover"
+    },
+	{
+      "type": "url",
+      "id": "brand_5_link",
+      "label": "Brand 5: Link"
+    },
+	{
+      "type": "image_picker",
+      "id": "brand_6_logo",
+      "label": "Brand 6: Upload Logo"
+    },
+	{
+      "type": "image_picker",
+      "id": "brand_6_logo_hover",
+      "label": "Brand 6: Upload Logo Hover"
+    },
+	{
+      "type": "url",
+      "id": "brand_6_link",
+      "label": "Brand 6: Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Upload Avatar"
+        },
+		{
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption"
+        },
+		{
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+		{
+          "type": "text",
+          "id": "position",
+          "label": "Position"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Testimonials",
+    "category": "Store Information"
+  }]
+}
+{% endschema %}

@@ -1,0 +1,85 @@
+<div data-section-id="{{ section.id }}" data-section-type="deal-section">
+  <section class="home-deal-layout" style="background-color: {{ section.settings.color_background }}; background-image:  url({% if section.settings.background %}{{ section.settings.background | img_url: '', crop: '' }}{% else %}{{ '1120x920.png' | asset_url }}{% endif %});">
+    <div class="container">
+      <div class="row">
+        <div class="home-deal-inner">
+          <div class="deal-content">
+            <div class="page-title text-left not-animated" data-animate="zoomIn" data-delay="100">
+              <h2>{{ section.settings.title }}</h2>
+              <p class="sub-title">
+                {{ section.settings.sub_title }}
+              </p>
+              {% if section.settings.caption != '' %}
+              <p class="caption">
+                {{ section.settings.caption }}
+              </p>
+              {% endif %}
+              {% if section.settings.action_text != '' %}
+              <a href="{{ section.settings.link }}" class="_btn">{{ section.settings.action_text }}</a>
+              {% endif %}
+            </div>
+          </div>
+          <div class="banner-content not-animated" data-animate="zoomIn" data-delay="100">
+            {% if section.settings.banner %}
+            <img src="{{ section.settings.banner | img_url: '', crop: 'center' }}" alt="{{ section.settings.banner.alt }}" />
+            {% else %}
+            <img src="{{ '672x496.png' | asset_url }}" alt=""/>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+  "name": "Deal Today",
+  "class": "index-section index-section-deal",
+  "settings": [
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "textarea",
+      "id": "caption",
+      "label": "Caption"
+    },
+	{
+      "type": "text",
+      "id": "action_text",
+      "label": "Action text"
+    },
+	{
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+	{
+      "type": "image_picker",
+      "id": "banner",
+      "label": "Upload Banner"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "Background Color"
+    },
+	{
+      "type": "image_picker",
+      "id": "background",
+      "label": "Upload Background"
+    }
+  ],
+  "presets": [{
+    "name": "Deal Today",
+    "category": "List Banner"
+  }]
+}
+{% endschema %}

@@ -1,0 +1,46 @@
+<div class="modal fade" id="lightbox-login" tabindex="-1" role="dialog" aria-labelledby="lightbox-login" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span class="lnr lnr-cross"></span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="login-content">
+          <div class="login-left">
+            <span class="login-title">
+              {{ 'customer.login.title_new_customer'|t }}
+            </span>
+            <span class="new-description">
+              {{ 'customer.login.description_new_customer'|t }}
+            </span>
+            <a href="/account/register" class="btn"><span>{{'customer.login.create'|t}}</span></a>
+          </div>
+          <div class="login-right">
+            <span class="login-title">
+              {{ 'customer.login.title_registered_customers'|t }}
+            </span>
+            <span class="register-description">
+              {{ 'customer.login.description_registered_customers'|t }}
+            </span>
+            {% form 'customer_login' %}
+            <div class="clearfix large_form">
+              <label for="customer_email_box" class="label">{{ 'customer.login.email' | t }} <span class="req">*</span></label>
+              <input type="email" value="" name="customer[email]" id="customer_email_box" class="form-control" />
+            </div>
+            <div class="clearfix large_form">
+              <label for="customer_password_box" class="label">{{ 'customer.login.password' | t }} <span class="req">*</span></label>
+              <input type="password" value="" name="customer[password]" id="customer_password_box" class="form-control password" />
+            </div>
+            <div class="action_bottom">
+              <a href="/account/login#recover"><span class="red">?</span> {{'customer.login.forgot_password'|t}}</a>
+              <button class="btn" type="submit">{{'customer.login.submit_recover'|t}}</button>
+            </div>
+            {% endform %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

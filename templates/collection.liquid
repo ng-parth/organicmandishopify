@@ -1,0 +1,83 @@
+<section class="heading-content collection-heading">
+  <div class="heading-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="page-heading-inner heading-group">
+          <div class="breadcrumb-group">
+            <h1 class="page-title">{{ collection.title }}</h1>
+            <div class="breadcrumb clearfix">
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+              <span class="arrow-space"></span>
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a href="{% if collection.handle == 'all' %}/collections/all{% else %}{{ collection.url }}{% endif %}" title="{{ collection.title | escape }}" itemprop="url">
+                  <span itemprop="title">
+                    {% if collection.handle == 'all' %}
+                    {{ 'collections.general.title' | t }}
+                    {% else %}
+                    {{ collection.title }}
+                    {% endif %}
+                  </span>
+                </a>
+              </span>
+            </div>        
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% comment %}
+  @Mayank - Both image and description has to be there for this section to show.
+  Image will be shown on the left side, description on the right side.
+{% endcomment %}
+{% if collection.image and collection.description %}
+  <section class="collection-info">
+    <div class="container">
+      <div class="row">
+        <div class="collection-photo col-md-6">
+          <img src="{{ collection.image | img_url: '', crop: 'center' }}" alt="Farmer's Image" />
+        </div>
+        <div class="collection-description col-md-6">
+          <p>
+            {{ collection.description }}
+          </p>        	
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}
+
+<section class="collection-layout">  
+  {% if settings.collection_style == 'full_width' %}
+  <div class="collection-fullWidth-layout">
+    <div class="container">
+      <div class="row">
+        {% section 'collection-default-template' %}
+      </div>
+    </div>
+  </div>
+  {% elsif settings.collection_style == 'list_full_width' %}
+  <div class="collection-fullWidth-layout">
+    <div class="container">
+      <div class="row">
+        {% section 'collection-listing-template' %}
+      </div>
+    </div>
+  </div>
+  {% else %}
+  <div class="container">
+    <div class="row">
+      {% if settings.collection_style == 'default' %}
+        {% section 'collection-default-template' %}
+      {% elsif settings.collection_style == 'listing' %}
+        {% section 'collection-listing-template' %}
+      {% elsif settings.collection_style == 'left_sidebar' %}
+        {% section 'collection-leftSidebar-template' %}
+      {% elsif settings.collection_style == 'list_left_sidebar' %}
+        {% section 'collection-listLeftSidebar-template' %}
+      {% endif %}
+    </div>
+  </div>
+  {% endif %}
+</section>

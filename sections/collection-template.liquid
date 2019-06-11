@@ -1,0 +1,212 @@
+{% if template == 'collection' %}
+{% assign pagination_limit = settings.pagination_limit %}
+{% elsif template == 'collection.16' %}
+{% assign pagination_limit = 16 %}
+{% elsif template == 'collection.20' %}
+{% assign pagination_limit = 20 %}
+{% elsif template == 'collection.24' %}
+{% assign pagination_limit = 24 %}
+{% else %}
+{% assign pagination_limit = 32 %}
+{% endif %}
+
+<div class="collection-inner positionSidebar-{{ settings.collection_position }}">
+  <!-- Tags loading -->
+  <div id="tags-load" style="display:none;"><i class="fa fa-spinner fa-pulse fa-2x"></i></div>
+  <div id="collection">
+    <div class="collection-content-inner">
+    <div class="collection-content">
+      {% paginate collection.products by pagination_limit %}    
+      {% if settings.collection_sidebar_show %}
+      <div class="collection-leftsidebar sidebar col-sm-3 clearfix">
+        <div class="collection-leftsidebar-group">
+          <div class="close-leftsidebar-group">
+            <a href="javascript:void(0)" class="close-leftsidebar">
+              <span class="cs-icon icon-close"></span>
+            </a>
+          </div>          
+          {% include 'collection-leftsidebar' %}
+        </div>        
+      </div>
+      {% endif %}
+      <div class="collection-mainarea {% if settings.collection_sidebar_show %}col-sm-9{% else %}col-sm-12{% endif %} clearfix"> 
+        <div class="collection-toolbar">
+          <h1 class="collection-title">
+            {% if collection.handle == 'all' %}
+            {{ 'collections.general.title' | t }}
+            {% else %}
+            {{ collection.title }}
+            {% endif %}
+          </h1>
+          {% if settings.collection_top_banner %}
+          <a href="{{ settings.collection_top_banner_link }}" class="collection-banner-top">
+            <img src="{{ settings.collection_top_banner | img_url: '', crop: '' | split:'?v=' | first }}" alt="{{ settings.collection_top_banner.alt }}" title="{{ settings.collection_top_banner.alt }}">
+          </a>
+          {% endif %}
+          <div class="group_toolbar">
+            <div class="filterCollections-layout">
+              <a href="javascript:void(0)" class="show-leftsidebar">
+                <span class="filterCollections-title">{{'collections.general.filter'|t}}</span>
+                <span class="cs-icon icon-ios-settings-strong"></span>
+              </a>
+            </div>
+            <!-- Sort by -->
+            {% if settings.collection_sort and collection.products_count > 1 %}
+            <div class="sortBy">
+              <div class="sortButtonWarper dropdown-toggle" data-toggle="dropdown">
+                <span class="toolbar-title">{{'collections.sorting.title'|t}}</span>
+                <button class="sortButton">
+                  <span class="name">{{'collections.sorting.featured'|t}}</span><i class="cs-icon icon-ios-arrow-down"></i>
+                </button>
+                <i class="sub-dropdown1"></i>
+                <i class="sub-dropdown"></i>
+              </div>
+              <div class="sortBox control-container dropdown-menu">
+                <ul class="sortForm list-unstyled option-set text-left list-styled" data-option-key="sortBy">
+                  <li class="sort manual"><a href="{% if collection.handle == "all" %}/collections/all{% else %}{{ collection.url }}{% endif %}/?sort_by=manual">{{'collections.sorting.featured'|t}}</a></li>
+                  <li class="sort price-ascending"><a href="{% if collection.handle == "all" %}/collections/all{% else %}{{ collection.url }}{% endif %}/?sort_by=price-ascending">{{'collections.sorting.price_ascending'|t}}</a></li>
+                  <li class="sort price-descending"><a href="{% if collection.handle == "all" %}/collections/all{% else %}{{ collection.url }}{% endif %}/?sort_by=price-descending">{{'collections.sorting.price_descending'|t}}</a></li>
+                  <li class="sort title-ascending"><a href="{% if collection.handle == "all" %}/collections/all{% else %}{{ collection.url }}{% endif %}/?sort_by=title-ascending">{{'collections.sorting.az'|t}}</a></li>
+                  <li class="sort title-descending"><a href="{% if collection.handle == "all" %}/collections/all{% else %}{{ collection.url }}{% endif %}/?sort_by=title-descending">{{'collections.sorting.za'|t}}</a></li>
+                  <li class="sort created-ascending"><a href="{% if collection.handle == "all" %}/collections/all{% else %}{{ collection.url }}{% endif %}/?sort_by=created-ascending">{{'collections.sorting.date_ascending'|t}}</a></li>
+                  <li class="sort created-descending"><a href="{% if collection.handle == "all" %}/collections/all{% else %}{{ collection.url }}{% endif %}/?sort_by=created-descending">{{'collections.sorting.date_descending'|t}}</a></li>
+                  <li class="sort best-selling"><a href="{% if collection.handle == "all" %}/collections/all{% else %}{{ collection.url }}{% endif %}/?sort_by=best-selling">{{'collections.sorting.best_selling'|t}}</a></li>
+                </ul>
+              </div>
+            </div>      
+            {% endif %}
+            {% if settings.collection_show_items %}
+            <div class="showPerPage">
+              <div class="showButtonWarper dropdown-toggle" data-toggle="dropdown">
+                <span class="toolbar-title">{{'collections.perpage.show'|t}}</span>
+                <button id="showButton">
+                  <span class="name">{{'collections.perpage.title'|t:x:pagination_limit}}</span>
+                  <i class="cs-icon icon-ios-arrow-down"></i>
+                </button>
+                <i class="sub-dropdown1"></i>
+                <i class="sub-dropdown"></i>
+              </div>
+              <div class="showBox control-container dropdown-menu">
+                <ul class="showForm list-unstyled text-left list-styled">
+                  <li class="show {% if pagination_limit == "16"%}active{%endif%}">
+                    <a href="/collections/{{collection.handle}}?view=16">{{'collections.perpage.16'|t}}</a>
+                  </li>
+                  <li class="show {% if pagination_limit == "20"%}active{%endif%}">
+                    <a href="/collections/{{collection.handle}}?view=20">{{'collections.perpage.20'|t}}</a>
+                  </li>
+                  <li class="show {% if pagination_limit == "24"%}active{%endif%}">
+                    <a href="/collections/{{collection.handle}}?view=24">{{'collections.perpage.24'|t}}</a>
+                  </li>
+                  <li class="show {% if pagination_limit == "32"%}active{%endif%}">
+                    <a href="/collections/{{collection.handle}}?view=32">{{'collections.perpage.32'|t}}</a>
+                  </li>
+                </ul>
+              </div>
+            </div>
+            {% endif %}
+            <!-- View as -->
+            {% if settings.collection_grid_list %}           
+            <div class="grid_list">              
+              <ul class="list-inline option-set hidden-xs" data-option-key="layoutMode">
+                <li data-option-value="fitRows" id="goGrid" class="active goAction" data-toggle="tooltip" data-placement="top" title="Grid">
+                  <i class="cs-icon icon-grid"></i>
+                </li>
+                <li data-option-value="straightDown" id="goList" class="goAction" data-toggle="tooltip" data-placement="top" title="List">
+                  <i class="cs-icon icon-navicon"></i>
+                </li>
+              </ul>
+            </div>
+            {% endif %}
+            <div class="pagination-toolbar">
+              {% include 'pagination' %}
+            </div>
+          </div>
+        </div> 
+        <div class="collection-items">
+          <div class="products">
+            {% if settings.products_per_row == '3' %}
+            {% assign class_col = 'col-sm-4' %}
+            {% elsif settings.products_per_row == '4' %}
+            {% assign class_col = 'col-sm-3' %}
+            {% endif %}
+            {% for product in collection.products %}
+            {% include 'collection-product' with collection.handle, class_col: class_col %}
+            {% endfor %}
+          </div>                  
+        </div>
+        <div class="collection-bottom-toolbar">
+          <div class="collection-bottom-toolbar-inner">
+            <div class="product-counter col-sm-6">
+              {% if paginate.current_page == 1 %} {% capture xnumber %}1{% endcapture%}
+              {% else %} {% capture xnumber %} {{paginate.current_page | minus:1 | times: pagination_limit | plus: 1}} {% endcapture%}
+              {% endif %}
+              {% capture ynumber%}{{paginate.current_page | times: pagination_limit}} {% endcapture%}
+              {% if paginate.pages == paginate.current_page %} {% capture ynumber %} {{collection.products_count}} {% endcapture%}{%endif%}  
+              {{'collections.general.showing'|t:x:xnumber,y:ynumber,z:collection.products_count}}
+            </div>
+            <div class="product-pagination col-sm-6">
+              {% include 'pagination' %}
+            </div>
+          </div>          
+        </div>
+      </div>
+      {% endpaginate %}
+    </div>
+  </div>
+</div>
+
+<script type="text/javascript">
+
+  /* Handle Grid - List */
+  function handleGridList(){
+
+    if($('#goList').length){
+      $('#goList').on(clickEv, function(e){
+        $(this).parent().find('li').removeClass('active');
+        $(this).addClass('active');
+        $('.collection-items').addClass('listMode');
+        $('.collection-items').removeClass('gridMode');
+        $('.collection-items .row-left').addClass('col-md-5');
+        $('.collection-items .row-right').addClass('col-md-7');
+        $('.collection-items .product-item').removeClass('col-sm-3 col-sm-4');
+        $('.grid-mode').addClass("hide");
+        $('.list-mode').removeClass("hide");
+      });
+    }
+
+    if($('#goGrid').length){
+      $('#goGrid').on(clickEv, function(e){
+        $(this).parent().find('li').removeClass('active');
+        $(this).addClass('active');
+        $('.collection-items').removeClass('listMode');
+        $('.collection-items').addClass('gridMode');
+        $('.collection-items .row-left').removeClass('col-md-5');
+        $('.collection-items .row-right').removeClass('col-md-7');
+        {% if settings.products_per_row == '3' %}
+        $('.collection-items .product-item').addClass('col-sm-4');
+        {% else%}
+        $('.collection-items .product-item').addClass('col-sm-3');
+        {% endif %}
+        $('.grid-mode').removeClass("hide");
+        $('.list-mode').addClass("hide");
+      });
+    }
+  }
+
+  $(document).ready(function() {
+    if(location.search.search("sort_by=") == -1){
+
+    }
+    else{
+      if(location.search != ""){
+        var stpo = location.search.search("sort_by=")+8, sortby_url = '.'+location.search.substr(stpo).split('='), sortby_url_a = sortby_url+" a";
+        $(sortby_url).addClass("active");
+        $('#sortButton .name').html($(sortby_url_a).html());
+      }
+      else{
+        $('.manual').addClass("active");
+      }
+    }
+    handleGridList();
+  });
+</script>

@@ -1,0 +1,340 @@
+<div class="contact-content contact-v2">
+  {% if section.settings.form_enable %}
+  <div class="detail-form-layout">
+    <div class="container">
+      <div class="row">
+        <div class="detail-form-inner">
+          {% if section.settings.form_banner %}
+          <div class="detail-layout">
+            <div class="detail-content">
+              <img src="{{ section.settings.form_banner | img_url: '', crop: 'center' }}" alt="{{ section.settings.form_banner.alt }}" />
+            </div>
+          </div>
+          {% endif %}
+          {% if section.settings.form_enable %}
+          <div class="form-layout">
+            <div class="page-title text-left">
+              <h2>{{ section.settings.form_title }}</h2>
+              <p class="sub-title">
+                {{ section.settings.form_sub_title }}
+              </p>
+              {% if section.settings.form_caption != '' %}
+              <p class="caption">
+                {{ section.settings.form_caption }}
+              </p>
+              {% endif %}
+            </div>
+            <div class="form-content">
+              {% form 'contact' %}
+              {% if form.posted_successfully? %}
+              <div class="successForm feedback">
+                <p>{{ 'contact.form.post_success' | t }}</p>
+              </div>
+              {% endif %}
+              {% if form.errors %}
+              <div class="errorForm feedback">
+                <p>{{ 'contact.form.post_error' | t }}</p>
+                {% for field in form.errors %}
+                <p>{{ 'contact.form.post_field_error_html' | t: field: field, error: form.errors.messages[field] }}</p>
+                {% endfor %}
+              </div>
+              {% endif %}
+              <div id="contactFormWrapper" class="group_form">
+                <div class="form-item">
+                  <input type="text" id="contactFormName" name="contact[name]" placeholder="{{ 'contact.placeholder.name' | t }}" />
+                </div>  
+                <div class="form-item">
+                  <input type="email" id="contactFormEmail" name="contact[email]" placeholder="{{ 'contact.placeholder.email' | t }}" />  
+                </div>
+                <div class="form-item">
+                  <input type="text" id="contactFormWeb" name="contact[website]" placeholder="{{ 'contact.placeholder.website' | t }}" />  
+                </div>
+                <div class="form-item">
+                  <textarea rows="15" cols="75" id="contactFormMessage" name="contact[body]" placeholder="{{ 'contact.placeholder.message' | t }}"></textarea>
+                </div>
+                <div class="form-item">
+                  <input type="submit" id="contactFormSubmit" value="{{ 'contact.form.send' | t }}" class="_btn" />
+                </div>                 
+              </div>
+              {% endform %}
+            </div>
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if section.settings.detail_enable %}
+  <div class="detail-contact-layout">
+    <div class="container">
+      <div class="row">
+        <div class="detail-contact-inner">
+          {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+          <div class="contact-item">
+            {% if block.settings.icon %}
+            <div class="item-icon">
+              <img src="{{ block.settings.icon | img_url: '', crop: 'center' }}" alt="{{ block.settings.icon.alt }}" />
+            </div>
+            {% endif %}
+            <div class="item-content">
+              <span class="title">
+                {{ block.settings.title }}
+              </span>
+              {{ block.settings.caption }}
+            </div>
+          </div>
+          {% endfor %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endif %}
+  {% if section.settings.contact_enable and section.settings.contact_address != '' %}
+  <div class="google-maps-layout clearfix">    
+    <div id="contact_map" class="m_map"></div>    
+  </div>
+  {% endif %}
+</div>
+
+<script type="text/javascript">
+  $(window).ready(function($) {
+    {% if section.settings.contact_enable and section.settings.contact_address != '' %}
+    if(jQuery().gMap){
+      if($('#contact_map').length){
+        $('#contact_map').gMap({
+          zoom: {{section.settings.contact_zoom}},
+          scrollwheel: {{section.settings.contact_scroll}},
+          maptype: '{{section.settings.contact_type}}',
+          markers:[
+            {
+              address: '{{section.settings.contact_address}}',
+              html: '_address'
+            }
+          ]
+        });
+      }
+    }
+    {% endif %}
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Contact Page Version 2",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "You need create the Page in Admin Panel and set the layout is page.contact-v2"
+    },
+	{
+      "type": "header",
+      "content": "Contact Form"
+    },
+	{
+      "type": "checkbox",
+      "id": "form_enable",
+      "label": "Set active this block",
+      "default": true
+    },
+	{
+      "type": "image_picker",
+      "id": "form_banner",
+      "label": "Upload Banner"
+    },
+	{
+      "type": "text",
+      "id": "form_title",
+      "label": "Title"
+    },
+	{
+      "type": "text",
+      "id": "form_sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "textarea",
+      "id": "form_caption",
+      "label": "Caption"
+    },
+	{
+      "type": "header",
+      "content": "Contact Us"
+    },
+	{
+      "type": "checkbox",
+      "id": "detail_enable",
+      "label": "Set active this block",
+      "default": true
+    },
+	{
+      "type": "paragraph",
+      "content": "Add item in Block"
+    },
+    {
+      "type": "header",
+      "content": "Google Map"
+    },
+    {
+      "type": "checkbox",
+      "id": "contact_enable",
+      "label": "Set active this block",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "contact_type",
+      "label": "Map type",
+      "options": [
+        {
+          "value": "ROADMAP",
+          "label": "Normal map"
+        },
+        {
+          "value": "SATELLITE",
+          "label": "Satellite"
+        },
+        {
+          "value": "HYBRID",
+          "label": "Hybrid"
+        },
+        {
+          "value": "TERRAIN",
+          "label": "Terrain"
+      	}
+      ]
+    },
+    {
+      "type": "select",
+      "id": "contact_zoom",
+      "label": "Zoom level",
+      "options": [
+        {
+          "value": "0",
+          "label": "0"
+        },
+        {
+          "value": "1",
+          "label": "1"
+        },
+        {
+          "value": "2",
+          "label": "2"
+        },
+        {
+          "value": "3",
+          "label": "3"
+        },
+        {
+          "value": "4",
+          "label": "4"
+        },
+        {
+          "value": "5",
+          "label": "5"
+        },
+        {
+          "value": "6",
+          "label": "6"
+        },
+        {
+          "value": "7",
+          "label": "7"
+		},
+        {
+          "value": "8",
+          "label": "8"
+        },
+        {
+          "value": "9",
+          "label": "9"
+        },
+        {
+          "value": "10",
+          "label": "10"
+        },
+        {
+          "value": "11",
+          "label": "11"
+        },
+        {
+          "value": "12",
+          "label": "12"
+        },
+        {
+          "value": "13",
+          "label": "13"
+        },
+        {
+          "value": "14",
+          "label": "14"
+        },
+        {
+          "value": "15",
+          "label": "15"
+        },
+        {
+          "value": "16",
+          "label": "16"
+        },
+        {
+          "value": "17",
+          "label": "17"
+        },
+        {
+          "value": "18",
+          "label": "18"
+        },
+        {
+          "value": "19",
+          "label": "19"
+        },
+        {
+          "value": "20",
+          "label": "20"
+        },
+        {
+          "value": "21",
+          "label": "21"
+        }
+      ]
+    },
+    {
+      "type": "text",
+      "id": "contact_address",
+      "label": "Map address"
+    },
+    {
+      "type": "checkbox",
+      "id": "contact_scroll",
+      "label": "Scroll wheel",
+      "default": true
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+		{
+          "type": "image_picker",
+          "id": "icon",
+          "label": "Upload icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption( HTML )"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

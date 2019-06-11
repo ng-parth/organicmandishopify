@@ -1,0 +1,388 @@
+<div data-section-id="{{ section.id }}" data-section-type="slideshow-section">
+  <section class="home-slideshow-layout not-animated" data-animate="zoomIn" data-delay="100">
+    <div class="home-slideshow-wrapper">
+      <div class="group-home-slideshow">
+        {% if section.blocks.size > 0 %}
+        <div class="home-slideshow-inner">
+          <div id="home_main-slider{{ section.id }}" class="home-slideshow-content carousel slide {% if section.settings.maincarousel_slide == 'fade' %}carousel-fade {% endif %}">
+            {% if section.settings.maincarousel_controlNav %}
+            <ol class="carousel-indicators">
+              {% for block in section.blocks %}
+              <li data-target="#home_main-slider{{ section.id }}" data-slide-to="{{ forloop.index | minus:1 }}" class="carousel-{{forloop.index}}{% if forloop.index == 1 %} active {% endif %}"></li>
+              {% endfor %}
+            </ol>
+            {% endif %}
+            <div class="carousel-inner">
+              {% for block in section.blocks %}
+              {% if block.type == 'image' %}
+              <div style="max-width: 100%; max-height: 100%;" class="item {% if forloop.first == true %}active {% endif %} image">
+                {% if block.settings.image %}
+                <img class="carousel-img lazyload" 
+                    src="{{ block.settings.image | img_url:'100x' }}"
+                    data-src="{{ block.settings.image | img_url: '', crop: 'center' }}"
+                    data-widths="[540, 720, 900, 1080, 1296]"
+                    data-aspectratio="{{ image.aspect_ratio }}"
+                    data-sizes="auto"
+                    alt="{{ block.settings.image.alt }}"
+                    style="opacity: 0.4"
+                    title="{{ block.settings.image.alt }}"
+                />
+                {% else %}
+                <img class="lazyload"
+                    src="{{ '1920x920.png' | img_url:'100x100' }}"
+                    data-src="{{ '1920x920.png' | asset_url }}"
+                    data-widths="[180, 360, 540, 720, 900, 1080, 1296, 1512, 1728]"
+                    data-aspectratio="{{ image.aspect_ratio }}"
+                    data-sizes="auto"	
+                    alt=""
+                />
+                {% endif %}
+                <div class="slideshow-caption">
+                  <div class="slideshow-caption-group">                             
+                    <div class="caption-group">
+                      <p style="color: #545454" class="group-sub-title transition-{{ block.settings.transition_sub_title }}">{{ block.settings.sub_title }}</p>
+                      <h5 class="group-title transition-{{ block.settings.transition_title }}">{{ block.settings.title }}</h5>
+                      <p style="color: #545454;" class="group-caption transition-{{ block.settings.transition_caption }}">{{ block.settings.caption }}</p>
+                    </div> 
+                    {% if block.settings.action_text != '' %}
+                    <div class="action transition-{{ block.settings.transition_button }}">
+                      <a class="_btn top-cta" href="{{block.settings.link}}">{{ block.settings.action_text }}</a>
+                    </div>
+                    {% endif %}
+                  </div>
+                </div>   
+              </div>  
+              {% elsif block.type == 'video' %}
+              <div class="item {% if forloop.first == true %}active {% endif %} video">
+                <iframe width="100%" frameborder="0" title="YouTube video player" type="text/html" src="https://www.youtube.com/embed/{{block.settings.video_id}}?enablejsapi=1{% if block.settings.video_autoplay %}&autoplay=1{% endif %}&rel=0"></iframe>
+              </div>  
+              {% endif %}
+              {% endfor %}
+            </div>
+            {% if section.settings.maincarousel_directionNav %}
+            <a class="left carousel-control" href="#home_main-slider{{ section.id }}" data-slide="prev">
+              <span class="icon-prev"></span>
+            </a>
+            <a class="right carousel-control" href="#home_main-slider{{ section.id }}" data-slide="next">
+              <span class="icon-next"></span>
+            </a>
+            {% endif %}
+          </div>
+        </div>
+        {% endif %}
+      </div>                
+    </div>
+  </section>
+</div>
+
+<script>
+  function setHeight(){
+    var height = $('#home_main-slider{{ section.id }} .carousel-inner').find('.item.image').height();
+    if( height == null ){
+      if( getWidthBrowser() > 767 ){
+        height = $('#home_main-slider{{ section.id }}').parents('.home-slideshow-inner').height();
+      }
+      else{
+        height = '200px';           
+      }   
+    }
+    $('#home_main-slider{{ section.id }} .carousel-inner').find('.item.video iframe').attr('height',height);
+  }
+  $(window).ready(function($) {
+    var tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    var firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+    window.onYouTubeIframeAPIReady = function(){
+      $('.item iframe').each(function(){
+        var player = new YT.Player(this, {
+          playerVars: {
+            autoplay: 0
+          }
+        });
+        player.addEventListener("onStateChange", function(state){
+          switch(state.data)
+          {
+            case YT.PlayerState.PLAYING:
+              $('#home_main-slider{{ section.id }}').carousel('pause');
+              break;
+            case YT.PlayerState.ENDED:
+            case YT.PlayerState.PAUSED:
+              {% if section.settings.maincarousel_auto %}
+              $('#home_main-slider{{ section.id }}').carousel('cycle'); 
+              {% endif %}
+              break;
+          }
+        });
+        $(this).data('player', player);
+      });
+    }
+    
+    $('#home_main-slider{{ section.id }}').carousel({
+      interval: {% if section.settings.maincarousel_auto %} {{section.settings.maincarousel_slideshowSpeed}} {% else %}false{% endif %},
+      {% if section.settings.maincarousel_pauseOnHover %} {% else %} pause: false  {% endif %}
+      });
+        setHeight();
+      
+      $("#home_main-slider{{ section.id }}").swiperight(function() {  
+        $("#home_main-slider{{ section.id }}").carousel('prev');  
+      });  
+      $("#home_main-slider{{ section.id }}").swipeleft(function() {  
+        $("#home_main-slider{{ section.id }}").carousel('next');  
+      });
+  });
+  $( window ).resize(function() {
+    setHeight();
+  });    
+</script>
+
+{% schema %}
+{
+  "name": "Slideshow",
+  "class": "index-section index-section-slideshow",
+  "settings": [
+	{
+      "type": "checkbox",
+      "id": "maincarousel_auto",
+      "label": "Setup to animate automatically",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "maincarousel_slide",
+      "label": "Controls the animation type",
+      "options": [
+        {
+          "value": "fade",
+          "label": "Fade"
+        },
+        {
+          "value": "slide",
+          "label": "Slide"
+        }
+      ],
+      "default": "slide"
+    },
+    {
+      "type": "text",
+      "id": "maincarousel_slideshowSpeed",
+      "label": "Speed of the slideshow cycling, in milliseconds",
+      "default": "5000"
+    },
+    {
+      "type": "checkbox",
+      "id": "maincarousel_directionNav",
+      "label": "Create previous\/next arrow navigation"
+    },
+    {
+      "type": "checkbox",
+      "id": "maincarousel_controlNav",
+      "label": "Active Navigation for paging control"
+    },
+    {
+      "type": "checkbox",
+      "id": "maincarousel_pauseOnHover",
+      "label": "Pause the slideshow when hovering over slider"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "image",
+      "name": "Image slide",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+		{
+          "type": "select",
+          "id": "transition_title",
+          "options": [
+            {
+              "value": "slideup",
+              "label": "Slide Up"
+            },
+            {
+              "value": "slidedown",
+              "label": "Slide Down"
+            },
+            {
+              "value": "slideright",
+              "label": "Slide Right"
+            },
+            {
+              "value": "slideleft",
+              "label": "Slide Left"
+            },
+            {
+              "value": "fade",
+              "label": "Fade"
+            }
+          ],
+          "label": "Transition Effects for Title",
+          "default": "slidedown"
+        },
+		{
+          "type": "text",
+          "id": "sub_title",
+          "label": "Sub Title"
+        },
+		{
+          "type": "select",
+          "id": "transition_sub_title",
+          "options": [
+            {
+              "value": "slideup",
+              "label": "Slide Up"
+            },
+            {
+              "value": "slidedown",
+              "label": "Slide Down"
+            },
+            {
+              "value": "slideright",
+              "label": "Slide Right"
+            },
+            {
+              "value": "slideleft",
+              "label": "Slide Left"
+            },
+            {
+              "value": "fade",
+              "label": "Fade"
+            }
+          ],
+          "label": "Transition Effects for Sub Title",
+          "default": "slidedown"
+        },
+        {
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption ( HTML )"
+        },
+		{
+          "type": "select",
+          "id": "transition_caption",
+          "options": [
+            {
+              "value": "slideup",
+              "label": "Slide Up"
+            },
+            {
+              "value": "slidedown",
+              "label": "Slide Down"
+            },
+            {
+              "value": "slideright",
+              "label": "Slide Right"
+            },
+            {
+              "value": "slideleft",
+              "label": "Slide Left"
+            },
+            {
+              "value": "fade",
+              "label": "Fade"
+            }
+          ],
+          "label": "Transition Effects for Caption",
+          "default": "slidedown"
+        },
+        {
+          "type": "select",
+          "id": "position",
+          "label": "Set the Position for Caption",
+          "options": [
+            {
+              "value": "left",
+              "label": "Left"
+            },
+            {
+              "value": "right",
+              "label": "Right"
+            }
+          ],
+          "default": "left"
+        },
+        {
+          "type": "text",
+          "id": "action_text",
+          "label": "Action text"
+        },
+		{
+          "type": "select",
+          "id": "transition_button",
+          "options": [
+            {
+              "value": "slideup",
+              "label": "Slide Up"
+            },
+            {
+              "value": "slidedown",
+              "label": "Slide Down"
+            },
+            {
+              "value": "slideright",
+              "label": "Slide Right"
+            },
+            {
+              "value": "slideleft",
+              "label": "Slide Left"
+            },
+            {
+              "value": "fade",
+              "label": "Fade"
+            }
+          ],
+          "label": "Transition Effects for Button",
+          "default": "slideright"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Slide link"
+        }
+      ]
+    },
+	{
+      "type": "video",
+      "name": "Video slide",
+      "settings": [
+        {
+          "type": "text",
+          "id": "video_id",
+          "label": "YouTube video id",
+          "info": "[Find your YouTube video ID](https://docs.joeworkman.net/rapidweaver/stacks/youtube/video-id)."
+        },
+		{
+          "type": "checkbox",
+          "id": "video_autoplay",
+          "label": "YouTube video autoplay?"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Slideshow",
+    "category": "List Slideshow",
+    "settings": {
+      "maincarousel_auto": true,
+      "maincarousel_slideshowSpeed": "5000"
+    },
+    "blocks": [
+      {
+        "type": "image"
+      },
+      {
+        "type": "image"
+      }
+    ]
+  }]
+}
+{% endschema %}

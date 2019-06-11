@@ -1,0 +1,19 @@
+<section class="page-404-layout">
+  <div class="page-404-wrapper">
+    <h1 class="hidden">{{ 'general.404.page_title' | t }}</h1>
+    <div class="container">
+      <div class="row">
+        <div class="page-404-inner">   
+          <div class="page-404-content">
+            <div class="page-group">
+              <h2 class="title">{{ settings.title_404 }}</h2>
+              <img src="{{ settings.image_404 | img_url: '', crop: 'center' }}" alt="{{ settings.image_404.alt }}" />
+              <div class="caption">{{ settings.caption_404 }}</div>
+              <a href="/" class="_btn">{{ settings.actiontext_404 }}</a>
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

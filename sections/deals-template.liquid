@@ -1,0 +1,23 @@
+<div class="products-deals">
+  <div class="products-deals-inner"> 
+    {% for product in collections.all.products %}
+    {% if product.price_min < product.compare_at_price_min %}
+    <div class="product-item-wrapper col-sm-3"> 
+      {% include 'index-proditem' %}
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% include 'pagination' %}
+  </div>
+</div>
+{% schema %}
+{
+  "name": "Super Deal Page",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "You need create the Page in Admin Panel and set the layout is page.deals"
+    }
+  ]
+}
+{% endschema %}  

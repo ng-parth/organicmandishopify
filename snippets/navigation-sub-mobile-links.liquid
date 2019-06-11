@@ -1,0 +1,22 @@
+{% assign submenu = l.title | handleize %}
+{% if linklists[submenu].links.size > 0 %}
+<li class="{% if l.active %}active{% endif %} li-sub-mega navigation_sub_mobile">
+  <a href="{{ l.url }}" class="menu-mobile-link mobile-goto-link">
+    <span >{{ l.title }}</span>
+  </a>
+  <a href="javascript:void(0)" class="arrow_sub arrow_sub_mobile">
+    <i class="cs-icon icon-ios-plus-empty"></i>
+  </a>
+  <ul class="sub-menu-mobile-container" style="display: none;"> 
+    {% for l in linklists[submenu].links %}
+    <li class="{% if l.active %}active{% endif %} li-sub-mega">
+      <a tabindex="-1" href="{{ l.url }}" class="mobile-goto-link">{{ l.title }}</a>
+    </li>
+    {% endfor %}
+  </ul>
+</li>
+{% else %} 
+<li class="{% if l.active %}active{% endif %} li-sub-mega">
+  <a tabindex="-1" href="{{ l.url }}" class="mobile-goto-link">{{ l.title }}</a>
+</li>
+{% endif %}

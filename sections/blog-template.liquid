@@ -1,0 +1,54 @@
+<div class="blog-inner">
+  <div id="blog" class="blog-content">   
+    {% paginate blog.articles by 5 %}
+    <div class="{% if settings.blog_sidebar_show %}articles-group-sidebar{% else %}articles-group-full{% endif %} articles">
+      <div class="articles-group">
+        <div class="articles-group-inner">
+          {% for article in blog.articles %}
+          {% if forloop.index == 1 %}
+            {% assign class = 'article-big' %}
+          {% elsif forloop.index == 2 or forloop.index == 4 %}
+            {% assign class = 'article-small small-left' %}
+          {% elsif forloop.index == 3 or forloop.index == 5 %}
+            {% assign class = 'article-small small-right' %}
+          {% endif %}
+          <div class="article {{ class }}">
+            <div class="group-blog-top">
+              {% if article.image %}
+              <div class="article-image"> 
+                <a href="{{ article.url }}">
+                  <img src="{{article.image | img_url: 'master'}}" alt="{{ article.image.alt }}" />
+                </a>
+              </div>
+              {% endif %}
+            </div>
+            <div class="group-blog-bottom">
+              <div class="article-title">                     
+                <h2 class="article-name"><a href="{{ article.url }}">{{ article.title }}</a></h2>                                            
+              </div>
+              <ul class="article-info list-inline">
+                <li class="article-date"><span>{{article.published_at | date: '%b %d, %Y'}}</span></li>                                           
+                <li class="article-author">
+                  <span>{{ 'blogs.comments.by' |t }}</span>
+                  <span class="user" itemprop="name">{{article.author}}</span>
+                </li> 
+              </ul>
+              <div class="article-content">
+                {{ article.content | strip_html | truncatewords : 30 }}
+                <a class="read_more" href="{{ article.url }}">{{ 'blogs.article.action'| t }}</a>
+              </div>
+            </div>                
+          </div> 
+          {% endfor %}
+        </div>                  
+      </div>     
+      {% include 'pagination' %}
+    </div>
+    {% if settings.blog_sidebar_show %}
+    <div class="sidebar-blog sidebar">
+      {% include 'blog-sidebar' %}
+    </div>
+    {% endif %}
+    {% endpaginate %}                        
+  </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="product-label">
+  {% if settings.new_active %}            
+  {% for tag in product.tags %}
+  {% if tag == 'new' %}
+  <div class="label-element new-label">
+    <span>{{ settings.new_text }}</span>
+  </div>
+  {% break %}
+  {% endif %}
+  {% endfor %}            
+  {% endif %}
+  {% if settings.best_active %}            
+  {% for tag in product.tags %}
+  {% if tag == 'bestselling' %}
+  <div class="label-element best-label">
+    <span>{{ settings.best_text }}</span>
+  </div>
+  {% break %}
+  {% endif %}
+  {% endfor %}            
+  {% endif %}
+  {% if settings.trend_active %}            
+  {% for tag in product.tags %}
+  {% if tag == 'hotting' %}
+  <div class="label-element hotting-label">
+    <span>{{ settings.hot_text }}</span>
+  </div>
+  {% break %}
+  {% endif %}
+  {% endfor %}            
+  {% endif %}
+  {% if settings.deal_active %}
+  {% if product.price_min < product.compare_at_price_min %}
+  <div class="label-element deal-label">
+    <span>{{product.compare_at_price | minus: product.price | times: 100.0 | divided_by: product.compare_at_price | round: 0}}%</span>
+  </div>
+  {% endif %}
+  {% endif %}
+</div>

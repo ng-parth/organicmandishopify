@@ -1,0 +1,20 @@
+<div class="article-item clearfix">
+  {% if article.image %}
+  <div class="article-image">
+    <a href="{{ article.url }}"><img src="{{article.image | img_url: 'master'}}" alt="" /></a>
+  </div>
+  {% endif %} 
+  <div class="articleinfo_group">
+    <div class="blog-title-group">
+      <a class="blog-title" href="{{ blogs[settings.blog_late_blog].url }}">
+        {{ blogs[settings.blog_late_blog].title }}
+      </a>
+    </div>    
+    <div class="article-title">                     
+      <h2 class="article-name"><a href="{{ article.url }}">{{ article.title }}</a></h2>                                            
+    </div>
+    <ul class="article-info list-inline">
+      <li class="article-date">{{article.published_at | date: '%b %d, %Y'}}</li>                         
+    </ul>
+  </div>               
+</div> 

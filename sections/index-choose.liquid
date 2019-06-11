@@ -1,0 +1,120 @@
+<div data-section-id="{{ section.id }}" data-section-type="choose-section">
+  <section class="home-choose-layout" style="background-color: {{ section.settings.color_background }};">
+    <div class="container">
+      <div class="row">
+        <div class="home-choose-inner">
+          <div class="home-choose-banner not-animated" data-animate="zoomIn" data-delay="100">
+            {% if section.settings.banner %}
+            <img src="{{ section.settings.banner | img_url: '', crop: 'center' }}" alt="{{ section.settings.banner.alt }}" />
+            {% else %}
+            <img src="{{ '630x695.png' | asset_url }}" alt=""/>
+            {% endif %}
+          </div>
+          <div class="home-choose-content">
+            <div class="group">
+              <div class="page-title text-left not-animated" data-animate="zoomIn" data-delay="100">
+                <h2>{{ section.settings.title }}</h2>
+                <p class="sub-title">
+                  {{ section.settings.sub_title }}
+                </p>
+                {% if section.settings.caption != '' %}
+                <p class="caption">
+                  {{ section.settings.caption }}
+                </p>
+                {% endif %}
+              </div>
+              {% if section.blocks.size > 0 %}
+              <div class="home-choose-group">
+                <div class="panel-group not-animated" data-animate="fadeInUp" data-delay="{{ forloop.index }}00" id="accordion_{{ section.id }}" role="tablist" aria-multiselectable="true">
+                  {% for block in section.blocks %}
+                  <div class="panel panel-default">
+                    <div class="panel-heading {% if forloop.first == true %}active{% endif %}" role="tab" id="tab_heading{{forloop.index}}_{{ section.id }}">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion_{{ section.id }}" href="#tab_collapse{{forloop.index}}_{{ section.id }}" aria-expanded="true" aria-controls="tab_collapse{{forloop.index}}_{{ section.id }}">
+                          {{forloop.index}}. {{ block.settings.title }}
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="tab_collapse{{forloop.index}}_{{ section.id }}" class="panel-collapse collapse {% if forloop.first == true %}in{% endif %}" role="tabpanel" aria-labelledby="tab_heading{{forloop.index}}_{{ section.id }}">
+                      <div class="panel-body">
+                        {{ block.settings.caption }}
+                      </div>
+                    </div>
+                  </div>
+                  {% endfor %}                 
+                </div>
+                <script>
+                  jQuery(function($) {
+                    var $active = $('#accordion_{{ section.id }} .panel-collapse.in').prev().addClass('active');
+                                    $active.find('a').prepend('<span class="fa fa-angle-down"></span>');
+                    $('#accordion_{{ section.id }} .panel-heading').not($active).find('a').prepend('<span class="fa fa-angle-right"></span>');
+                      $('#accordion_{{ section.id }}').on('show.bs.collapse', function(e) {
+                      $('#accordion_{{ section.id }} .panel-heading.active').removeClass('active').find('.fa').toggleClass('fa-angle-down fa-angle-right');
+                      $(e.target).prev().addClass('active').find('.fa').toggleClass('fa-angle-right fa-angle-down');
+                  })
+                  });
+                </script>
+              </div>
+              {% endif %}
+            </div>            
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+{% schema %}
+{
+  "name": "Why Choose With Us?",
+  "class": "index-section index-section-choose",
+  "settings": [
+	{
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+	{
+      "type": "text",
+      "id": "sub_title",
+      "label": "Sub Title"
+    },
+	{
+      "type": "textarea",
+      "id": "caption",
+      "label": "Caption"
+    },
+	{
+      "type": "image_picker",
+      "id": "banner",
+      "label": "Upload Banner"
+    },
+	{
+      "type": "color",
+      "id": "color_background",
+      "label": "Background Color"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "item",
+      "name": "Item",
+      "settings": [
+		{
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+		{
+          "type": "textarea",
+          "id": "caption",
+          "label": "Caption"
+        }
+      ]
+    }
+  ],
+  "presets": [{
+    "name": "Why Choose With Us?",
+    "category": "Store Information"
+  }]
+}
+{% endschema %}

@@ -1,0 +1,32 @@
+<section class="heading-content">
+  <div class="heading-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="page-heading-inner heading-group">
+          <div class="breadcrumb-group">
+            <h3 class="page-title"><span>{{ 'blogs.article.title' | t }}</span></h3>
+            <div class="breadcrumb clearfix">
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+              <span class="arrow-space"></span>
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb" itemprop="title">
+                <a href="{{ blog.url }}" title="{{ blog.title }}" itemprop="url"><span itemprop="title">{{ blog.title }}</span></a>
+              </span>
+              <span class="arrow-space"></span>
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a href="{{ article.url }}" title="{{ article.title }}" itemprop="url"><span itemprop="title">{{ article.title }}</span></a>
+              </span>
+            </div>         
+          </div> 
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="article-layout">
+  <div class="container">
+    <div class="row">
+      {% section 'article-template' %}
+    </div>
+  </div>
+</section>

@@ -1,0 +1,40 @@
+<section class="heading-content">
+  <div class="heading-wrapper">
+    <div class="container">
+      <div class="row">
+        <div class="page-heading-inner heading-group">
+          <div class="breadcrumb-group">
+            <h1 class="page-title">{{ 'collections.list_collections.product_collections' | t }}</h1>
+            <div class="breadcrumb clearfix">
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb"><a href="{{ shop.url }}" title="{{ shop.name | escape }}" itemprop="url"><span itemprop="title">{{ 'general.breadcrumbs.home' | t }}</span></a></span>
+              <span class="arrow-space"></span>
+              <span itemscope itemtype="http://data-vocabulary.org/Breadcrumb">
+                <a href="/collections" title="{{'collections.list_collections.title'|t}}" itemprop="url">
+                  <span itemprop="title">{{'collections.list_collections.title'|t}}</span>
+                </a>
+              </span>
+            </div>      
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="list-collection-layout">  
+    <div class="container">
+      <div class="row">
+        <div class="list-collection-inner">
+          <div class="list-collection-content">
+            {% for collection in collections %}
+            {% unless collection.all_products_count == 0 or collection.handle == "frontpage" %}
+            <div class="col-sm-4">
+              {% include 'collection-loop' %}
+            </div>
+            {% endunless %}
+            {% endfor %}
+          </div>    
+        </div>      
+      </div>
+    </div>  
+</section>
