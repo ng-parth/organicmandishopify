@@ -404,7 +404,7 @@ $_padding_btn_small: 15px;
   margin-top: 15px;
   margin-right: 10px;
   &:hover{
-    @include btn1;
+    opacity: 0.75;
   }
   @include respond-to($media_max_tablet){
     @include btn_medium;
@@ -3523,6 +3523,9 @@ body{
         width:100%;
         clear:both;
       }
+      .carousel-img {
+        width: 100%;
+      }
       @include respond-to($media_max_tabletsmall){
         .carousel-inner{
           height: auto;
@@ -3561,19 +3564,24 @@ body{
           font-size: 55px;                                        
           color: $color_caption_text2;
           font-weight: $font-weight_bold1;
-          line-height: 1em;
-          margin-bottom: 20px;
+          line-height: 1.2;
+          margin-bottom: 16px;
         }       
         .group-caption{
-          line-height: 1.8em;
+          line-height: 1.4;
           font-size: 24px;
         }
         .slideshow-caption-group{
           text-align: center;
           .top-cta{
-             background-color: #6D380B;
-             border: 0;
-             opacity: 0.7;
+            display: inline-block;
+            padding: 16px;
+            color: $color_btn_primary_text;
+            background-color: rgba(109,56,11, 0.8);
+            border: 0;
+            border-radius: 5px;
+            font-size: 16px;
+            text-transform: uppercase;
           }
 {% comment %}          width: 50%;{% endcomment %}
         }
@@ -3664,19 +3672,22 @@ body{
             }
           }
           .group-title{
-            font-size: 30px;
+            font-size: 28px;
             line-height: 32px;
           }
           .group-caption{
             font-size: 16px;
-            margin-bottom: 2px;
+            margin-bottom: 10px;
+          }
+          .top-cta {
+            padding: 10px 16px !important;
           }
 {% comment %}          position: relative;{% endcomment %}
           width: 100%;                    
           .slideshow-caption-group{
             margin-top: 5%;
             width: 100% !important;
-          }  
+          }
         }
       }       
       .carousel-control{ 
@@ -3829,7 +3840,7 @@ body{
         }
         .process-caption{
           font-size: $_h7;
-          line-height: 1.8em;
+          line-height: 1.4;
         }
       }
       @include respond-to($media_max_tablet){
@@ -4072,7 +4083,7 @@ body{
           }
           .about-caption{
             margin-bottom: 0;
-            line-height: 1.8em;
+            line-height: 1.4;
           }          
         }
       }      
@@ -4230,16 +4241,19 @@ body{
               width: $width_full - $_width_img;              
               padding: 10px 30px;
               .testimonials-caption{
-                font-size: 14px;
+                font-size: 16px;
                 font-style: italic;
-                line-height: 1.7em;
+                color: #27272f;
+                line-height: 1.4;
                 margin-bottom: 10px;
+                font-weight: $font_weight_bold1;
               }            
               .testimonials-name{
                 font-size: $_h7;
                 color: $color_heading;
-                font-weight: $font_weight_normal;
+                font-weight: $font_weight_bold1;
                 margin-bottom: 0px;
+                opacity: 0.85;
               }
               .testimonials-position{
                 color: $color_primary;
@@ -4782,6 +4796,9 @@ body{
 				.farmer-blog-title-group{
 					text-align: center;
 					padding: 10px 0 0px;
+					._btn {
+					    padding: 4px 16px !important;
+					}
 				}
 				
 				.farmer-article-name{    

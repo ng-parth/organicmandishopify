@@ -2,7 +2,7 @@ $(document).ready(function(){
  $('#farmer-carousel').owlnewCarousel({
       stagePadding: 40,
       loop: true,
-      margin: 15,
+      margin: 20,
       nav: true,
       dots: false,
    	lazyload: true,
